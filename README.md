@@ -13,3 +13,4 @@ Referencias:
 - https://lacuerda.net/Recursos/acordes/ - Guias de ayuda 
 - http://www.todomusica.com.ar/ - Estetica
 - https://christianvib.com/ - Tutoriales de youtube
+- https://www.amazon.com/ - Interfaz gráfica

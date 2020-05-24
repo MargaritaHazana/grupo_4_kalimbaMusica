@@ -1,0 +1,127 @@
+
+.carrito-container {
+    background-color: white;
+    padding: 3%;
+    margin: 2%;
+    font-size: 100%;
+}
+.titulos {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.titulo {
+    color: #144d73;
+    font-weight: bold;
+    padding: 0px 2%;
+}
+.productos {
+    width: 100%;
+    border: 2px solid #d9dadb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 1%;
+    font-size: 110%;
+    margin-bottom: 5%;
+}
+.prod-resumen {
+    display: flex;
+    width: 33%;
+    flex-wrap: wrap;
+}
+.prod-name {
+    font-weight: bold;
+    width: 100%;
+}
+.foto-container {
+    width: 30%;
+}
+.prod-resumen img {
+    width: 100%;
+}
+.caracteristicas {
+    width: 33%;
+    font-size: 90%;
+    margin: 0px 0px 1% 6%;
+}
+.cant {
+    width: 33%;
+    text-align: center;
+    align-self: center;
+}
+.final {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 33%;
+    padding: 1%;
+}
+.total-prod {
+    width: 100%;
+    text-align: right;
+    align-self: center;
+}
+.quitar {
+    background-color: white;
+    border: none;
+    color: #d9dadb;
+    width: 10%;
+    text-align: right;
+    margin: 20% 0px 0px 75%;
+}
+.total {
+    width: 100%;
+    padding: 0px 2%;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 120%;
+}
+.comprar {
+    width: 40%;
+    background-color: #144d73;
+    border: none;
+    border-radius: 2%;
+    color: white;
+    font-weight: bold;
+    font-size: 120%;
+    margin: 3% 0px 5% 27%;
+    line-height: 3;
+}
+.name {
+    margin-top: 0px;
+}
+.ProductosDestacados{
+    margin: 0px 2%;
+}
+@media(max-width: 768px){
+    .quitar {
+        font-size: 83%;
+        margin-top: 30%;
+    }
+}
+
+@media(max-width: 576px) {
+    .prod-name {
+        font-size: 100%;
+        margin-bottom: 1%;
+    }
+    .foto-container {
+        display: none;
+    }
+    .titulo {
+        font-size: 90%;
+    }
+    .quitar {
+        margin-left: 68%;
+        margin-top: 45%;
+    }
+}
+
+@media(max-width: 425px){
+    .quitar{
+        margin-left: 45%;
+        margin-top: 50%;
+    }
+}

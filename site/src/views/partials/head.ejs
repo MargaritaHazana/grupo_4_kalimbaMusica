@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalimba Musica</title>
+
+    <!-- Font Awesome Stylesheet -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+	<!-- Agregando el Stylesheet necesario en cada view -->
+	<% switch (view) {
+		case 'index': %>
+	 	<link rel="stylesheet" href="/stylesheets/stylehome.css">
+		<%	break;
+		case 'detail': %>
+		<link rel="stylesheet" href="/stylesheets/stylehome.css">
+		<link rel="stylesheet" href="/stylesheets/detail.css">
+		<%	break; 
+		case 'carrito': %>
+		<link rel="stylesheet" href="/stylesheets/stylehome.css">
+		<link rel="stylesheet" href="/stylesheets/detail.css">
+		<link rel="stylesheet" href="/stylesheets/carrito.css">
+		<%	break; 
+		case 'forms': %>
+		<link rel="stylesheet" href="/stylesheets/stylehome.css">
+		<link rel="stylesheet" href="/stylesheets/forms.css">
+		<%	break; 
+	}%>
+</head>
+
+

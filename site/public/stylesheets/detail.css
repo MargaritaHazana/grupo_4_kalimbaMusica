@@ -1,0 +1,274 @@
+
+* {
+    box-sizing: border-box;
+}
+
+main { 
+    background: #d9dadb;
+    font-family: 'Open Sans', sans-serif;
+    margin: auto;
+    margin-top: 0px;
+    padding: 2% 4%;
+}
+/* Diseño del container del producto */
+.flex-container {
+    display: flex;
+    margin: 2%;
+    padding: 1%;
+    background-color: white;
+}
+/* Diseño de la sección de fotos */
+.margen-izq {
+    flex-direction: column;
+    width: 10%;
+}
+.foto {
+    width: 90%;
+    margin: 5% 0px;
+    border-color: black;
+}
+.middle {
+    width: 50%;
+    height: 50%;
+    padding: 1%;
+    text-align: center;
+}
+.foto-principal {
+    width: 80%;
+}
+.description-foto {
+    display: none;
+}
+/* Diseño detalles del producto */
+.margen-der {
+    width: 35%;
+    margin: 1%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding-left: 4%;
+}
+.nombre {
+    margin: 0px;
+    line-height: 2;
+}
+.description {
+    width: 100%;
+    line-height: 2;
+    margin: 4% 0px;
+}
+.price {
+    margin: 2% 0px 4% 0px;
+    display: flex;
+}
+.precio {
+    height: 20%;
+    margin: 0px 0px 0px 2%;
+    font-size: 206%;
+}
+.descuento {
+    color: #1a4f8e;
+    margin: 0px 5%;
+    font-size: 150%;
+    font-weight: bold
+}
+.colores {
+    width: 100%;
+    margin-bottom: 5%;
+    display: flex;
+}
+.opciones {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+.rojo {
+    width: 10%;
+    height: 58%;
+    text-align: center;
+    padding-top: 1%;
+    background-color: red;
+    border: 1px solid black;
+}
+.negro {
+    width: 10%;
+    height: 58%;
+    text-align: center;
+    padding-top: 1%;
+    background-color: black;
+    border: 1px solid black;
+    color: white;
+}
+.madera {
+    width: 10%;
+    height: 58%;
+    text-align: center;
+    padding-top: 1%;
+    background-color: burlywood;
+    border: 1px solid black;
+}
+.blanco {
+    width: 10%;
+    height: 58%;
+    text-align: center;
+    padding-top: 1%;
+    background-color: white;
+    border: 1px solid black;
+}
+.azul {
+    width: 10%;
+    height: 58%;
+    text-align: center;
+    padding-top: 1%;
+    background-color: #1a4f8e;
+    border: 1px solid black;
+}
+.boton-comprar {
+    width: 100%;
+    height: 10%;
+    background-color: #1a4f8e;
+    border: none;
+    border-radius: 2%;
+    justify-self: center;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 5%;
+}
+/* Cambios sección productos destacados */
+.P002{
+    margin-left: 2%;
+}
+.ProductosDestacados{
+    margin: 0px 2%;
+}
+/* Diseño sección opiniones */
+.opinions {
+    margin-bottom: 5%;
+}
+.title{
+    margin-left: 2%;
+}
+.comentarios-container {
+    margin: 2%;
+    padding: 2%;
+    background-color: white;
+}
+.opinion-container {
+    width: 100%;
+}
+.titulo {
+    font-weight: bold;
+    color: #1a4f8e;
+    text-align: left;
+    font-size: 150%;
+}
+.corrector {
+    height: 10%;
+}
+.d {
+    color: #d9dadb;
+}
+/* Haciendolo responsive */
+@media(max-width: 1024px){
+    .nombre {
+        line-height: 1;
+    }
+    .description {
+        line-height: 1;
+    }
+}
+
+@media(max-width: 768px) {
+    /* Arreglando las fotos */
+    .foto {
+        margin: 15% 0px;
+    }
+    .foto-principal {
+        width: 100%;
+    }
+    /* Arreglando los colores */
+    .rojo {
+        width: 13%;
+        height: 50%;
+    }
+    .negro {
+        width: 13%;
+        height: 50%;
+    }
+    .madera {
+        width: 13%;
+        height: 50%;
+    }
+    .blanco {
+        width: 13%;
+        height: 50%;
+    }
+    .azul {
+        width: 13%;
+        height: 50%;
+    }
+}
+
+@media(max-width: 576px) {
+    /* Poniendo todo en una columna */
+    .flex-container {
+        display: block;
+    }
+    .margen-izq {
+        display: none;
+    }
+    .middle {
+        width: 100%;
+    }
+    .foto-principal {
+        width: 80%;
+    }
+    .description-foto {
+        display: none;
+    }
+    .margen-der {
+        width: 100%;
+        padding: 4%;
+    }
+    .texto {
+        width: 100%;
+        height: 70%;
+    }
+    .nombre {
+        font-size: 150%;
+        margin: 4% 0px;
+        font-weight: bold;
+    }
+    .description {
+        display: inline;
+        line-height: 1;
+        font-weight: lighter;
+        font-size: 75%;
+    }
+    .price {
+        margin-top: 3%;
+        display: flex;
+        justify-content:flex-start
+    }
+    .precio {
+        width: 25%;
+    }
+    .boton-comprar {
+        width: 100%;
+        line-height: 2;
+    }
+    .relacionados {
+        margin-top: 5%;
+    }
+    .title {
+        font-size: 155%;
+        line-height: 1;
+    }
+    .name {
+        font-weight: lighter;
+        font-size: 65%;
+    }
+}

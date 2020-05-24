@@ -1,0 +1,131 @@
+/* Forms */
+.contenedor-form{
+    width: 100%;
+
+}
+.formulario {
+    width: 60%;
+    flex-wrap: wrap;
+    display: flex;
+    background-color: white;
+    margin: 5% 20% 5% 20%; 
+}
+.titulo-form{
+    background-color: #1a4f8e;
+    font-size: 230%;
+    width: 100%;
+    color: white;
+    padding-left: 4%;
+}
+.pregunta{
+    width: 39%;
+    display: block;
+    font-size: 200%;
+    margin-top: 3%;
+    padding-left: 13%;
+}
+.respuesta{
+    width: 40%;
+    margin-top: 3%;
+    font-size: 200%;
+    font-weight: 100;
+    background: #d9dadb;
+}
+.enter{
+    width: 40%;
+    font-size: 272%;
+    margin: 5% 30% 5% 30%;
+    background-color: #1a4f8e;
+    color: white;
+    height: 80px;
+    border-radius: 17px;
+}
+.respuesta2{
+    width: 100%;
+    height: 30px;
+    margin-top: 3%;
+    font-weight: 100;
+    font-size: 160%;
+    background: #d9dadb
+}
+.p-option{
+    font-size: 143%;
+    float: left;
+    width: 60%;
+}
+.respuesta3{
+    width: 47%;
+}
+
+@media(max-width: 1020px){
+    .enter{
+        font-size: 240%;
+    }
+    .p-option{
+        width: 76%;
+    }
+    .respuesta2{
+        width: 100%;
+    }
+    #p-option{
+        margin: 0px;
+    }
+}
+
+@media(max-width: 768px){
+    .formulario{
+        font-size: 100%;
+        width: 80%;
+        margin: 5% 10% 5% 10%;
+    }
+    .respuesta2{
+        width: 80%;
+    }
+    .p-option{
+        width: 76%;
+    }
+    .enter{
+        font-size: 180%;
+    }
+}
+
+@media(max-width: 568px){
+
+    .formulario{
+        width: 100%;
+        margin: 0%;
+    }
+    .titulo-form{
+        font-size: 170%;
+    }
+    .enter{
+        font-size: 180%;
+    }
+    .pregunta{
+        width: 100%;
+        text-align: center;
+        margin-top: 8%;
+        padding: 0%;
+    }
+    .respuesta{
+        width: 95%;
+        margin-left: 2.5%;
+    
+    }
+    .respuesta3{
+        width: 100%;
+        flex-wrap: wrap;
+        display: flex;
+    }
+    .p-option{
+        width: 44%;
+        text-align: center;
+    }
+    #p-option{
+        float: left;
+        margin: 3%
+    }
+    .respuesta2{
+        width: 100%;
+    }
+}

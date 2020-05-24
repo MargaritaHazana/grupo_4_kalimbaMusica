@@ -1,0 +1,144 @@
+    <!-- Trayendo el head -->
+    <%- include('partials/head', {title: 'Nombre del producto'}) %>
+<body>
+
+    <!-- Trayendo el header -->
+    <%- include('partials/header') %> 
+
+    <main>
+        <!-- Container del producto -->
+        <div class="flex-container">
+            <!-- Fotos del costado -->
+            <section class="margen-izq">
+
+                <img src="images/Bajo.jpg" alt="foto" class="foto">
+                <img src="images/Bajo.jpg" alt="foto" class="foto">
+                <img src="images/Bajo.jpg" alt="foto" class="foto">
+                <img src="images/Bajo.jpg" alt="foto" class="foto">
+
+            </section>
+            <!-- Foto principal -->
+            <section class= "middle">
+
+                <img src="images/Bajo.jpg" alt="foto" class="foto-principal">
+                <!-- Descripción para mobile -->
+                <p class="description-foto">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga repellat similique accusamus facere magni inventore quia. Corporis velit ducimus culpa.
+                </p>
+
+            </section>
+            <!-- Detalles -->
+            <section class="margen-der">
+
+                <div class="texto">
+
+                    <h1 class="nombre">
+                        Nombre del producto
+                    </h1>
+
+                    <p class="description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga repellat similique accusamus facere magni inventore quia. Corporis velit ducimus culpa.
+                    </p>
+
+                    <div class="price">
+
+                        <p class="precio">
+                            $999
+                        </p>
+    
+                        <p class="descuento">
+                            40% OFF
+                        </p>
+
+                    </div>
+                    
+                    <section class="colores">
+                        <p class="colour">Color:</p>
+                        <div class="opciones">
+                            <div class="rojo">R</div>
+                            <div class="negro">N</div>
+                            <div class="madera">M</div>
+                            <div class="blanco">B</div>
+                            <div class="azul">A</div>
+                        </div>
+                    </section>
+
+                </div>
+
+                <button type="submit" class="boton-comprar">
+                    Añadir a mi carrito
+                </button>
+
+            </section>
+
+        </div>
+
+        <!-- Productos Destacados - Traído del Index-->
+        <h1 class="P002">Productos Destacados</h1>
+        <div class="ProductosDestacados">
+            
+            <div class="SDIV006">
+                <div class="SSDIV001">
+                    <img class="IMG002" src="/images/piano.jpg" alt="">
+                    <p class="P003">Piano Yamaha 12.50$</p> 
+                </div>
+            </div>
+            <div class="SDIV006">
+                <div class="SSDIV001">
+                    <img class="IMG002" src="/images/piano.jpg" alt="">
+                    <p class="P003">Piano Yamaha 12.50$</p> 
+                </div>
+            </div>
+            <div class="SDIV006">
+                <div class="SSDIV001">
+                    <img class="IMG002" src="/images/piano.jpg" alt="">
+                    <p class="P003">Piano Yamaha 12.50$</p> 
+                </div>
+            </div>
+            <div class="SDIV006">
+                <div class="SSDIV001">
+                    <img class="IMG002" src="/images/piano.jpg" alt="">
+                    <p class="P003">Piano Yamaha 12.50$</p> 
+                </div>
+            </div>
+        </div>
+        <!-- Sección de opiniones -->
+        <div class="opinions">
+            <h1 class="title">
+                Opiniones sobre el producto:
+            </h1>
+            <section class="comentarios-container">
+                <div class="opinion-container">
+                    <strong class="titulo">Muy bueno</strong>
+                    <p class="comentario">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt reprehenderit corporis fugit tenetur ipsa harum nisi quia illo, repellendus delectus!
+                    </p>
+                </div>
+                <div class="opinion-container">
+                    <strong class="titulo">Bueno</strong>
+                    <p class="comentario">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt reprehenderit corporis fugit tenetur ipsa harum nisi quia illo, repellendus delectus!
+                    </p>
+                </div>
+                <div class="opinion-container">
+                    <strong class="titulo">Normal</strong>
+                    <p class="comentario">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt reprehenderit corporis fugit tenetur ipsa harum nisi quia illo, repellendus delectus!
+                    </p>
+                </div>
+            </section>
+
+            <section class="corrector">
+                <p class="d">d </p>
+            </section>
+
+        </div>
+
+    </main>
+    
+    <!-- Trayendo el footer -->
+    <%- include('partials/footer') %> 
+
+    <!-- Fin de la View -->
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!-- Trayendo el head -->
+<%- include('partials/head', {title: 'Mi carrito'}) %>
+<body>
+
+    <!-- Trayendo el header -->
+    <%- include('partials/header') %> 
+
+    <main>
+        <section class="carrito-container">
+            <div class="titulos">
+                <p class="titulo">Precio</p>
+                <p class="titulo">Cantidad</p>
+                <p class="titulo">Total</p>
+            </div>
+
+            <div class="productos">
+                <div class="prod-resumen">
+                    <p class="prod-name">Nombre del producto</p>
+                    <div class="foto-container"><img src="./images/Bajo.jpg" alt="foto"></div>
+                   
+                    <div class="caracteristicas">          
+                        <p>Color</p>
+                        <p> Marca </p>
+                    </div>
+                </div>
+
+                <p class="cant">1</p>
+
+                <div class="final">
+                    <p class="total-prod">$999</p>
+                    <p class="quitar">Quitar</p>
+                </div>
+                
+            </div>
+
+            <div class="total">
+                <p>Total:</p>
+                <p>$999</p>
+            </div>
+            <button type="submit" class="comprar">Comprar</button>
+        </section>
+
+        <!-- Productos Destacados - Traído del Index-->
+        <h1 class="P002">Productos Destacados</h1>
+        <div class="ProductosDestacados">
+            
+            <div class="SDIV006">
+                <div class="SSDIV001">
+                    <img class="IMG002" src="/images/piano.jpg" alt="">
+                    <p class="P003">Piano Yamaha 12.50$</p> 
+                </div>
+            </div>
+            <div class="SDIV006">
+                <div class="SSDIV001">
+                    <img class="IMG002" src="/images/piano.jpg" alt="">
+                    <p class="P003">Piano Yamaha 12.50$</p> 
+                </div>
+            </div>
+            <div class="SDIV006">
+                <div class="SSDIV001">
+                    <img class="IMG002" src="/images/piano.jpg" alt="">
+                    <p class="P003">Piano Yamaha 12.50$</p> 
+                </div>
+            </div>
+            <div class="SDIV006">
+                <div class="SSDIV001">
+                    <img class="IMG002" src="/images/piano.jpg" alt="">
+                    <p class="P003">Piano Yamaha 12.50$</p> 
+                </div>
+            </div>
+        </div>
+    </main>
+
+   <!-- Trayendo el footer -->
+   <%- include('partials/footer') %> 
+
+    <!-- Fin de la View -->
+    
+</body>
+</html>

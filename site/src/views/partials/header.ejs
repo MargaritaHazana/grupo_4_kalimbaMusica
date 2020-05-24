@@ -1,0 +1,95 @@
+ <!-- Barrita Chiquita -->
+ <div class="DIV000">
+        
+</div>
+
+<!-- ARRANCA EL HEADER -->
+<div class="Header">
+    <!-- PRIMERA PARTE DEL HEADER - LBIR -->
+    <div class="DIV001">
+        <!-- Logo -->
+        <img class="IMG000" src="/images\LogoKalimba2.jpg" alt="Logo de Kalimba">
+        <!-- Buscador -->
+        <div class="SDIV001">
+                <div class="search">
+                        <input type="text" class="searchTerm" placeholder="¿Que buscas?">
+                        <button type="submit" class="searchButton">
+                    <i class="fa fa-search"></i>
+                </button>
+                </div>
+        </div>
+        <!-- Registrarte / Iniciar Sesion -->
+        <div class="SDIV002">
+            <div class="SDIV0021"> 
+                <div class="user">
+                    <i class="fas fa-user-alt"></i>
+                </div>
+                <div class="SSDIV000"><h1 class="H000">Registrame <br> Log In</div>
+                <div class="SSDIV000bis"><h1 class="H000">Registrame <br> Log In</div>
+                <div class="cart">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- SEGUNDA PARTE DEL HEADER - CATEGORIAS -->
+    <!-- Menu De Categorias -->
+    <div class="DIV003">
+        <!-- Menu de Mobile -->
+        <div class="dropdowncontainer">
+            <div class="dropdown">
+                <button onclick="myFunction()" class="dropbtn">Categorias</button>
+                <div id="myDropdown" class="dropdown-content">
+                <a href="#">Cuerdas</a>
+                <a href="#">Teclas</a>
+                <a href="#">Percusion</a>
+                <a href="#">Equipamiento</a>
+                </div>
+            </div>
+        </div>
+        <!-- Menu de Laptop y Tablet -->
+        <div class="SDIV003">
+            <p class="P001">Cuerdas</p>
+        </div>
+        <div class="SDIV003">
+            <p class="P001">Teclas</p>
+        </div>
+        <div class="SDIV003">
+            <p class="P001">Percusion</p>
+        </div>
+        <div class="SDIV003">
+            <p class="P001">Equipamiento</p>
+        </div>
+
+        </div>
+        
+        
+</div>
+<!-- Barrita Chiquita -->
+<div class="DIV000">
+</div>
+<!-- HASTA ACA ES EL HEADER -->
+
+
+<!-- MAGIA OSCURA DEL MENU COLAPSABLE https://www.w3schools.com/howto/howto_js_dropdown.asp -->
+<script>
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+        }
+        }
+    }
+    }
+</script>

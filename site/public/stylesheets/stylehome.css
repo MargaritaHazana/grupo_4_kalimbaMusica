@@ -129,11 +129,11 @@ body{
     width: 100%;
     font-size: 160%;
 }
-.SSDIV000bis{
+.SDIV0021bis{
     display: none;
 }
 .H000{
-    font-size: 20px;
+    font-size: 120%;
     margin-bottom: 0%;
     margin-left: 7%;
     text-align: left;
@@ -468,6 +468,11 @@ body{
         display: none;
     }
 }
+@media (max-width: 670px){
+    .DIV001 {
+        margin-right: 11%;
+    }
+}
 @media(max-width: 568px){
     .DIV001{
         flex-wrap: wrap;
@@ -484,8 +489,31 @@ body{
     .SDIV002{
         width: 90%;
     }
-    .SSDIV000bis{
-        display: block;
+    .SDIV0021{
+        display: none;
+    }
+    .DIV003{
+        display: flex;
+    }
+    .user{
+        margin-left: 10%;
+        margin-top: 5%;
+    }
+    .user i{
+        font-size: 130%;
+    }
+    .H000{
+        font-size: 80%;
+    }
+    .cart{
+        margin-top: 4%;
+    }
+    .cart i{
+        font-size: 130%;
+    }
+    .SDIV0021bis{
+        display: flex;
+        width: 50%;
     }
     .ProductosDestacados{
         justify-content: space-between;
@@ -505,6 +533,8 @@ body{
     }
     .dropdowncontainer{
         display:flex;
+        align-items: center;
+        padding-top: 2%;
     }
     .Header{
         padding-bottom: 2%;
@@ -522,5 +552,16 @@ body{
 @media(max-width: 425px){
     .redes{
         padding-left: 6%;
+    }
+    .H000{
+        font-size: 70%;
+    }
+}
+@media(max-width: 320px){
+    .user i{
+        font-size: 70%;
+    }
+    .cart i{
+        font-size: 70%;
     }
 }

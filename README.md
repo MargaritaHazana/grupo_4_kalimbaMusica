@@ -12,4 +12,6 @@ Referencias:
 - https://www.amazon.com/ - La barra de arriba con el buscador, el menú y el carrito nos parece que es conveniente, tmbién nos gusta la simpleza de la página de inicio y el display de información en los detalles de cada producto. 
 - https://www.beckcasademusica.com.ar/ - Nos parece que la información en la página está mal distribuida, pero nos gusta la idea de que aparezca el detalle del producto al poner el cursor sobre la foto y como se muestran los productos en el carrito.
 
-Colores elegidos para el diseño de nuestra página: https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=FF6D00&secondary.color=00796B&primary.text.color=FAFAFA&secondary.text.color=CFD8DC
+Colores elegidos para el diseño de nuestra página:https://material.io/resources/color/#!/?view.left=0&view.right=1&primary.color=ff7124&secondary.color=1a4f8e&secondary.text.color=ffffff
+
+Planilla de Trello: https://trello.com/b/sr6p6QbG/ecommerce

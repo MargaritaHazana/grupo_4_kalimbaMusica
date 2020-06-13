@@ -1,3 +1,9 @@
+const path = require('path');
+const fs = require("fs")
+let rutaProductosJson = path.join(__dirname, '../../data/Products.json');
+let productos = fs.readFileSync( rutaProductosJson, 'utf-8');
+let dataProductos = JSON.parse(productos)
+console.log(dataProductos)
 AlfaCont = {
     // Renderiza la view del Index
     index: function(req,res){

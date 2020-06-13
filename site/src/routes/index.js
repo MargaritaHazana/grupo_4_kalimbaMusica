@@ -8,6 +8,10 @@ var alfaCont = require('../controllers/AlfaCont')
 router.get('/', alfaCont.index);
 
 
+// GET products
+
+
+
 // GET product detail
 router.get('/productDetail', alfaCont.productDetail);
 

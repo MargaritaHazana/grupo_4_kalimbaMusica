@@ -33,7 +33,7 @@
 }
 .enter{
     width: 40%;
-    font-size: 272%;
+    font-size: 220%;
     margin: 5% 30% 5% 30%;
     background-color: #1a4f8e;
     color: white;
@@ -70,6 +70,12 @@
     #p-option{
         margin: 0px;
     }
+    .pregunta{
+        width: 50%;
+    }
+    .enter{
+        font-size: 200%;
+    }
 }
 
 @media(max-width: 768px){
@@ -86,6 +92,9 @@
     }
     .enter{
         font-size: 180%;
+    }
+    .pregunta{
+        font-size: 165%;
     }
 }
 
@@ -106,6 +115,7 @@
         text-align: center;
         margin-top: 8%;
         padding: 0%;
+        
     }
     .respuesta{
         width: 95%;
@@ -128,4 +138,5 @@
     .respuesta2{
         width: 100%;
     }
+
 }

@@ -458,8 +458,15 @@ body{
         padding-left: 4%;
     }
     .DIV001{
-        margin-right: 4%;
-        margin-left: 4%;
+        margin-right: 3%;
+        margin-left: 3%;
+    }
+    .user{
+        margin-left: 5%;
+    }
+    .cart{
+        margin-left: 7%;
+        padding-left: 3%;
     }
     .DIV004{
         margin-right: 4%;
@@ -495,9 +502,18 @@ body{
         display: none;
     }
 }
+@media(max-width: 700px){
+    .IMG000 {
+        margin-right: 0px;
+    }
+    .H000{
+        font-size: 100%;
+    }
+}
 @media (max-width: 670px){
     .DIV001 {
-        margin-right: 11%;
+        margin-right: 1%;
+        margin-left: 0px;
     }
 }
 @media(max-width: 568px){
@@ -514,7 +530,7 @@ body{
         display: none;
     }
     .SDIV002{
-        width: 90%;
+        display: none;
     }
     .SDIV0021{
         display: none;
@@ -576,7 +592,18 @@ body{
         margin: 25%;
     }
 }
+@media(max-width: 470px){
+    .user{
+        margin-left: 0px;
+    }
+}
 @media(max-width: 425px){
+    .user i{
+        font-size: 100%;
+    }
+    .cart i{
+        font-size: 100%;
+    }
     .redes{
         padding-left: 6%;
     }

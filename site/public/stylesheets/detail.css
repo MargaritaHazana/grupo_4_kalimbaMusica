@@ -137,6 +137,11 @@ main {
     font-weight: bold;
     margin-bottom: 5%;
 }
+.boton{
+    border: none;
+    background-color: none;
+    color: grey;
+}
 /* Cambios sección productos destacados */
 .P002{
     margin-left: 2%;

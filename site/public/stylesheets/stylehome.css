@@ -210,8 +210,15 @@ body{
     margin-top: 0.75%;
     margin-bottom: 0.75%;
     height: 15%;
-    width: 23%;
+    width: 25%;
     justify-content: center;
+    border-radius: 5px;
+    transition: 0.3s;
+    
+}
+.SDIV003:hover{
+    background-color: #1a4f8e;
+    
 }
 .P001{
     font-size: 20px;
@@ -222,7 +229,10 @@ body{
 .HomeView{
     height: 100%;
     padding-top: 4%;
-    padding-bottom: 7%
+    padding-bottom: 7%;
+    margin: auto;
+    background-image: url('/images/renglones2.png');
+    
 }
 /* Contenedor del SlideShow */
 .DIV004{
@@ -233,8 +243,8 @@ body{
     background-color: white;
     padding-left: 3%;
     padding-right: 3%;
-    border-top: #1a4f8e 3px solid;
-    border-bottom: #1a4f8e 3px solid;
+    border-top: #002860 3px solid;
+    border-bottom: #002860 3px solid;
 }
 /* - - - - ACA EMPIEZA EL SLIDESHOW IMPORTADO DE ESTE URL https://www.w3schools.com/howto/howto_js_slideshow.asp - - - - */
 /* Slideshow container */
@@ -307,6 +317,11 @@ body{
     from {opacity: .4}
     to {opacity: 1}
 }
+.IMG003{
+    border-left: black 1px solid;
+    border-right:black 1px solid ;
+   
+}
 /* - - - - ACA TERMINA EL SLIDESHOW IMPORTADO DE https://www.w3schools.com/howto/howto_js_slideshow.asp - - - -*/
 
 /* Productos Destacados */
@@ -318,11 +333,17 @@ body{
     align-content: center;
     margin-bottom: 6%;
     flex-wrap: wrap;
+   
+}
+.SDIV006:hover{
+    border: #547bbf 2px solid
 }
 .SDIV006{
     width: 24%;
     text-align: center;
     background-color: #547bbf;
+    border-bottom: 3px solid #1a4f8e;
+    transition: 0.2s;
 }
 /* Texto de Productos Destacados */
 .P002{
@@ -336,7 +357,7 @@ body{
 .SSDIV001{
     background-color: white;
     padding: 8%;
-    border-bottom: 3px solid #1a4f8e;
+    
 }
 
 
@@ -355,6 +376,12 @@ body{
     width:45%;
     border-radius: 5px;
     overflow: hidden;
+    transition: 0.1s;
+    height: 100%;
+}
+.SDIV004:hover{
+    width: 47%;
+
 }
 .IMG002{
     width: 100%;
@@ -441,19 +468,6 @@ body{
     .DIV005{
         margin-right: 4%;
         margin-left: 4%;
-    }
-    .SDIV002 {
-        margin-left: 3%;
-    }
-    .SDIV0021{
-        width: 100%;
-    }
-    .user{
-        margin-left: 0px;
-    }
-    .cart{
-        margin-left: 6%;
-        padding-left: 4%;
     }
     .P002{
         margin-right: 4%;
@@ -563,13 +577,6 @@ body{
     }
 }
 @media(max-width: 425px){
-    .user{
-        margin-left: 0px;
-    }
-    .cart{
-        margin-left: 6%;
-        padding-left: 4%;
-    }
     .redes{
         padding-left: 6%;
     }

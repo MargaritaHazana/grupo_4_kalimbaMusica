@@ -1,25 +1,32 @@
 var express = require('express');
 var router = express.Router();
+var alfaCont = require('../controllers/AlfaCont')
 
-/* GET home page. */
-router.get('/', function(req, res) {
-  res.render('index', { view: 'index' });
-});
 
-router.get('/productDetail', function(req, res) {
-  res.render('productDetail', { view: 'detail' });
-});
 
-router.get('/productCart', function(req, res) {
-  res.render('productCart', { view: 'carrito' });
-});
+// GET home page / index
+router.get('/', alfaCont.index);
 
-router.get('/productAdd', function(req, res) {
-  res.render('productAdd', { view: 'forms' });
-});
 
-router.get('/register', function(req, res) {
-  res.render('register', { view: 'forms' });
-});
+// GET product detail
+router.get('/productDetail', alfaCont.productDetail);
+
+
+// GET product cart
+router.get('/productCart', alfaCont.productCart);
+
+
+//  GET product add
+router.get('/productAdd', alfaCont.productAdd);
+
+
+// GET register
+router.get('/register', alfaCont.register);
+
+// GET login
+router.get('/login',alfaCont.login)
+
+
+
 
 module.exports = router;

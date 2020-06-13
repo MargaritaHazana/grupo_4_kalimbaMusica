@@ -442,6 +442,19 @@ body{
         margin-right: 4%;
         margin-left: 4%;
     }
+    .SDIV002 {
+        margin-left: 3%;
+    }
+    .SDIV0021{
+        width: 100%;
+    }
+    .user{
+        margin-left: 0px;
+    }
+    .cart{
+        margin-left: 6%;
+        padding-left: 4%;
+    }
     .P002{
         margin-right: 4%;
         margin-left: 4%;
@@ -550,6 +563,13 @@ body{
     }
 }
 @media(max-width: 425px){
+    .user{
+        margin-left: 0px;
+    }
+    .cart{
+        margin-left: 6%;
+        padding-left: 4%;
+    }
     .redes{
         padding-left: 6%;
     }

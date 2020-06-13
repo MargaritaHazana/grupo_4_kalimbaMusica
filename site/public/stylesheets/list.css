@@ -1,0 +1,40 @@
+*{
+    font-family: 'Open Sans', sans-serif;
+    box-sizing:border-box
+}
+.DIV010{
+    margin-top: 3%;
+    margin-bottom: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+}
+.A010{
+    display: contents;
+}
+.SDIV010{
+    
+    width: 15%;
+    background-color: white;
+    border: 1px black solid;
+    margin: 1%;
+    transition: 0.1s;
+}
+.SDIV010:hover{
+    border: 2px #1a4f8e solid;
+}
+.IMG010{
+    width: 100%;
+}
+@media(max-width: 768px){
+    .SDIV010{
+        width: 30%
+    }
+}
+@media(max-width: 486px){
+    .SDIV010{
+        width: 45%
+    }
+}

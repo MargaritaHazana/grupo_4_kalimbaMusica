@@ -1,0 +1,22 @@
+    <!-- Trayendo el head -->
+    <%- include('partials/head') %> 
+
+<body>
+    
+    <!-- Trayendo el header -->
+    <%- include('partials/header') %> 
+
+    <div class="DIV010">
+        <% for( let i = 0; i < dataProductos.length; i++ ) { %>
+            <a class="A010" href="/productDetail/<%= dataProductos[i].id %> ">
+                <div class="SDIV010">
+                    <img class="IMG010" src="/images/<%= dataProductos[i].image %> " alt="">
+                    <p class="P010"> <%= dataProductos[i].name %> </p>
+                    <p class="P010"> <%= dataProductos[i].price %> </p>
+                </div>
+            </a>
+        <% } %>
+        
+    </div>
+    <%- include('partials/footer') %> 
+</body>

@@ -11,19 +11,19 @@
             <!-- Fotos del costado -->
             <section class="margen-izq">
 
-                <img src="images/Bajo.jpg" alt="foto" class="foto">
-                <img src="images/Bajo.jpg" alt="foto" class="foto">
-                <img src="images/Bajo.jpg" alt="foto" class="foto">
-                <img src="images/Bajo.jpg" alt="foto" class="foto">
+                <img src="/images/<%=producto.image %> " alt="foto" class="foto">
+                <img src="/images/<%=producto.image %> " alt="foto" class="foto">
+                <img src="/images/<%=producto.image %> " alt="foto" class="foto">
+                <img src="/images/<%=producto.image %> " alt="foto" class="foto">
 
             </section>
             <!-- Foto principal -->
             <section class= "middle">
 
-                <img src="images/Bajo.jpg" alt="foto" class="foto-principal">
+                <img src="/images/<%=producto.image %> " alt="foto" class="foto-principal">
                 <!-- Descripción para mobile -->
                 <p class="description-foto">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga repellat similique accusamus facere magni inventore quia. Corporis velit ducimus culpa.
+                    <%= producto.description %> 
                 </p>
 
             </section>
@@ -33,21 +33,21 @@
                 <div class="texto">
 
                     <h1 class="nombre">
-                        Nombre del producto
+                        <%= producto.name %> 
                     </h1>
 
                     <p class="description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga repellat similique accusamus facere magni inventore quia. Corporis velit ducimus culpa.
+                        <%= producto.description.slice(11290) %> 
                     </p>
 
                     <div class="price">
 
                         <p class="precio">
-                            $999
+                            <%= producto.price %> 
                         </p>
     
                         <p class="descuento">
-                            40% OFF
+                            <%= producto.discount %> 
                         </p>
 
                     </div>
@@ -68,13 +68,13 @@
                 <button type="submit" class="boton-comprar">
                     Añadir a mi carrito
                 </button>
-
-                <form action="/product/delete:?_method:DELETE" method="get" >
+                <form action="/product/delete/<%= producto.id %>?_method=delete" method="POST" >
                     <button type="submit" class="boton">Eliminar </button>
                 </form>
-                <form action="/product/edit" method="get" >
+                <form action="/product/<%= producto.id %>/edit" method="POST" >
                     <button type="submit" class="boton">Editar </button>
                 </form>
+
             </section>
 
         </div>

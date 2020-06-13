@@ -15,6 +15,7 @@ main {
     display: flex;
     margin: 2%;
     padding: 1%;
+    padding-bottom: 3%;
     background-color: white;
 }
 /* Diseño de la sección de fotos */
@@ -137,11 +138,6 @@ main {
     font-weight: bold;
     margin-bottom: 5%;
 }
-.boton{
-    border: none;
-    background-color: none;
-    color: grey;
-}
 /* Cambios sección productos destacados */
 .P002{
     margin-left: 2%;
@@ -176,6 +172,12 @@ main {
 .d {
     color: #d9dadb;
 }
+.boton{
+    border: none;
+    background-color: none;
+    color: grey;
+}
+
 /* Haciendolo responsive */
 @media(max-width: 1024px){
     .nombre {

@@ -43,14 +43,17 @@ body{
     margin-left: 10%;
 }
 /* Logo */
-.IMG000{
+.logo{
     width: 30%; 
-    margin-right: 2%;
+}
+.IMG000{
+    width: 100%;
 }
 /* BUSCADOR IMPORTADO DE https://codepen.io/huange/pen/rbqsD?__cf_chl_jschl_tk__=98e7196be0cc62e805f74a67aab9275205dbaa70-1590008016-0-AZR1kDuZmO6xn_rTozNGTRqESiZBGYxLtZU5qq5dr522PAKkTVtFWQ9HSStRNzPx9nUuekqDlsFaAszqf_3J6z3YaYTn3GCxATwBu4i-y7Pr5glMqQiU3PwIuhSbp5YULwR6RKrpA64H79n2BtTY3car8igPxPaj5pNsLO72dZ4OoH31NZwoUE3gfAkGhNt9yPcbZKnUGl4kIBCCxp32n4O7dlkQvUgHH5jjFnJE9JP4AA4qr4oR4HKNYjkbQQluI7bZGxH6XQfKNr9D3sT0UtGC3Cmg7lo4A3i_ZP5PaFYyZcuuhUwUlFqYTm52dfgVgxyI2J0xa3X2mGQLS8eYF4OfdNdN8mjoft1YN2v99cVG */
 .SDIV001{
     background-color: #ff7124;
     margin-top: 2%;
+    margin-left: 2%;
     width: 40%;
 }
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
@@ -107,36 +110,41 @@ body{
 }
 .user{
     width: 30%;
-    margin-left: 15%;
+    margin-left: 10%;
     display: flex;
     align-items: center;
-    margin-top: 8%;
+    margin-top: 4%;
 }
 .user i {
     width: 100%;
-    font-size: 160%; 
+    font-size: 170%; 
 }
 .cart{
     width: 30%;
     display: flex;
     align-items: center;
     margin-left: 10%;
-    margin-top: 8%;
+    margin-top: 4%;
     padding-left: 7%;
     border-left: 2px solid black;
 }
 .cart i {
     width: 100%;
-    font-size: 160%;
+    font-size: 170%;
 }
 .SDIV0021bis{
     display: none;
+}
+.SSDIV000{
+    text-align: left;
+    padding-top: 5%;
 }
 .H000{
     font-size: 120%;
     margin-bottom: 0%;
     margin-left: 7%;
-    text-align: left;
+    font-weight: bold;
+    counter-reset: black;
 }
 
 /* Categorias */
@@ -217,7 +225,7 @@ body{
     
 }
 .SDIV003:hover{
-    background-color: #1a4f8e;
+    background-color: #c54000;
     
 }
 .P001{
@@ -230,21 +238,20 @@ body{
     height: 100%;
     padding-top: 4%;
     padding-bottom: 7%;
-    margin: auto;
+    
     background-image: url('/images/renglones2.png');
     
 }
 /* Contenedor del SlideShow */
 .DIV004{
-    margin-right: 20%;
-    margin-left: 20%;
+    
     display: flex;
     margin-bottom: 1.45%;
-    background-color: white;
+    background-image: white;
     padding-left: 3%;
     padding-right: 3%;
-    border-top: #002860 3px solid;
-    border-bottom: #002860 3px solid;
+    border-top: #002860 5px solid;
+    border-bottom: #002860 5px solid;
 }
 /* - - - - ACA EMPIEZA EL SLIDESHOW IMPORTADO DE ESTE URL https://www.w3schools.com/howto/howto_js_slideshow.asp - - - - */
 /* Slideshow container */
@@ -283,8 +290,9 @@ body{
   }
   /* Caption text */
   .text {
-    color: black;
-    font-size: 19px;
+      display: none;
+    color: white;
+    font-size: 40px;
     padding: 8px 12px;
     position: absolute;
     bottom: 8px;
@@ -323,7 +331,7 @@ body{
    
 }
 /* - - - - ACA TERMINA EL SLIDESHOW IMPORTADO DE https://www.w3schools.com/howto/howto_js_slideshow.asp - - - -*/
-
+ 
 /* Productos Destacados */
 .ProductosDestacados{
     margin-right: 20%;
@@ -359,31 +367,32 @@ body{
     padding: 8%;
     
 }
-
-
+ 
+ 
 /* Guias y Tutoriales */
 .DIV005{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
     background-color: #ffffff;
-    margin-right: 20%;
-    margin-left: 20%;
+    margin: 0px 20%;
+ 
     padding: 1%;
     /* border-bottom: 3px solid #1a4f8e; */
 }
 .SDIV004{
-    width:45%;
+    width:48%;
     border-radius: 5px;
     overflow: hidden;
     transition: 0.1s;
     height: 100%;
 }
 .SDIV004:hover{
-    width: 47%;
-
+    width: 49%;
+ 
 }
 .IMG002{
+    border-radius: 5px;
     width: 100%;
     height: 100%;
 }
@@ -450,7 +459,7 @@ body{
     margin: -53px 3%;
 }
 /* -----------------Comienza el tema de Responsiveness--------------- */
-
+ 
 /* Acomoda tamaños y la pudro fuerte*/
 @media(max-width: 768px){
     .DIV003{

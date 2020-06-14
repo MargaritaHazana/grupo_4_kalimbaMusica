@@ -37,7 +37,10 @@
                     </h1>
 
                     <p class="description">
-                        <%= producto.description.slice(11290) %> 
+                        
+                            <%= producto.description.slice(0,250) %> 
+                        
+                        
                     </p>
 
                     <div class="price">
@@ -47,7 +50,7 @@
                         </p>
     
                         <p class="descuento">
-                            <%= producto.discount %> 
+                            <%= producto.discount %> % OFF 
                         </p>
 
                     </div>
@@ -64,17 +67,18 @@
                     </section>
 
                 </div>
-
+                <% var urlEdit = "/product/" + producto.id + "/edit" %> 
                 <button type="submit" class="boton-comprar">
                     Añadir a mi carrito
                 </button>
                 <form action="/product/delete/<%= producto.id %>?_method=delete" method="POST" >
                     <button type="submit" class="boton">Eliminar </button>
                 </form>
-                <form action="/product/<%= producto.id %>/edit" method="POST" >
-                    <button type="submit" class="boton">Editar </button>
-                </form>
-
+                
+                    <a href="<%= urlEdit %> ">Editar </a>
+               
+                
+                
             </section>
 
         </div>

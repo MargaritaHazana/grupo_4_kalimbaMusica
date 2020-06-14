@@ -1,0 +1,31 @@
+<!-- Trayendo el head -->
+<%- include('partials/head', {title: 'Registrarme'}) %>
+<body>
+    <!-- Trayendo el header -->
+    <%- include('partials/header') %>
+
+<!-- Form -->
+<div class="contenedor-form">
+    <form class="formulario">
+        <div class="titulo-form"><p class="texto-titulo-form"> Iniciando sesion
+        </p></div>
+
+        <label class="pregunta" for="">Email</label>
+        <input class="respuesta" type="email" name="email">
+
+        <label class="pregunta" for="">Contraseña</label>
+        <input class="respuesta" type="password" name="password">
+
+        <button type="submit" class="enter">Entrar</button>
+        </form>
+    </div>
+
+
+     
+
+<!-- Termina el form -->
+<!-- Trayendo el footer -->
+     <%- include('partials/footer') %>
+    
+</body>
+</html>

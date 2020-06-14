@@ -69,7 +69,7 @@ main {
     font-size: 206%;
 }
 .descuento {
-    color: #1a4f8e;
+    color: #41426f;
     margin: 0px 5%;
     font-size: 150%;
     font-weight: bold
@@ -130,7 +130,7 @@ main {
 .boton-comprar {
     width: 100%;
     height: 10%;
-    background-color: #1a4f8e;
+    background-color: #41426f;
     border: none;
     border-radius: 2%;
     justify-self: center;
@@ -162,7 +162,7 @@ main {
 }
 .titulo {
     font-weight: bold;
-    color: #1a4f8e;
+    color: #41426f;
     text-align: left;
     font-size: 150%;
 }

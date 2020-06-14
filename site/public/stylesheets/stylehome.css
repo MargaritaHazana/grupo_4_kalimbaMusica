@@ -16,12 +16,12 @@ body{
 }
 /* -------------- COMIENZA EL HEADER --------------- */
 .Header{
-    background-color: #ff7124;
+    background-color: #ff724a;
     height: 50%;
 }
 /* Barritas Chiquitas*/
 .DIV000{
-    background-color: #c54000;
+    background-color: #e75f3e;
     height: 8px;
     display: block
 }
@@ -48,10 +48,11 @@ body{
 }
 .IMG000{
     width: 100%;
+    padding-top: 2%};
 }
 /* BUSCADOR IMPORTADO DE https://codepen.io/huange/pen/rbqsD?__cf_chl_jschl_tk__=98e7196be0cc62e805f74a67aab9275205dbaa70-1590008016-0-AZR1kDuZmO6xn_rTozNGTRqESiZBGYxLtZU5qq5dr522PAKkTVtFWQ9HSStRNzPx9nUuekqDlsFaAszqf_3J6z3YaYTn3GCxATwBu4i-y7Pr5glMqQiU3PwIuhSbp5YULwR6RKrpA64H79n2BtTY3car8igPxPaj5pNsLO72dZ4OoH31NZwoUE3gfAkGhNt9yPcbZKnUGl4kIBCCxp32n4O7dlkQvUgHH5jjFnJE9JP4AA4qr4oR4HKNYjkbQQluI7bZGxH6XQfKNr9D3sT0UtGC3Cmg7lo4A3i_ZP5PaFYyZcuuhUwUlFqYTm52dfgVgxyI2J0xa3X2mGQLS8eYF4OfdNdN8mjoft1YN2v99cVG */
 .SDIV001{
-    background-color: #ff7124;
+    background-color: #ff724a;
     margin-top: 2%;
     margin-left: 2%;
     width: 40%;
@@ -100,7 +101,7 @@ body{
 }
 /* INICIO Y REGISTRO */
 .SDIV002{
-    background-color: #ff7124;
+    background-color: #ff724a;
     width: 30%;
     display: flex;
 }
@@ -110,13 +111,12 @@ body{
 }
 .user{
     width: 30%;
-    margin-left: 10%;
     display: flex;
     align-items: center;
     margin-top: 4%;
 }
 .user i {
-    width: 100%;
+    width: 150%;
     font-size: 170%; 
 }
 .cart{
@@ -154,7 +154,7 @@ body{
 }
 /* Dropdown Button */
 .dropbtn {
-    background-color: #1a4f8e;
+    background-color: #41426f;
     color: white;
     padding-right: 16px;
     padding-left: 16px;
@@ -168,7 +168,7 @@ body{
   
   /* Dropdown button on hover & focus */
   .dropbtn:hover, .dropbtn:focus {
-    background-color: #1a4f8e;
+    background-color: #41426f;
   }
   
   /* The container <div> - needed to position the dropdown content */
@@ -225,7 +225,7 @@ body{
     
 }
 .SDIV003:hover{
-    background-color: #c54000;
+    background-color: #e75f3e;
     
 }
 .P001{
@@ -250,8 +250,8 @@ body{
     background-image: white;
     padding-left: 3%;
     padding-right: 3%;
-    border-top: #002860 5px solid;
-    border-bottom: #002860 5px solid;
+    /* border-top: #41426f 5px solid;
+    border-bottom: #41426f 5px solid; */
 }
 /* - - - - ACA EMPIEZA EL SLIDESHOW IMPORTADO DE ESTE URL https://www.w3schools.com/howto/howto_js_slideshow.asp - - - - */
 /* Slideshow container */
@@ -290,7 +290,7 @@ body{
   }
   /* Caption text */
   .text {
-      display: none;
+    display: none;
     color: white;
     font-size: 40px;
     padding: 8px 12px;
@@ -349,8 +349,7 @@ body{
 .SDIV006{
     width: 24%;
     text-align: center;
-    background-color: #547bbf;
-    border-bottom: 3px solid #1a4f8e;
+    background-color: #41426f;
     transition: 0.2s;
 }
 /* Texto de Productos Destacados */
@@ -361,6 +360,10 @@ body{
 .P003{
     margin: 0px;
     padding-top: 3%;
+}
+.P004{
+    color: #41426f;
+    font-weight: bold;
 }
 .SSDIV001{
     background-color: white;
@@ -407,21 +410,19 @@ body{
     flex-wrap: wrap;
     margin-right: 1.45%;
     margin-left: 1.45%;
-    margin-top: 1.45%;
     padding-left: 1.45%;
     justify-content: flex-start;
     align-items: flex-start;
     text-align: left;
 }
 .SDIV005{
-    margin-top: 3%;
     padding:2%;
     width: 30%;
     font-size: 16px;
     border: none;
 }
 .FT1{
-    color:#1a4f8e ;
+    color:#41426f ;
     font-size: 130%;
 }
 .redes{
@@ -431,7 +432,7 @@ body{
     justify-content: space-around;
     height: 40%;
     align-self: flex-start;
-    margin-top: 7%;
+    margin-top: 4%;
 }
 .social{
     border-radius: 100%;

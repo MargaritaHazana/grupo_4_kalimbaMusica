@@ -24,9 +24,15 @@
 }
 
 .h-container {
-    display: block;
+    display: flex;
     width: 100%;
     color: #41426f;
+}
+.a{
+    color: gray;
+    width: 14%;
+    margin-right: 10%;
+    margin-top: 2%;
 }
 h2{
     text-align: left;
@@ -69,6 +75,9 @@ h2{
 @media(max-width: 550px){
     .SDIV010{
         width: 45%
+    }
+    .a{
+        margin-top: 5%;
     }
 }
 @media(max-width: 320px){

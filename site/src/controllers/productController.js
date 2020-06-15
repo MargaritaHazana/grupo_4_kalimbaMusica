@@ -6,6 +6,7 @@ const rutaProductosJson = path.join(__dirname, '../../data/Products.json');
 const productos = fs.readFileSync( rutaProductosJson, 'utf-8');
 const dataProductos = JSON.parse(productos);
 
+
 var numberWithCommas = x => {
     x = x.toString();
     var pattern = /(-?\d+)(\d{3})/;
@@ -71,7 +72,7 @@ productController = {
             coloresDisponibles: req.body.coloresDisponibles,
             stock: req.body.stock
         }
-         
+        
         dataProductos.push(productoNuevo);
 
         fs.writeFileSync(rutaProductosJson, JSON.stringify(dataProductos));

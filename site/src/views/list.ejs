@@ -9,6 +9,7 @@
     <div class="DIV010">
             <div class="h-container">
                 <h2> Productos disponibles </h2>
+                <a href="/product/create" class="a">Agregar producto</a>
             </div>
         <% for( let i = 0; i < dataProductos.length; i++ ) { %>
             <a class="A010" href="/productDetail/<%= dataProductos[i].id %> ">
@@ -29,6 +30,7 @@
                 </div>
             </a>
         <% } %>
+
         
     </div>
     <%- include('partials/footer') %> 

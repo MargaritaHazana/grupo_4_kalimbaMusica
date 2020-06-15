@@ -98,7 +98,24 @@ productController = {
         let productoEncontrado = dataProductos.find((producto)=>{
             idProducto == producto.id
         });
-        productoEncontrado = {
+        if(req.files[0] == undefined){
+            
+            productoEncontrado = {
+                id: req.params.id,
+                name: req.body.name,
+                type: req.body.type,
+                brand: req.body.brand,
+                category: req.body.category,
+                price: req.body.price,
+                image:  "Bajo.jpg",
+                discount: req.body.discount,
+                size: req.body.size,
+                description: req.body.description,
+                stock: req.body.estado,
+                coloresDisponibles: req.body.coloresDisponibles,
+            };}
+        else{
+                productoEncontrado = {
             id: req.params.id,
             name: req.body.name,
             type: req.body.type,
@@ -112,6 +129,9 @@ productController = {
             stock: req.body.estado,
             coloresDisponibles: req.body.coloresDisponibles,
         };
+        }
+        
+        
         dataProductos.map(function(producto){
             if(producto.id == idProducto){
                 let posicionAEditar = dataProductos.indexOf(producto);

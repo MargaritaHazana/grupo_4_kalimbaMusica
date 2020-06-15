@@ -1,0 +1,18 @@
+<!-- Productos Destacados -->
+<h1 class="P002">Productos Destacados</h1>
+<div class="ProductosDestacados">
+    <% destacados.forEach(producto => { %>
+        <a href="/productDetail/<%= producto.id %> " class="prod001">
+            <div class="SDIV006">
+                <div class="SSDIV001">
+                    <img class="IMG002" src="/images/<%= producto.image %> " alt="foto">
+                    <p class="P003"><%= producto.name %>  </p> 
+                    <div class="preciosDestacados">
+                        <p class="P004"> $<%= producto.price %> </p>
+                        <p class="P005"><%= producto.discount %>%OFF </p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    <% }) %>
+</div>

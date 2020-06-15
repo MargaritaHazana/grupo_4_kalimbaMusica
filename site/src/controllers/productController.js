@@ -13,14 +13,16 @@ var numberWithCommas = x => {
         x = x.replace(pattern, "$1.$2");
     return x;
 }
-// Esto es facilmente reemplazable una vez que podamos usar Sql
-var coloresDisponiblesGeneral = ["Blanco","Negro","Azul","Rojo","Marron"]
+
+// Variable que pasa los productos destacados
+let destacados = [dataProductos[1],dataProductos[2],dataProductos[3],dataProductos[4]];
 
 
 productController = {
     // Renderiza la view del Index
     index: function(req,res){
-        res.render('index', { view: 'index', dataProductos });
+        
+        res.render('index', { view: 'index', destacados });
     },
 
     // Renderiza la lista de los productos
@@ -39,12 +41,12 @@ productController = {
         var precioDescuento = Math.round(producto.price - descuento);
         var precioFinal = "$" + numberWithCommas(precioDescuento);
         
-        res.render('productDetail', { view: 'detail' , producto, precioViejo, precioFinal });
+        res.render('productDetail', { view: 'detail' , producto, precioViejo, precioFinal, destacados });
     },
 
     // Renderiza la view del Carro de los Productos
     productCart:function(req,res){
-        res.render('productCart', { view: 'carrito' });
+        res.render('productCart', { view: 'carrito', destacados });
     },
 
     // Renderiza la view que permite agregar productos
@@ -67,10 +69,8 @@ productController = {
             size: req.body.size,
             description: req.body.description,
             coloresDisponibles: req.body.coloresDisponibles,
-            stock: req.body.estado
+            stock: req.body.stock
         }
-        
-        console.log(req.body);
          
         dataProductos.push(productoNuevo);
 
@@ -84,6 +84,8 @@ productController = {
         let idProducto = req.params.id;
 
         let productoAEditar = dataProductos.find((product)=> idProducto == product.id);
+        // Esto es facilmente reemplazable una vez que podamos usar Sql
+        var coloresDisponiblesGeneral = ["Blanco","Negro","Azul","Rojo","Marron"]
         
         res.render('productEdit', {view: 'forms', productoAEditar, coloresDisponiblesGeneral});
 
@@ -140,3 +142,6 @@ productController = {
 }
 
 module.exports= productController;
+
+
+

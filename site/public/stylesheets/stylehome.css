@@ -344,11 +344,13 @@ body{
     flex-wrap: wrap;
    
 }
+.prod001{
+    width: 24%;
+}
 .SDIV006:hover{
-    border: #547bbf 2px solid
+    border: #e75f3e 2px solid
 }
 .SDIV006{
-    width: 24%;
     text-align: center;
     background-color: #41426f;
     transition: 0.2s;
@@ -360,11 +362,21 @@ body{
 /* Texto de cada Producto */
 .P003{
     margin: 0px;
+    width: 100%;
     padding-top: 3%;
 }
+.preciosDestacados{
+    display: flex;
+}
 .P004{
+    color: black;
+    font-weight: bold;
+}
+.P005{
     color: #41426f;
     font-weight: bold;
+    font-size: 90%;
+    margin-left: 2%;
 }
 .SSDIV001{
     background-color: white;

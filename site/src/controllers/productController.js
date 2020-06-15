@@ -112,7 +112,7 @@ productController = {
                 discount: req.body.discount,
                 size: req.body.size,
                 description: req.body.description,
-                stock: req.body.estado,
+                stock: req.body.stock,
                 coloresDisponibles: req.body.coloresDisponibles,
             };}
         else{
@@ -127,7 +127,7 @@ productController = {
             discount: req.body.discount,
             size: req.body.size,
             description: req.body.description,
-            stock: req.body.estado,
+            stock: req.body.stock,
             coloresDisponibles: req.body.coloresDisponibles,
         };
         }

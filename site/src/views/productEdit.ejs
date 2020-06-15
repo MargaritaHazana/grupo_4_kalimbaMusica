@@ -86,8 +86,13 @@
 
         <label class="pregunta" for="">Stock</label>
         <select class="respuesta" name="stock" id="">
-            <option value="true">Sí</option>
-            <option value="false">No</option>
+            <% if (productoAEditar.stock == "true") { %>
+                <option value="true" selected>Sí</option>
+                <option value="false">No</option>
+                <% } else { %>
+                <option value="true" >Sí</option>
+                <option value="false" selected>No</option>
+            <% } %>
         </select>
 
         <button type="submit" class="enter">Finalizar</button>

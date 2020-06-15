@@ -61,7 +61,7 @@
             
             <% if (typeof productoAEditar.coloresDisponibles == "string") { %>
                 <option value="<%= productoAEditar.coloresDisponibles %> " selected><%= productoAEditar.coloresDisponibles %> </option>
-                <% coloresSeleccionados.push(productoAEditar.coloresSeleccionados)  %> 
+                <% coloresSeleccionados.push(productoAEditar.coloresDisponibles)  %> 
             <% } else { %>
                 <% for( let j = 0; j < productoAEditar.coloresDisponibles.length; j++ ) { %>
                         <option value="<%= productoAEditar.coloresDisponibles[j] %>" selected ><%= productoAEditar.coloresDisponibles[j] %> </option> 

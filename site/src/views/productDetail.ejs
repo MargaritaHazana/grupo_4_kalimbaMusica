@@ -37,22 +37,27 @@
                     </h1>
 
                     <p class="description">
-                        
-                            <%= producto.description %> 
-                        
-                        
+                        <%= producto.description %> 
                     </p>
 
                     <div class="price">
-
-                        <p class="precio">
-                            <%= producto.price %> 
-                        </p>
-    
-                        <p class="descuento">
-                            <%= producto.discount %> % OFF 
-                        </p>
-
+                        <% if (producto.discount !== '0') { %>
+                            <p class="precioViejo">
+                                <%= precioViejo %> 
+                            </p>
+                            <p class="precio">
+                                <%= precioFinal %> 
+                            </p>
+        
+                            <p class="descuento">
+                                <%= producto.discount %>% OFF 
+                            </p>
+                        <% } %>
+                        <% if (producto.discount == '0') { %>
+                            <p class="precio">
+                                <%= precioViejo %> 
+                            </p>
+                        <% } %>
                     </div>
                     
                     <section class="colores">

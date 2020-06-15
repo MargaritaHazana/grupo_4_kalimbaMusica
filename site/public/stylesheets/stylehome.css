@@ -6,7 +6,7 @@
 /* Remueve Cosas Feas de los Links */
 a{
     text-decoration: none;
-    color: rgb(43, 43, 43);
+    color: black;
 }
 /* General */
 body{
@@ -114,6 +114,7 @@ body{
     display: flex;
     align-items: center;
     margin-top: 4%;
+    margin-left: 10%;
 }
 .user i {
     width: 150%;
@@ -123,9 +124,9 @@ body{
     width: 30%;
     display: flex;
     align-items: center;
-    margin-left: 10%;
+    margin-left: 6%;
     margin-top: 4%;
-    padding-left: 7%;
+    padding-left: 5%;
     border-left: 2px solid black;
 }
 .cart i {
@@ -460,7 +461,26 @@ body{
     margin: -53px 3%;
 }
 /* -----------------Comienza el tema de Responsiveness--------------- */
- 
+@media(max-width: 950px){
+    .DIV001{
+        margin-right: 10%;
+        margin-left: 10%;
+    }
+    .DIV003{
+        padding-right: 10%;
+        padding-left: 10%;
+    }
+}
+@media(max-width: 850px){
+    .DIV001{
+        margin-right: 5%;
+        margin-left:5%;
+    }
+    .DIV003{
+        padding-right: 10%;
+        padding-left: 10%;
+    }
+}
 /* Acomoda tamaños y la pudro fuerte*/
 @media(max-width: 768px){
     .DIV003{
@@ -531,10 +551,12 @@ body{
         flex-wrap: wrap;
     }
     .IMG000{
-        width: 45%;
+        width: 100%;
+        margin-top: 3%;
     }
     .SDIV001{
-        width: 45%;
+        width: 55%;
+        margin-top: 1%;
     }
     .SSDIV000{
         display: none;
@@ -557,6 +579,7 @@ body{
     }
     .H000{
         font-size: 80%;
+        text-align: left;
     }
     .cart{
         margin-top: 4%;

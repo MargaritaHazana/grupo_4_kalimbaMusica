@@ -68,6 +68,10 @@ main {
     margin: 0px 0px 0px 2%;
     font-size: 206%;
 }
+.precioViejo{
+    text-decoration-line: line-through;
+    color: gray;
+}
 .descuento {
     color: #41426f;
     margin: 0px 5%;

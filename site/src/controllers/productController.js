@@ -17,19 +17,26 @@ var numberWithCommas = x => {
 productController = {
     // Renderiza la view del Index
     index: function(req,res){
-        res.render('index', { view: 'index' });
+        res.render('index', { view: 'index', dataProductos });
     },
 
     // Renderiza la lista de los productos
     list: function(req,res){
-        res.render('list', { view: 'list', dataProductos, numberWithCommas});
+        res.render('list', {view: 'list', dataProductos, numberWithCommas});
     },
 
     // Renderiza la view del Detalle del Producto
     productDetail:function(req,res){
+        // Encontrando el producto
         var idProducto = req.params.id;
         var producto = dataProductos.find((product)=> idProducto == product.id);
-        res.render('productDetail', { view: 'detail' , producto });
+        // Calculando el precio con descuento
+        var precioViejo = "$" + Math.round(producto.price);
+        var descuento = producto.price * (producto.discount / 100);
+        var precioDescuento = Math.round(producto.price - descuento);
+        var precioFinal = "$" + numberWithCommas(precioDescuento);
+        
+        res.render('productDetail', { view: 'detail' , producto, precioViejo, precioFinal });
     },
 
     // Renderiza la view del Carro de los Productos
@@ -56,7 +63,8 @@ productController = {
             discount: req.body.discount,
             size: req.body.size,
             description: req.body.description,
-            stock: req.body.stock
+            color: req.body.color.value,
+            stock: req.body.stock.value
         }
         
         console.log(req.body);
@@ -83,7 +91,7 @@ productController = {
 
         let productoEncontrado = dataProductos.find((producto)=>{
             idProducto == producto.id
-        })
+        });
         productoEncontrado = {
             id: req.params.id,
             name: req.body.name,
@@ -100,7 +108,7 @@ productController = {
         dataProductos.map(function(producto){
             if(producto.id == idProducto){
                 let posicionAEditar = dataProductos.indexOf(producto);
-                dataProductos.splice(posicionAEditar, 1, productoEncontrado)
+                dataProductos.splice(posicionAEditar, 1, productoEncontrado);
             }
         });
         

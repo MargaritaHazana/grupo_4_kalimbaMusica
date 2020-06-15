@@ -42,20 +42,37 @@ h2{
     text-align: left;
     margin-left: 3%;
     color: white;
+    margin-bottom: 0px;
+}
+.P011{
+    text-align: left;
+    margin-left: 3%;
+    color: white;
+    font-weight: bold;
+    font-size: 90%;
 }
 .p-container{
     border-top: 1px white;
 }
+.p-container2 {
+    border-top: 1px white;
+    display: flex;
+}
 #P010 {
     font-weight: bolder;
 }
-@media(max-width: 768px){
+@media(max-width: 850px){
     .SDIV010{
         width: 30%
     }
 }
-@media(max-width: 486px){
+@media(max-width: 550px){
     .SDIV010{
         width: 45%
+    }
+}
+@media(max-width: 320px){
+    .SDIV010{
+        width: 90%
     }
 }

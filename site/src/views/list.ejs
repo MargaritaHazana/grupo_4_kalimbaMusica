@@ -18,8 +18,11 @@
                         <div class="p-container">
                             <p class="P010" id="P010"> <%= dataProductos[i].name %> </p>
                         </div>
-                        <div class="p-container">
-                            <p class="P010"><%= numberWithCommas(dataProductos[i].price) %> </p>
+                        <div class="p-container2">
+                            <p class="P010">$<%= numberWithCommas(dataProductos[i].price) %> </p>
+                            <% if (dataProductos[i].discount !== '0') { %>
+                                <p class="P011"><%= dataProductos[i].discount %>% OFF </p>
+                            <% } %>
                         </div>
                         
                     </div>

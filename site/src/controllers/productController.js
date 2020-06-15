@@ -6,6 +6,13 @@ const rutaProductosJson = path.join(__dirname, '../../data/Products.json');
 const productos = fs.readFileSync( rutaProductosJson, 'utf-8');
 const dataProductos = JSON.parse(productos);
 
+var numberWithCommas = x => {
+    x = x.toString();
+    var pattern = /(-?\d+)(\d{3})/;
+    while (pattern.test(x))
+        x = x.replace(pattern, "$1.$2");
+    return x;
+}
 
 productController = {
     // Renderiza la view del Index
@@ -15,7 +22,7 @@ productController = {
 
     // Renderiza la lista de los productos
     list: function(req,res){
-        res.render('list', { view: 'list', dataProductos});
+        res.render('list', { view: 'list', dataProductos, numberWithCommas});
     },
 
     // Renderiza la view del Detalle del Producto

@@ -7,12 +7,22 @@
     <%- include('partials/header') %> 
 
     <div class="DIV010">
+            <div class="h-container">
+                <h2> Productos disponibles </h2>
+            </div>
         <% for( let i = 0; i < dataProductos.length; i++ ) { %>
             <a class="A010" href="/productDetail/<%= dataProductos[i].id %> ">
                 <div class="SDIV010">
                     <img class="IMG010" src="/images/<%= dataProductos[i].image %> " alt="">
-                    <p class="P010"> <%= dataProductos[i].name %> </p>
-                    <p class="P010"> <%= dataProductos[i].price %> </p>
+                    <div class="p-container">
+                        <div class="p-container">
+                            <p class="P010" id="P010"> <%= dataProductos[i].name %> </p>
+                        </div>
+                        <div class="p-container">
+                            <p class="P010"><%= numberWithCommas(dataProductos[i].price) %> </p>
+                        </div>
+                        
+                    </div>
                 </div>
             </a>
         <% } %>

@@ -17,16 +17,37 @@
 .SDIV010{
     
     width: 15%;
-    background-color: white;
-    border: 1px black solid;
+    border: 5px #41426f solid;
     margin: 1%;
     transition: 0.1s;
+    background-color: #41426f;
 }
-.SDIV010:hover{
-    border: 2px #1a4f8e solid;
+
+.h-container {
+    display: block;
+    width: 100%;
+    color: #41426f;
+}
+h2{
+    text-align: left;
+    width: 86%;
+    font-size: 170%;
+    margin-left: 8%;
+
 }
 .IMG010{
     width: 100%;
+}
+.P010 {
+    text-align: left;
+    margin-left: 3%;
+    color: white;
+}
+.p-container{
+    border-top: 1px white;
+}
+#P010 {
+    font-weight: bolder;
 }
 @media(max-width: 768px){
     .SDIV010{

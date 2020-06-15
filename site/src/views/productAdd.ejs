@@ -48,16 +48,23 @@
 
 
         <label class="pregunta" for="">Colores disponibles</label>
-        <div class="respuesta3">
+        <!-- <div class="respuesta3">
         
         <p class="p-option"><input class="respuesta" type="checkbox" name="color" value="negro">Negro</p>
         <p class="p-option"><input class="respuesta" type="checkbox" name="color" value="marron">Marron</p>
         <p class="p-option"><input class="respuesta" type="checkbox" name="color" value="gris">Gris</p>
         <p class="p-option" id="p-option"><textarea class="respuesta2" name="comentario" id="" ></textarea>Otro</p>
-        </div>
+        </div> -->
+        <select name="coloresDisponibles" class="respuesta"id="" multiple>
+            <option value="Blanco">Blanco</option>
+            <option value="Negro">Negro</option>
+            <option value="Rojo">Rojo</option>
+            <option value="Marron">Marron</option>
+            <option value="Azul">Azul</option>
+        </select>
     
         <label class="pregunta" for="">Stock</label>
-        <select class="respuesta" name="stock" id="">
+        <select class="respuesta" name="estado" id="">
             <option value="true">Sí</option>
             <option value="false">No</option>
         </select>

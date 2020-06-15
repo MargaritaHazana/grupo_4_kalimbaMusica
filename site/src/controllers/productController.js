@@ -13,6 +13,9 @@ var numberWithCommas = x => {
         x = x.replace(pattern, "$1.$2");
     return x;
 }
+// Esto es facilmente reemplazable una vez que podamos usar Sql
+var coloresDisponiblesGeneral = ["Blanco","Negro","Azul","Rojo","Marron"]
+
 
 productController = {
     // Renderiza la view del Index
@@ -51,7 +54,7 @@ productController = {
 
     // Agrega el nuevo producto a la base de datos
     addingProduct : function(req, res, next){
-
+        
         let productoNuevo = {
             id: dataProductos[dataProductos.length - 1].id + 1,
             name: req.body.name,
@@ -63,8 +66,8 @@ productController = {
             discount: req.body.discount,
             size: req.body.size,
             description: req.body.description,
-            color: req.body.color.value,
-            stock: req.body.stock.value
+            coloresDisponibles: req.body.coloresDisponibles,
+            stock: req.body.estado
         }
         
         console.log(req.body);
@@ -81,8 +84,9 @@ productController = {
         let idProducto = req.params.id;
 
         let productoAEditar = dataProductos.find((product)=> idProducto == product.id);
+        
+        res.render('productEdit', {view: 'forms', productoAEditar, coloresDisponiblesGeneral});
 
-        res.render('productEdit', {view: 'forms', productoAEditar});
     },
 
     editingProduct: function(req, res){
@@ -103,7 +107,8 @@ productController = {
             discount: req.body.discount,
             size: req.body.size,
             description: req.body.description,
-            stock: req.body.stock
+            stock: req.body.estado,
+            coloresDisponibles: req.body.coloresDisponibles,
         };
         dataProductos.map(function(producto){
             if(producto.id == idProducto){

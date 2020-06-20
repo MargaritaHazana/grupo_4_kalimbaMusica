@@ -3,9 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
 
+// Routers
 var productRouter = require('./routes/products');
 var usersRouter = require('./routes/users');
+
+// Middlewares
+var loginCookie = require('./middlewares/loginCookieMiddleware.js');
 
 var app = express();
 
@@ -18,17 +23,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
+app.use(session({secret:"Adronitis"}));
+// Cookie middleware
+app.use(loginCookie);
 
-// SI NO FUNCA COMENTAR DE ACA HASTA LA LINEA 31 Y SACAR LA LINEA 18 DEL ROUTER DE USUARIOS
-// Requiero el middleware de cookies y el paquete de session
-var session = require('express-session')
-var authCookie = require('./middlewares/authCookie.js')
-
-// Aplico a nivel ruta el middleware que le asigna el valor almacenado a la cookie a la sesion y configuro session
-app.use(session({secret:"Adronitis"}))
-app.use(authCookie)
-
-
+// Configura rutas
 app.use('/', productRouter);
 app.use('/users', usersRouter);
 

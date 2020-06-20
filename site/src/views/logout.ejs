@@ -1,0 +1,25 @@
+    <!-- Trayendo el head -->
+    <%- include('partials/head', {title: 'Registrarme'}) %>
+<body>
+    <!-- Trayendo el header -->
+    <%- include('partials/header') %>
+
+<!-- Form -->
+<div class="contenedor-form">
+    <form class="formulario" action="/users/logout" method="POST">
+
+        <div class="titulo-form">
+            <p class="texto-titulo-form"> ¿Estás seguro que queres cerrar sesión?</p>
+        </div>
+
+        <button type="submit" class="enter">Salir</button>
+        </form>
+    </div>
+
+<!-- Termina el form -->
+
+<!-- Trayendo el footer -->
+     <%- include('partials/footer') %>
+    
+</body>
+</html>

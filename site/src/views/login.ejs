@@ -6,15 +6,33 @@
 
 <!-- Form -->
 <div class="contenedor-form">
-    <form class="formulario">
-        <div class="titulo-form"><p class="texto-titulo-form"> Iniciando sesion
-        </p></div>
+    <form class="formulario" action="/users/login" method="POST">
+
+        <div class="titulo-form">
+            <p class="texto-titulo-form"> Iniciar sesion</p>
+        </div>
+
+        <!-- Muestra los errores de la validación -->
+        <div class="errors">
+            <% if (typeof errors != 'undefined') { %>
+                <ul>
+                    <% errors.forEach(error => { %>
+                        <li>
+                            <%= error.msg %> 
+                        </li>
+                    <% }) %>
+                </ul>
+            <% } %>
+        </div>
 
         <label class="pregunta" for="">Email</label>
         <input class="respuesta" type="email" name="email">
 
         <label class="pregunta" for="">Contraseña</label>
         <input class="respuesta" type="password" name="password">
+
+        <label class="recordarme" for="">Recordarme</label>
+        <input class="check" type="checkbox" name="recordarme" id="">
 
         <button type="submit" class="enter">Entrar</button>
         </form>

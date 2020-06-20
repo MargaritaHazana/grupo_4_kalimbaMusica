@@ -22,17 +22,23 @@ let destacados = [dataProductos[1],dataProductos[2],dataProductos[3],dataProduct
 productController = {
     // Renderiza la view del Index
     index: function(req,res){
-        
-        res.render('index', { view: 'index', destacados });
+        // ID del usuario en sesion
+        let sessionUserID = req.session.userID;
+
+        res.render('index', { view: 'index', destacados, sessionUserID });
     },
 
     // Renderiza la lista de los productos
     list: function(req,res){
-        res.render('list', {view: 'list', dataProductos, numberWithCommas});
+        // ID del usuario en sesion
+        let sessionUserID = req.session.userID;
+        res.render('list', {view: 'list', dataProductos, numberWithCommas, sessionUserID});
     },
 
     // Renderiza la view del Detalle del Producto
     productDetail:function(req,res){
+        // ID del usuario en sesion
+        let sessionUserID = req.session.userID;
         // Encontrando el producto
         var idProducto = req.params.id;
         var producto = dataProductos.find((product)=> idProducto == product.id);
@@ -42,22 +48,26 @@ productController = {
         var precioDescuento = Math.round(producto.price - descuento);
         var precioFinal = "$" + numberWithCommas(precioDescuento);
         
-        res.render('productDetail', { view: 'detail' , producto, precioViejo, precioFinal, destacados });
+        res.render('productDetail', { view: 'detail' , producto, precioViejo, precioFinal, destacados, sessionUserID });
     },
 
     // Renderiza la view del Carro de los Productos
     productCart:function(req,res){
-        res.render('productCart', { view: 'carrito', destacados });
+        // ID del usuario en sesion
+        let sessionUserID = req.session.userID;
+        res.render('productCart', { view: 'carrito', destacados, sessionUserID });
     },
 
     // Renderiza la view que permite agregar productos
     productAdd:function(req,res){
-        res.render('productAdd', { view: 'forms' });
+        // ID del usuario en sesion
+        let sessionUserID = req.session.userID;
+        res.render('productAdd', { view: 'forms', sessionUserID });
     },
 
     // Agrega el nuevo producto a la base de datos
     addingProduct : function(req, res, next){
-        
+       
         let productoNuevo = {
             id: dataProductos[dataProductos.length - 1].id + 1,
             name: req.body.name,
@@ -81,6 +91,8 @@ productController = {
     },
 
     productEdit: function(req, res){
+        // ID del usuario en sesion
+        let sessionUserID = req.session.userID;
         
         let idProducto = req.params.id;
 
@@ -88,7 +100,7 @@ productController = {
         // Esto es facilmente reemplazable una vez que podamos usar Sql
         var coloresDisponiblesGeneral = ["Blanco","Negro","Azul","Rojo","Marron"]
         
-        res.render('productEdit', {view: 'forms', productoAEditar, coloresDisponiblesGeneral});
+        res.render('productEdit', {view: 'forms', productoAEditar, coloresDisponiblesGeneral, sessionUserID});
 
     },
 
@@ -145,6 +157,7 @@ productController = {
     },
     // Borra un producto
     delete: function(req,res){
+       
         var idProducto = req.params.id;
 
         function productDestroyer(id,data){

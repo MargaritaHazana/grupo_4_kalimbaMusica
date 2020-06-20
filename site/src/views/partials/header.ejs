@@ -18,19 +18,36 @@
                 </button>
                 </div>
         </div>
-        <!-- Registrarte / Iniciar Sesion -->
-        <div class="SDIV002">
-            <div class="user">
-                <i class="fas fa-user-alt"></i>
+        <!-- Pregunta si hay un usuario logueado -->
+        <% if ( typeof sessionUserID != 'undefined') { %>
+            <!-- Mi perfil / Cerrar sesion -->
+            <div class="SDIV002">
+                <div class="user">
+                    <i class="fas fa-user-alt"></i>
+                </div>
+                <div class="SSDIV000">
+                    <a href="/users/profile/<%= sessionUserID %> " class="H000">Mi perfil</a>
+                    <a href="/users/logout" class="H000">Log Out</a>
+                </div>
+                <div class="cart">
+                    <a href="/productCart"><i class="fas fa-shopping-cart"></i></a>
+                </div>
             </div>
-            <div class="SSDIV000">
-                <a href="/users/register" class="H000">Registrame</a>
-                <a href="/users/login" class="H000">Log In</a>
+        <% } else { %>
+            <!-- Registrarte / Iniciar Sesion -->
+            <div class="SDIV002">
+                <div class="user">
+                    <i class="fas fa-user-alt"></i>
+                </div>
+                <div class="SSDIV000">
+                    <a href="/users/register" class="H000">Registrame</a>
+                    <a href="/users/login" class="H000">Log In</a>
+                </div>
+                <div class="cart">
+                    <a href="/productCart"><i class="fas fa-shopping-cart"></i></a>
+                </div>
             </div>
-            <div class="cart">
-                <a href="/productCart"><i class="fas fa-shopping-cart"></i></a>
-            </div>
-        </div>
+        <% }  %>
     </div>
     <!-- SEGUNDA PARTE DEL HEADER - CATEGORIAS -->
     <!-- Menu De Categorias -->

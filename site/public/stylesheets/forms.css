@@ -56,6 +56,20 @@
 .respuesta3{
     width: 47%;
 }
+.recordarme {
+    width: 78%;
+    font-size: 100%;
+    text-align: right;
+    margin-top: 3%;
+    margin-right: 1%
+}
+.check{
+    margin-top: 3.4%;
+}
+.errors{
+    width: 100%;
+    padding-left: 10%;
+}
 
 @media(max-width: 1020px){
     .enter{

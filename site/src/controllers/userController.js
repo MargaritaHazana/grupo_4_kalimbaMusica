@@ -13,15 +13,56 @@ const dataUsers = JSON.parse(users);
 userController = {
 
     // Renderiza la view de Registracion
-    register: function(req,res){
-        res.render('register', { view: 'forms' });
-    },
-
-    // Renderiza la view de Inicio de Sesion
-    loginView: (req,res)=>{
+    registerView: function(req,res){
+        
         let mensaje = []
+
+
+            res.render('register', { view: 'forms', mensaje});
+        },
+    
+        register: function(req, res){
+            
+           
+            let errors = validationResult(req);
+            let mensaje = []
+            // Valida los datos del form
+            if (!errors.isEmpty()) {
+                 mensaje.push(errors)
+                // Si hay errores - Redirige al login y envía errores
+                return res.render('register', { view: 'forms', mensaje, errors: errors.errors});
+            } 
+    
+            else {
+                let newUser = {
+                    id: dataUsers[dataUsers.length - 1].id + 1,
+                    first_name: req.body.name,
+                    last_name: req.body.lastName,
+                    email: req.body.email,
+                    tel: req.body.phone,
+                    birth_date: req.body.date,
+                    username: req.body.username,
+                    password: bcrypt.hashSync (req.body.password, 10), 
+                    category: 2,
+                    image: req.files[0].filename,
+                    
+                }
+        
+                dataUsers.push(newUser);
+        
+                fs.writeFileSync(rutaUsersJson, JSON.stringify(dataUsers));
+                res.redirect('/')
+            }
+            
+    
+    
+        },
+     // Renderiza la view de Inicio de Sesion
+    loginView: (req,res)=>{
         // ID del usuario en sesion
         let sessionUserID = req.session.userID;
+
+        let mensaje = []
         res.render('login', {view: 'forms', sessionUserID, mensaje});
     },
 

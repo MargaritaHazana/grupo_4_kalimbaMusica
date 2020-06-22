@@ -5,14 +5,25 @@
     <%- include('partials/header') %>
     <!-- Forms -->
     <div class="contenedor-form">
-        <form class="formulario">
+        <form class="formulario" action="/users/register" method="POST" enctype="multipart/form-data">
             <div class="titulo-form"><p class="texto-titulo-form"> Unite a nuestra comunidad!
             </p></div>
+            <% if (typeof errors != 'undefined') { %>
+                <ul>
+                    <% errors.forEach(error => { %>
+                        <li>
+                            <%= error.msg %> 
+                        </li>
+                    <% }) %>
+                </ul>
+            <% } %>
+              
+              
         <label class="pregunta" for="">Nombre</label>
         <input  class="respuesta" type="text" name="name">
 
         <label class="pregunta" for="">Apellido</label>
-        <input class="respuesta" type="text" name="surname">
+        <input class="respuesta" type="text" name="lastName">
 
         <label class="pregunta" for="">Email</label>
         <input class="respuesta" type="email" name="email">
@@ -29,8 +40,8 @@
         <label class="pregunta" for="">Contraseña</label>
         <input class="respuesta" type="password" name="password">
 
-        <label class="pregunta" for="">Confirmar contraseña</label>
-        <input class="respuesta" type="password" name="rePassword">
+        <label class="pregunta" for="">Foto de perfil</label>
+        <input class="respuesta" type="file" name="image">
 
         <button type="submit" class="enter">Registrarme</button>
         </form>

@@ -39,10 +39,10 @@ router.post('/product/add', upload.any(), productController.addingProduct);
 // GET product edit
 router.get('/product/:id/edit', productController.productEdit);
 // PUT product edit
-router.post('/product/:id', upload.any(), productController.editingProduct);
+router.put('/product/:id', upload.any(), productController.editingProduct);
 
 //DELETE
-router.post('/product/delete/:id', productController.delete);
+router.delete('/product/delete/:id', productController.delete);
 
 
 

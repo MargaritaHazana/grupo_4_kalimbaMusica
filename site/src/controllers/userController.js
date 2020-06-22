@@ -19,14 +19,16 @@ userController = {
 
     // Renderiza la view de Inicio de Sesion
     loginView: (req,res)=>{
+        let mensaje = []
         // ID del usuario en sesion
         let sessionUserID = req.session.userID;
-        res.render('login', {view: 'forms', sessionUserID});
+        res.render('login', {view: 'forms', sessionUserID, mensaje});
     },
 
     // Procesa el usuario en login
     login: function(req,res, next){
         
+        let sessionUserID = req.session.userID;
         let user = dataUsers.find((us)=> us.email == req.body.email);
         let errors = validationResult(req);
         let mensaje = []
@@ -34,7 +36,7 @@ userController = {
         // Valida los datos del form
         if (!errors.isEmpty()) {
             // Si hay errores - Redirige al login y envía errores
-            return res.render('login', {errors: errors.errors, view: 'forms', sessionUserID});
+            return res.render('login', {errors: errors.errors, view: 'forms', sessionUserID, mensaje});
         } 
 
         // Si no hay errores - Busca si el el email está registrado
@@ -49,18 +51,15 @@ userController = {
 
                 // Si tocó recordarme - Guarda el userID en cookies
                 if (req.body.recordarme){
-                    res.cookie('userIDCookie', user.id, {maxAge: 7604800});
+                    res.cookie('userIDCookie', user.id, {maxAge: 604800000});
                 }
                 res.redirect('/');
             } else {
                 // Si está mal - Redirige al login y manda mensaje de error
 
-                mensaje.push('Email o contraseña invalida');
-                // <% if (typeof mensaje != 'undefinded') { %>
-                //     <p><%= mensaje %>  </p>
-                //    <% } %>   
+                mensaje.push('Email o contraseña invalida'); 
                 
-                res.redirect('/users/login');
+                res.render('login', { view: 'forms', sessionUserID, mensaje});
             }
         } else {
             // Si no encientra el usuario - Redirige al login

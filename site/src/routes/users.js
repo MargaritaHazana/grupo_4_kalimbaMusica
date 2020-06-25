@@ -19,7 +19,7 @@ var storage = multer.diskStorage({
 const userController = require('../controllers/userController');
 // Requiriendo el middleware
 const loginMiddleware = require('../middlewares/loginMiddleware');
-
+const authAdmins = require('../middlewares/authAdmins');
 
 // Rutas login
 router.get('/login', userController.loginView);
@@ -48,5 +48,6 @@ router.get('/profile/:id', loginMiddleware, userController.profile);
 router.get('/logout', userController.logoutView);
 router.post('/logout', userController.logout);
 
-
+// RUTA DE PRUEBA ADMINS
+router.get('/userList', authAdmins, userController.userList)
 module.exports = router;

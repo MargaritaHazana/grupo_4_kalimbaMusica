@@ -1,0 +1,17 @@
+<%- include('partials/head', {title: 'Nombre del producto'}) %>
+<body>
+    <!-- Trayendo el header -->
+    <%- include('partials/header') %> 
+    <div class="DIV020">
+        <ul class="">
+        <% for( let i = 0; i < dataUsers.length; i++ ) { %>
+            <p class="P020"><%= dataUsers[i].id %>  <%= dataUsers[i].first_name %>   <%= dataUsers[i].last_name %></p>
+        <% } %>
+        </ul>
+    </div>
+    <!-- Trayendo el Footer -->
+    <%- include('partials/footer') %> 
+
+    <!-- Fin de la View -->
+</body>
+</html>

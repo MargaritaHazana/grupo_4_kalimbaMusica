@@ -82,14 +82,14 @@ userController = {
 
         // Si no hay errores - Busca si el el email está registrado
         if (user !== undefined) {
-        // BORRAR CUANDO EL REGISTER ESTE LISTO
-            let passHash = bcrypt.hashSync(user.password);
+        
             
             // Chequea contraseña
-            if (bcrypt.compareSync(req.body.password, passHash)) {
+            if (bcrypt.compareSync(req.body.password, user.password)) {
                 // Si está bien - Guarda el userID en session y redirige al home
                 req.session.userID = user.id;
-
+                req.session.category = user.category
+                
                 // Si tocó recordarme - Guarda el userID en cookies
                 if (req.body.recordarme){
                     res.cookie('userIDCookie', user.id, {maxAge: 604800000});
@@ -122,6 +122,9 @@ userController = {
         // ID del usuario en sesion
         let sessionUserID = req.session.userID;
         res.render('profile', {view: 'index', sessionUserID});
+    },
+    userList: (req,res)=>{
+        res.render('userList', {view: 'index', dataUsers})
     }
 }
 

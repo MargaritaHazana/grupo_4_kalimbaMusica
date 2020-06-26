@@ -33,7 +33,7 @@
                 <!-- Descripción -->
                 <section class="abajo">
                     <div class="description">
-                        <h2 class="titulo3">Descripción</h2>
+                        <h1 class="titulo3">Descripción</h1>
                         <p><%= producto.description %> </p>
                     </div>
                 </section>
@@ -73,9 +73,9 @@
 
                         <div class="list">
                             <ul >
-                                <li><i class="fas fa-shipping-fast"></i> Envíos a todo el país </li>
-                                <li><i class="fas fa-undo-alt"></i> Devolución gratis por 30 días </li>
-                                <li><i class="fas fa-credit-card"></i> Consultá medios de pago </li>
+                                <li><i class="fas fa-shipping-fast camion"></i> Envíos a todo el país </li>
+                                <li><i class="fas fa-undo-alt flecha"></i> Devolución gratis por 30 días </li>
+                                <li><i class="fas fa-credit-card tarjeta"></i> Consultá medios de pago </li>
                             </ul> 
                         </div>
 
@@ -104,18 +104,30 @@
                     
                     <!-- Descripción mobile -->
                     <div class="desc-mobile">
-                        <h2 class="titulo2">Descripción</h2>
+                        <h1 class="titulo2">Descripción</h1>
                         <p> <%= producto.description %> </p>
                     </div>
                 </section>
+               
                 <section class="titulo2">
-                    <h3>Medios de pago</h3>
+                    <h1>Medios de pago</h1>
+                    
                     <div class="tarjetas">
                         <i class="fab fa-cc-mastercard master"></i>
                         <i class="fab fa-cc-visa visa"></i>
                         <i class="fab fa-cc-paypal pp"></i>
                         <i class="fab fa-cc-amex amex"></i>
                     </div>
+                    <div class="divmp">
+                        <h1 class="titulomp">Pagá a través de MercadoPago</h1><i class="far fa-handshake mp"></i>
+                    </div>
+                </section>
+                <section class="titulo2">
+                    <h1>Formas de entrega</h1>
+                    <p class="retiro">Retirá tu compra por cualquiera de nuestros locales</p>
+                    <a href="/locales" class="consulta">Ver locales</a>
+                    <p class="retiro">Envíos a todo el país por Correo Argentino</p>
+                    <a href="/" class="consulta">Consultar costo de envío</a>
                     
                 </section>
             </div>

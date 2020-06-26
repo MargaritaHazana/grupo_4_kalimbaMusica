@@ -25,9 +25,11 @@ main {
     width: 65%;
     display: flex;
     flex-wrap: wrap;
+    align-content: flex-start;
 }
 .parte-der{
     width: 35%;
+    border-left: slategray 0.5px solid;
 }
 /* Diseño de la sección de fotos */
 .margen-izq {
@@ -57,14 +59,15 @@ main {
     margin: 1%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
     align-items: flex-start;
     padding-top: 3%;
     padding-right: 4%;
+    padding-left: 8%;
 }
 .nombre {
-    line-height: 3;
+    line-height: 1;
     margin-bottom: 0px;
+    font-weight: 700;
 }
 .list {
     width: 100%;
@@ -73,9 +76,28 @@ main {
 }
 li{
     list-style: none;
+    color: #333333
 }
 ul{
     padding-left: 0px;
+}
+.camion{
+    margin-right: 4%;
+    font-size: 100%;
+    color: rgb(82, 179, 62);
+    margin-left: 1%;
+}
+.flecha{
+    margin-right: 4%;
+    font-size: 100%;
+    color: rgb(82, 179, 62);
+    margin-left: 1.5%;
+}
+.tarjeta{
+    margin-right: 4%;
+    font-size: 100%;
+    color: rgb(82, 179, 62);
+    margin-left: 1.5%;
 }
 .price {
     margin: 6% 0px 4% 0px;
@@ -166,7 +188,8 @@ ul{
     margin-top: 4%;
 }
 .titulo2{
-    font-size: 150%;
+    padding: 0px 7%;
+    margin-top: 10%;
 }
 .tarjetas{
     width: 100%;
@@ -175,20 +198,48 @@ ul{
     padding-right: 13%;
 }
 .master{
-    font-size: 140%;
-    color: orange;
+    font-size: 180%;
+    color: #EE5536;
 }
 .visa{
-    font-size: 140%;
-    color: #1a4f8e;
+    font-size: 180%;
+    color: orange;
 }
 .pp{
-    font-size: 140%;
-    color: #009EE3;
+    font-size: 180%;
+    color: #2D3277;
 }
 .amex{
-    font-size: 140%;
+    font-size: 180%;
     color: lightslategrey;
+}
+.divmp{
+    border-radius: 2%;
+    /* border: #009EE3 solid 3px; */
+    background-color: #009EE3;
+    padding-left: 2%;
+    display: flex;
+    margin-top: 6%;
+    margin-bottom: 6%;
+}
+.titulomp{
+    font-size: 110%;
+    color: #333333;
+}
+.mp{
+    color: black;
+    margin-left: 3%;
+    margin-top: 4%;
+    font-size: 180%;
+}
+.retiro{
+    font-size: 85%;
+    color: black;
+}
+.consulta{
+    font-size: 80%;
+    color: #323eeb;
+    margin-bottom: 2%};
 }
 .abajo{
     display: block;
@@ -197,7 +248,6 @@ ul{
     padding-left: 4%;
 }
 .titulo3{
-    font-size: 180%;
     margin-top: 8%;
 }
 .description{
@@ -249,13 +299,6 @@ ul{
 /* Haciendolo responsive */
 
 @media(max-width: 768px) {
-    /* Arreglando las fotos */
-    .foto {
-        margin: 15% 0px;
-    }
-    .foto-principal {
-        width: 100%;
-    }
     /* Arreglando los colores */
     .rojo {
         width: 13%;
@@ -277,11 +320,8 @@ ul{
         width: 13%;
         height: 50%;
     }
-}
-
-@media(max-width: 576px) {
-    /* Poniendo todo en una columna */
-    .flex-container {
+     /* Poniendo todo en una columna */
+     .flex-container {
         display: block;
     }
     .parte-der{
@@ -301,6 +341,9 @@ ul{
     }
     .list-foto {
         display: none;
+    }
+    .parte-der{
+        border: none;
     }
     .margen-der {
         width: 100%;
@@ -350,4 +393,8 @@ ul{
     .desc-mobile{
         display: inline;
     }
+}
+
+@media(max-width: 576px) {
+    
 }

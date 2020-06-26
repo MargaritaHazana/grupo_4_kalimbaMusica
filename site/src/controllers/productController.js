@@ -1,10 +1,15 @@
 const path = require('path');
 const fs = require("fs")
 
-//Pasando el JSON a JS
+//Pasando el JSON a JS - DB de productos
 const rutaProductosJson = path.join(__dirname, '../../data/Products.json');
 const productos = fs.readFileSync( rutaProductosJson, 'utf-8');
 const dataProductos = JSON.parse(productos);
+
+//Pasando el JSON a JS - DB de usuarios
+const rutaUsersJson = path.join(__dirname, '../../data/Users.json');
+const users = fs.readFileSync(rutaUsersJson, 'utf-8');
+const dataUsers = JSON.parse(users);
 
 
 var numberWithCommas = x => {
@@ -43,7 +48,7 @@ productController = {
         var idProducto = req.params.id;
         var producto = dataProductos.find((product)=> idProducto == product.id);
         // Calculando el precio con descuento
-        var precioViejo = "$" + Math.round(producto.price);
+        var precioViejo = "$" + numberWithCommas(Math.round(producto.price));
         var descuento = producto.price * (producto.discount / 100);
         var precioDescuento = Math.round(producto.price - descuento);
         var precioFinal = "$" + numberWithCommas(precioDescuento);

@@ -8,84 +8,121 @@
     <main>
         <!-- Container del producto -->
         <div class="flex-container">
-            <!-- Fotos del costado -->
-            <section class="margen-izq">
+            <div class="parte-izq">
+                <!-- Fotos del costado -->
+                <section class="margen-izq">
 
-                <img src="/images/<%=producto.image %> " alt="foto" class="foto">
-                <img src="/images/<%=producto.image %> " alt="foto" class="foto">
-                <img src="/images/<%=producto.image %> " alt="foto" class="foto">
-                <img src="/images/<%=producto.image %> " alt="foto" class="foto">
+                    <img src="/images/<%=producto.image %> " alt="foto" class="foto">
+                    <img src="/images/<%=producto.image %> " alt="foto" class="foto">
+                    <img src="/images/<%=producto.image %> " alt="foto" class="foto">
+                    <img src="/images/<%=producto.image %> " alt="foto" class="foto">
 
-            </section>
-            <!-- Foto principal -->
-            <section class= "middle">
+                </section>
+                <!-- Foto principal -->
+                <section class= "middle">
 
-                <img src="/images/<%=producto.image %> " alt="foto" class="foto-principal">
-                <!-- Descripción para mobile -->
-                <p class="description-foto">
-                    <%= producto.description %> 
-                </p>
+                    <img src="/images/<%=producto.image %> " alt="foto" class="foto-principal">
+                    <!-- Detalles para mobile -->
+                    <ul class="list-foto">
+                        <li>Marca: <%= producto.brand %> </li>
+                        <li>Modelo: <%= producto.type %> </li>
+                        <li>Tamaño: <%= producto.category %> </li>
+                    </ul> 
 
-            </section>
-            <!-- Detalles -->
-            <section class="margen-der">
+                </section>
+                <!-- Descripción -->
+                <section class="abajo">
+                    <div class="description">
+                        <h2 class="titulo3">Descripción</h2>
+                        <p><%= producto.description %> </p>
+                    </div>
+                </section>
+            </div>
+            
+            <div class="parte-der">
+                <!-- Detalles -->
+                <section class="margen-der">
 
-                <div class="texto">
+                    <div class="texto">
 
-                    <h1 class="nombre">
-                        <%= producto.name %> 
-                    </h1>
+                        <h1 class="nombre">
+                            <%= producto.name %> 
+                        </h1>
 
-                    <p class="description">
-                        <%= producto.description %> 
-                    </p>
+                        <div class="price">
+                            <% if (producto.discount !== "0") { %>
+                                <p class="precioViejo">
+                                    <%= precioViejo %> 
+                                </p>
 
-                    <div class="price">
-                        <% if (producto.discount !== '0') { %>
-                            <p class="precioViejo">
-                                <%= precioViejo %> 
-                            </p>
-                            <p class="precio">
-                                <%= precioFinal %> 
-                            </p>
-        
-                            <p class="descuento">
-                                <%= producto.discount %>% OFF 
-                            </p>
-                        <% } %>
-                        <% if (producto.discount == '0') { %>
-                            <p class="precio">
-                                <%= precioViejo %> 
-                            </p>
-                        <% } %>
+                                <p class="precio">
+                                    <%= precioFinal %> 
+                                </p>
+            
+                                <p class="descuento">
+                                    <%= producto.discount %>% OFF 
+                                </p>
+                            <% } %>
+                            <% if (producto.discount == "0") { %>
+                                <p class="precio">
+                                    <%= precioViejo %> 
+                                </p>
+                            <% } %>
+
+                        </div>
+
+                        <div class="list">
+                            <ul >
+                                <li><i class="fas fa-shipping-fast"></i> Envíos a todo el país </li>
+                                <li><i class="fas fa-undo-alt"></i> Devolución gratis por 30 días </li>
+                                <li><i class="fas fa-credit-card"></i> Consultá medios de pago </li>
+                            </ul> 
+                        </div>
+
+                        <section class="colores">
+                            <p class="colour">Color:</p>
+                            <div class="opciones">
+                                <div class="rojo">R</div>
+                                <div class="negro">N</div>
+                                <div class="madera">M</div>
+                                <div class="blanco">B</div>
+                                <div class="azul">A</div>
+                            </div>
+                        </section>
+
+                    </div>
+                    <% var urlEdit = "/product/" + producto.id + "/edit" %> 
+                    <button type="submit" class="boton-comprar">
+                        Añadir a mi carrito
+                    </button>
+                    <form action="/product/delete/<%= producto.id %>?_method=delete" method="POST" >
+                        <button type="submit" class="boton">Eliminar </button>
+                    </form>
+                    <form action="<%= urlEdit %> " method="get">
+                        <button type="submit" class="boton">Editar</button>
+                    </form>
+                    
+                    <!-- Descripción mobile -->
+                    <div class="desc-mobile">
+                        <h2 class="titulo2">Descripción</h2>
+                        <p> <%= producto.description %> </p>
+                    </div>
+                </section>
+                <section class="titulo2">
+                    <h3>Medios de pago</h3>
+                    <div class="tarjetas">
+                        <i class="fab fa-cc-mastercard master"></i>
+                        <i class="fab fa-cc-visa visa"></i>
+                        <i class="fab fa-cc-paypal pp"></i>
+                        <i class="fab fa-cc-amex amex"></i>
                     </div>
                     
-                    <section class="colores">
-                        <p class="colour">Color:</p>
-                        <div class="opciones">
-                            <div class="rojo">R</div>
-                            <div class="negro">N</div>
-                            <div class="madera">M</div>
-                            <div class="blanco">B</div>
-                            <div class="azul">A</div>
-                        </div>
-                    </section>
-
-                </div>
-                <% var urlEdit = "/product/" + producto.id + "/edit" %> 
-                <button type="submit" class="boton-comprar">
-                    Añadir a mi carrito
-                </button>
-                <form action="/product/delete/<%= producto.id %>?_method=delete" method="POST" >
-                    <button type="submit" class="boton">Eliminar </button>
-                </form>
-                
-                <form action="<%= urlEdit %> " method="get">
-                    <button type="submit" class="boton">Editar</button>
-                </form>
-            </section>
-
+                </section>
+            </div>
         </div>
+        
+        
+
 
         <!-- Trayendo los productos destacados -->
         <%- include('partials/productosDestacados') %>

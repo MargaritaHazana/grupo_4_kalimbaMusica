@@ -8,6 +8,10 @@ a{
     text-decoration: none;
     color: black;
 }
+/* Sacando la negrita */
+h1{
+    font-weight: normal;
+}
 /* General */
 body{
     margin: 0px;
@@ -237,7 +241,7 @@ body{
 /* -----------------Comienza el cuerpo del Home------------------- */
 .HomeView{
     height: 100%;
-    padding-top: 4%;
+    padding-top: 2%;
     padding-bottom: 7%;
     
     background-image: url('/images/renglones2.png');
@@ -247,7 +251,7 @@ body{
 .DIV004{
     
     display: flex;
-    margin-bottom: 1.45%;
+    margin-bottom: 3%;
     background-image: white;
     padding-left: 3%;
     padding-right: 3%;
@@ -302,11 +306,12 @@ body{
   }
   /* Number text (1/3 etc) */
   .numbertext {
-    color: #f2f2f2;
+    /* color: #f2f2f2;
     font-size: 12px;
     padding: 8px 12px;
     position: absolute;
-    top: 0;
+    top: 0; */
+    display: none;
   }  
   .active, .dot:hover {
     background-color: #717171;
@@ -335,8 +340,8 @@ body{
  
 /* Productos Destacados */
 .ProductosDestacados{
-    margin-right: 20%;
-    margin-left: 20%;
+    margin-right: 15%;
+    margin-left: 15%;
     display: flex;
     justify-content: space-around;
     align-content: center;
@@ -358,6 +363,8 @@ body{
 /* Texto de Productos Destacados */
 .P002{
     margin-left: 20%;
+    margin-top: 10%;
+
 }
 /* Texto de cada Producto */
 .P003{
@@ -374,7 +381,6 @@ body{
 }
 .P005{
     color: #41426f;
-    font-weight: bold;
     font-size: 90%;
     margin-left: 2%;
 }
@@ -607,8 +613,10 @@ body{
         justify-content: space-between;
     }
     .SDIV006{
-        width: 48%;
         margin-bottom: 1%;
+    }
+    .preciosDestacados{
+        display: inline;
     }
     .SDIV004{
         width:100%;
@@ -654,6 +662,9 @@ body{
     }
     .H000{
         font-size: 70%;
+    }
+    .prod001{
+        width: 50%;
     }
 }
 @media(max-width: 320px){

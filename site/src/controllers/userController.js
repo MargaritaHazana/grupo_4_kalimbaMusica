@@ -124,7 +124,9 @@ userController = {
         res.render('profile', {view: 'index', sessionUserID});
     },
     userList: (req,res)=>{
-        res.render('userList', {view: 'index', dataUsers})
+        // ID del usuario en sesion
+        let sessionUserID = req.session.userID;
+        res.render('userList', {view: 'index', dataUsers, sessionUserID});
     }
 }
 

@@ -89,25 +89,28 @@
                                 <div class="azul">A</div>
                             </div>
                         </section>
+                        <button type="submit" class="boton-comprar">
+                            Añadir a mi carrito
+                        </button>
 
                     </div>
-                    <% var urlEdit = "/product/" + producto.id + "/edit" %> 
-                    <button type="submit" class="boton-comprar">
-                        Añadir a mi carrito
-                    </button>
-                    <form action="/product/delete/<%= producto.id %>?_method=delete" method="POST" >
-                        <button type="submit" class="boton">Eliminar </button>
-                    </form>
-                    <form action="<%= urlEdit %> " method="get">
-                        <button type="submit" class="boton">Editar</button>
-                    </form>
+                    <!-- Si el user es admin - Muestra botones de editar y eliminar -->
+                    <% if (categoryUser == 1) { %>
+                        <% var urlEdit = "/product/" + producto.id + "/edit" %>  
+                        <form action="/product/delete/<%= producto.id %>?_method=delete" method="POST" >
+                            <button type="submit" class="boton">Eliminar producto</button>
+                        </form>
+                        <form action="<%= urlEdit %> " method="get">
+                            <button type="submit" class="boton">Editar producto</button>
+                        </form>
+                    <% } %>
                     
-                    <!-- Descripción mobile -->
-                    <div class="desc-mobile">
-                        <h1 class="titulo2">Descripción</h1>
-                        <p> <%= producto.description %> </p>
-                    </div>
                 </section>
+                <!-- Descripción mobile -->
+                <div class="desc-mobile titulo2">
+                    <h1 class="">Descripción</h1>
+                    <p> <%= producto.description %> </p>
+                </div>
                
                 <section class="titulo2">
                     <h1>Medios de pago</h1>

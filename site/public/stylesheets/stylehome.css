@@ -347,7 +347,6 @@ body{
     align-content: center;
     margin-bottom: 6%;
     flex-wrap: wrap;
-   
 }
 .prod001{
     width: 24%;
@@ -364,7 +363,6 @@ body{
 .P002{
     margin-left: 20%;
     margin-top: 10%;
-
 }
 /* Texto de cada Producto */
 .P003{
@@ -387,7 +385,7 @@ body{
 .SSDIV001{
     background-color: white;
     padding: 8%;
-    
+    box-shadow: 0px 5px 5px #888888;
 }
  
  
@@ -397,10 +395,9 @@ body{
     flex-wrap: wrap;
     justify-content: space-evenly;
     background-color: #ffffff;
-    margin: 0px 20%;
- 
+    margin: 0px 15%;
+    box-shadow: 0px 2px 2px #888888;
     padding: 1%;
-    /* border-bottom: 3px solid #1a4f8e; */
 }
 .SDIV004{
     width:48%;
@@ -427,8 +424,8 @@ body{
 .DIV006{
     display: flex;
     flex-wrap: wrap;
-    margin-right: 1.45%;
-    margin-left: 1.45%;
+    margin-right: 9%;
+    margin-left: 17%;
     padding-left: 1.45%;
     justify-content: flex-start;
     align-items: flex-start;
@@ -436,7 +433,7 @@ body{
 }
 .SDIV005{
     padding:2%;
-    width: 30%;
+    width: 43%;
     font-size: 16px;
     border: none;
 }
@@ -445,11 +442,10 @@ body{
     font-size: 130%;
 }
 .redes{
-    justify-self: flex-end;
     display: flex;
-    width: 40%;
     justify-content: space-around;
-    height: 40%;
+    flex-direction: column;
+    width: 10%;
     align-self: flex-start;
     margin-top: 4%;
 }
@@ -457,6 +453,7 @@ body{
     border-radius: 100%;
     width: 10%;
     height: 10%;
+    margin-bottom: 23%;
 }
 .social i {
     font-size: 150%;
@@ -537,11 +534,6 @@ body{
     }
     .SDIV005{
         width: 35%;
-    }
-    .redes{
-        flex-direction: column;
-        width: 30%;
-        padding-left: 15%;
     }
     .social{
         margin: 17%;

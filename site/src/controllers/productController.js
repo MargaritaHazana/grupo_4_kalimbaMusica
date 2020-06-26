@@ -37,13 +37,25 @@ productController = {
     list: function(req,res){
         // ID del usuario en sesion
         let sessionUserID = req.session.userID;
-        res.render('list', {view: 'list', dataProductos, numberWithCommas, sessionUserID});
+        // Chequea si el user en session es admin
+        let categoryUser = 0
+        if (sessionUserID !== undefined) {
+            dataUsers.find((user)=>user.id == sessionUserID);
+            categoryUser = 1
+        }
+        res.render('list', {view: 'list', dataProductos, numberWithCommas, sessionUserID, categoryUser});
     },
 
     // Renderiza la view del Detalle del Producto
     productDetail:function(req,res){
         // ID del usuario en sesion
         let sessionUserID = req.session.userID;
+        // Chequea si el user en session es admin
+        let categoryUser = 0
+        if (sessionUserID !== undefined) {
+            dataUsers.find((user)=>user.id == sessionUserID);
+            categoryUser = 1
+        }
         // Encontrando el producto
         var idProducto = req.params.id;
         var producto = dataProductos.find((product)=> idProducto == product.id);
@@ -53,7 +65,7 @@ productController = {
         var precioDescuento = Math.round(producto.price - descuento);
         var precioFinal = "$" + numberWithCommas(precioDescuento);
         
-        res.render('productDetail', { view: 'detail' , producto, precioViejo, precioFinal, destacados, sessionUserID });
+        res.render('productDetail', { view: 'detail' , producto, precioViejo, precioFinal, destacados, sessionUserID, categoryUser });
     },
 
     // Renderiza la view del Carro de los Productos

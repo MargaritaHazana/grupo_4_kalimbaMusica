@@ -2,13 +2,17 @@
 <body>
     <!-- Trayendo el header -->
     <%- include('partials/header') %> 
-    <div class="DIV020">
-        <ul class="">
-        <% for( let i = 0; i < dataUsers.length; i++ ) { %>
-            <p class="P020"><%= dataUsers[i].id %>  <%= dataUsers[i].first_name %>   <%= dataUsers[i].last_name %></p>
-        <% } %>
-        </ul>
+    <div class="DIV020 top">
+        <p class="P020 left">Id</p><p class="P020 center">Nombre y Mail</p><p class="P020 right">Acciones</p>
     </div>
+    <div class="Parent020">
+        <% for( let i = 0; i < dataUsers.length; i++ ) { %>
+            <div class="DIV020">
+                <p class="P020 left"><%= dataUsers[i].id %> </p><p class="P020 center"> <%= dataUsers[i].first_name %> <%= dataUsers[i].last_name %>  <br> <%= dataUsers[i].email %></p><p class="P020 right"><a href="">Editar</a>         <a href="">Eliminar</a></p>
+            </div>
+        <% } %>
+    </div>
+   
     <!-- Trayendo el Footer -->
     <%- include('partials/footer') %> 
 

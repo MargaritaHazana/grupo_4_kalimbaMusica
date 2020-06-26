@@ -675,3 +675,72 @@ body{
         font-size: 70%;
     }
 }
+/* Estilo de la User List Nombre de clases no se ven afectados */
+.DIV020{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    width: 60%;
+    border-radius: 5px;
+    background-color: rgb(202, 202, 202);
+    color: rgb(42, 42, 42);
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 1%;
+
+}
+
+.P020{
+    font-size: 18px;
+    margin: 5px;
+    width: 55%;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+.left{
+    text-align: left;
+    padding-left: 3%;
+    font-weight: bold;
+    margin-left: 0;
+    width: 15%;
+}
+.lala{
+    padding-left: 0;
+}
+.top{
+    background-color: rgb(58, 58, 58);
+    color: #ede9d9;
+    font-weight: 500;
+    width: 60%;
+    margin-bottom: 1.5%;
+    margin-top: 2%;
+}
+.mail{
+    font-style: oblique;
+}
+.right{
+    width: 15%
+}
+@media(max-width:768px){
+    .P020{
+        font-size: 15px;
+    }
+    .DIV020{
+        width: 95%;
+        margin-left: 2.5%;
+    }
+}
+@media(max-width:568px){
+    .P020{
+        font-size: 16px;
+    }
+    .left{
+        width: 10%;
+    }
+    .center{
+        width: 70%;
+    }
+    .right{
+        width: 20%;
+    }
+}

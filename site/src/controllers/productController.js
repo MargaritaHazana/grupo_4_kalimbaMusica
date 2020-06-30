@@ -1,5 +1,9 @@
 const path = require('path');
-const fs = require("fs")
+const fs = require("fs");
+
+const DB = require('../database/models');
+const OP = DB.Sequelize.Op;
+
 
 //Pasando el JSON a JS - DB de productos
 const rutaProductosJson = path.join(__dirname, '../../data/Products.json');
@@ -10,6 +14,7 @@ const dataProductos = JSON.parse(productos);
 const rutaUsersJson = path.join(__dirname, '../../data/Users.json');
 const users = fs.readFileSync(rutaUsersJson, 'utf-8');
 const dataUsers = JSON.parse(users);
+
 
 
 var numberWithCommas = x => {

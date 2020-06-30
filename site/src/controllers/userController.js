@@ -4,6 +4,10 @@ const bcrypt = require('bcryptjs');
 const {chack, body, validationResult, check} = require('express-validator');
 const session = require('express-session');
 
+const DB = require('../database/models');
+const OP = DB.Sequelize.Op;
+
+
 //Pasando el JSON a JS
 const rutaUsersJson = path.join(__dirname, '../../data/Users.json');
 const users = fs.readFileSync(rutaUsersJson, 'utf-8');

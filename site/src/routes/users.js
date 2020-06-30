@@ -31,11 +31,11 @@ router.post('/login',[
 // Rutas register
 router.get('/register', userController.registerView);
 router.post('/register', upload.any(), [
-    check('name').notEmpty().withMessage('El campo nombre no puede estar vacío'),
-    check('lastName').notEmpty().withMessage('El campo apellido no puede estar vacío'),
+    check('first_name').notEmpty().withMessage('El campo nombre no puede estar vacío'),
+    check('last_name').notEmpty().withMessage('El campo apellido no puede estar vacío'),
     check('email').notEmpty().withMessage('El campo email no puede estar vacío').trim(),
-    check('phone').notEmpty().withMessage('El campo telefono no puede estar vacío').isNumeric().withMessage('El campo telefono debe ser numérico'),
-    check('date').notEmpty().withMessage('El campo fecha de nacimiento no puede estar vacío'),
+    check('tel').notEmpty().withMessage('El campo telefono no puede estar vacío').isNumeric().withMessage('El campo telefono debe ser numérico'),
+    check('birth_date').notEmpty().withMessage('El campo fecha de nacimiento no puede estar vacío'),
     check('username').notEmpty().withMessage('El campo nombre de usuario no puede estar vacío'),
     check('password').notEmpty().withMessage('El campo constraseña no puede estar vacío').isLength({min:8}).withMessage('La contraseña debe tener al menos 8 caracteres'),
    
@@ -43,6 +43,10 @@ router.post('/register', upload.any(), [
 
 // Ruta profile
 router.get('/profile/:id', loginMiddleware, userController.profile);
+
+// Ruta editar perfil
+router.get('/edit/:id', loginMiddleware, userController.editView);
+router.put('/edit/:id', loginMiddleware, upload.any(), userController.edit)
 
 // Rutas logout
 router.get('/logout', userController.logoutView);

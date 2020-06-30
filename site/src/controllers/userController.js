@@ -36,11 +36,11 @@ userController = {
             else {
                 let newUser = {
                     id: dataUsers[dataUsers.length - 1].id + 1,
-                    first_name: req.body.name,
-                    last_name: req.body.lastName,
+                    first_name: req.body.first_name,
+                    last_name: req.body.last_name,
                     email: req.body.email,
-                    tel: req.body.phone,
-                    birth_date: req.body.date,
+                    tel: req.body.tel,
+                    birth_date: req.body.birth_date,
                     username: req.body.username,
                     password: bcrypt.hashSync (req.body.password, 10), 
                     category: 2,
@@ -121,8 +121,59 @@ userController = {
     profile: (req, res)=>{
         // ID del usuario en sesion
         let sessionUserID = req.session.userID;
-        res.render('profile', {view: 'index', sessionUserID});
+        let user = dataUsers.find((user)=> sessionUserID == user.id);
+        res.render('profile', {view: 'profile', sessionUserID, user});
     },
+    editView: function(req, res){
+        // ID del usuario en sesion
+        let sessionUserID = req.session.userID;
+        let user = dataUsers.find((user)=> sessionUserID == user.id);
+
+        res.render('userEdit', {view: 'profile', sessionUserID, user})
+        
+    },
+    edit: function(req, res){
+       
+
+        let sessionUserID = req.session.userID;
+        let userToEdit = dataUsers.find((user)=> sessionUserID == user.id);
+
+        if(req.files[0] == undefined){
+            userToEdit = {
+                first_name: req.body.first_name,
+                last_name: req.body.last_name,
+                email: req.body.email,
+                tel: req.body.tel,
+                birth_date: req.body.birth_date,
+                username: req.body.username, 
+                password: userToEdit.password,
+                category: 2,
+                image: userToEdit.image
+                
+            } 
+        }
+        else {
+            userToEdit = {
+                first_name: req.body.first_name,
+                last_name: req.body.last_name,
+                email: req.body.email,
+                tel: req.body.tel,
+                birth_date: req.body.birth_date,
+                username: req.body.username, 
+                password: user.password,
+                category: 2,
+                image: req.files[0].filename,
+        }}
+        dataUsers.map(function(user){
+            if(user.id == sessionUserID){
+                let posicionAEditar = dataUsers.indexOf(user);
+                dataUsers.splice(posicionAEditar, 1, userToEdit);
+            }
+        })
+        fs.writeFileSync(rutaUsersJson, JSON.stringify(dataUsers));
+
+        res.redirect('/')
+        },
     userList: (req,res)=>{
         // ID del usuario en sesion
         let sessionUserID = req.session.userID;

@@ -1,6 +1,6 @@
 // modelo users
 var users = function (sequelize, dataTypes){
-    alias = "Users"
+    alias = "User"
     cols = {
         first_name: dataTypes.STRING,
         last_name: dataTypes.STRING,
@@ -10,6 +10,7 @@ var users = function (sequelize, dataTypes){
         username: dataTypes.STRING,
         password: dataTypes.STRING,
         image: dataTypes.STRING,
+        deletedAt: dataTypes.DATE
     }
     config = {
         timestamps: false
@@ -17,7 +18,7 @@ var users = function (sequelize, dataTypes){
     const users = sequelize.define(alias,cols,config)
     users.associate = (models) =>{
         // un usuario puede hacer multiples ordenes
-        users.hasMany(models.Orders,{as:"orders", foreignKey: "users_id"})
+        users.hasMany(models.Order,{as:"orders", foreignKey: "usersId"})
     }
     
     return users

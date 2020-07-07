@@ -1,8 +1,9 @@
 //  modelos colors
 var colors = function (sequelize, dataTypes){
-    alias = "Colors"
+    alias = "Color"
     cols = {
         name: dataTypes.STRING,
+        deletedAt: dataTypes.DATE
     }
     config = {
         timestamps: false
@@ -10,7 +11,7 @@ var colors = function (sequelize, dataTypes){
     const colors = sequelize.define(alias,cols,config)
     colors.associate = (models)=>{
         // un color encierra muchos productos
-        colors.hasMany(models.Products,{as:"products", foreignKey: "colors_id"})
+        colors.hasMany(models.Product,{as:"products", foreignKey: "colorsId"})
     }    
 
     return colors

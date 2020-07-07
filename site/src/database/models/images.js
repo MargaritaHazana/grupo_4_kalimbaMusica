@@ -1,8 +1,9 @@
 // modelo images
 var images = function (sequelize, dataTypes){
-    alias = "Images"
+    alias = "Image"
     cols = {
         name: dataTypes.STRING,
+        deletedAt: dataTypes.DATE
     }
     config = {
         timestamps: false
@@ -10,7 +11,7 @@ var images = function (sequelize, dataTypes){
     const images = sequelize.define(alias,cols,config)
     images.associate = (models) =>{
         // muchas imagenes pertenece a un producto
-        images.belongsTo(models.Products,{as:"products", foreignKey: "products_id"})
+        images.belongsTo(models.Product,{as:"products", foreignKey: "productsId"})
     }
     
     return images

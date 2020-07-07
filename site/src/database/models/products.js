@@ -1,27 +1,28 @@
 // modelo products
 var products = function (sequelize, dataTypes){
-    alias = "Products"
+    alias = "Product"
     cols = {
         name: dataTypes.STRING,
         price: dataTypes.DECIMAL,
         discount: dataTypes.INTEGER,
         stock: dataTypes.INTEGER,
         description: dataTypes.STRING,
+        deletedAt: dataTypes.DATE
     }
     config = {
         timestamps: false
     }
     const products = sequelize.define(alias,cols,config)
     products.associate = (models) =>{
-        // un producto tiee muchos colores y pertenece a categorias, subcategorias y marcas
-        products.belongsTo(models.Colors,{as:"colors", foreignKey: "colors_id"})
-        products.belongsTo(models.Categories,{as:"categories", foreignKey: "categories_id"})
-        products.belongsTo(models.Subcategories,{as:"subcategories", foreignKey: "subcategories_id"})
-        products.belongsTo(models.Brands,{as:"brands", foreignKey: "brands_id"})
+        // un producto tiene muchos colores y pertenece a categorias, subcategorias y marcas
+        products.belongsTo(models.Color,{as:"colors", foreignKey: "colorsId"})
+        products.belongsTo(models.Category,{as:"categories", foreignKey: "categoriesId"})
+        products.belongsTo(models.Subcategory,{as:"subcategories", foreignKey: "subcategoriesId"})
+        products.belongsTo(models.Brand,{as:"brands", foreignKey: "brandsId"})
         // un producto tiene muchas imagenes
-        products.hasMany(models.Images,{as:"images", foreignKey: "products_id"})
+        products.hasMany(models.Image,{as:"images", foreignKey: "productsId"})
         // muchos productos tienen muchas ordenes
-        products.belongsToMany(models.Orders,{as:"products", through: "orders_products", foreignKey: "products_id",otherKey: "orders_id",timestamps:false})
+        products.belongsToMany(models.Order,{as:"products", through: "orders_products", foreignKey: "productsId",otherKey: "orders_id",timestamps:false})
     }
     
     return products

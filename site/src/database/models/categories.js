@@ -1,8 +1,9 @@
 // modelo categories
 var categories = function (sequelize, dataTypes){
-    alias = "Categories"
+    alias = "Category"
     cols = {
         name: dataTypes.STRING,
+        deletedAt: dataTypes.DATE
     }
     config = {
         timestamps: false
@@ -10,8 +11,8 @@ var categories = function (sequelize, dataTypes){
     const categories = sequelize.define(alias,cols,config)
     categories.associate = (models) =>{
         // una categoria encierra muchas subcategorias y muchos productos
-        categories.hasMany(models.Subcategories,{as:"subcategories", foreignKey: "categories_id"})
-        categories.hasMany(models.Products,{as:"products", foreignKey: "categories_id"})
+        categories.hasMany(models.Subcategory,{as:"subcategories", foreignKey: "subcategoriesId"})
+        categories.hasMany(models.Product,{as:"products", foreignKey: "categoriesId"})
     }
     
     return categories

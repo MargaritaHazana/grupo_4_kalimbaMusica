@@ -2,6 +2,8 @@ const path = require('path');
 const fs = require("fs");
 
 const DB = require('../database/models');
+const categories = require('../database/models/categories');
+const types = require('../database/models/types');
 const OP = DB.Sequelize.Op;
 
 
@@ -81,33 +83,41 @@ productController = {
     },
 
     // Renderiza la view que permite agregar productos
-    productAdd:function(req,res){
+    productAdd: async (req,res)=>{
         // ID del usuario en sesion
         let sessionUserID = req.session.userID;
-        res.render('productAdd', { view: 'forms', sessionUserID });
+        try {
+            let categories = await DB.Categories.findAll();
+            let subcategories = await DB.Subcategories.findAll();
+            let types = await DB.Types.findAll();
+            let brands = await DB.Brands.findAll();
+            let colors = await DB.Colors.findAll();
+
+            res.render('productAdd', { view: 'forms', sessionUserID, categories, subcategories, types, brands, colors });
+        } catch (error) {
+            res.send('Error');
+        }
     },
 
     // Agrega el nuevo producto a la base de datos
-    addingProduct : function(req, res, next){
+    addingProduct : async (req, res, next)=>{
        
-        let productoNuevo = {
-            id: dataProductos[dataProductos.length - 1].id + 1,
-            name: req.body.name,
-            type: req.body.type,
-            brand: req.body.brand,
-            category: req.body.category,
-            price: req.body.price,
-            image: req.files[0].filename,
-            discount: req.body.discount,
-            size: req.body.size,
-            description: req.body.description,
-            coloresDisponibles: req.body.coloresDisponibles,
-            stock: req.body.stock
+        try {
+            const newProduct = await DB.Products.create({
+                name: req.body.name,
+                price: req.body.price,
+                discount: req.body.discount,
+                stock: req.body.stock,
+                description: req.body.description,
+                type: req.body.type,
+                brand: req.body.brand,
+                category: req.body.category,
+                image: req.files[0].filename,
+                coloresDisponibles: req.body.coloresDisponibles,
+            })
+        } catch (error) {
+            res.send('Error');
         }
-        
-        dataProductos.push(productoNuevo);
-
-        fs.writeFileSync(rutaProductosJson, JSON.stringify(dataProductos));
 
         res.redirect('/products');
     },

@@ -1,10 +1,11 @@
 // modelo orders
 var orders = function (sequelize, dataTypes){
-    alias = "Orders"
+    alias = "Order"
     cols = {
         shipping_city: dataTypes.STRING,
         shipping_postalcode: dataTypes.INTEGER,
         shipping_date: dataTypes.DATE,
+        deletedAt: dataTypes.DATE
     }
     config = {
         timestamps: false
@@ -12,9 +13,9 @@ var orders = function (sequelize, dataTypes){
     const orders = sequelize.define(alias,cols,config)
     orders.associate = (models) =>{
         // una orden pertenece a muchos usuarios (aparentemente)
-        orders.belongsTo(models.Users,{as:"users", foreignKey: "users_id"})
+        orders.belongsTo(models.User,{as:"users", foreignKey: "usersId"})
         // muchas ordenes tienen muchos productos
-        orders.belongsToMany(models.Products,{as:"products", through: "orders_products", foreignKey: "orders_id",otherKey: "products_id",timestamps:false})
+        orders.belongsToMany(models.Product,{as:"products", through: "orders_products", foreignKey: "ordersId",otherKey: "productsId",timestamps:false})
     }
     
     return orders

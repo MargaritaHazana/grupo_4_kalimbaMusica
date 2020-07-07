@@ -1,8 +1,9 @@
 // modelo subcategories
 var subcategories = function (sequelize, dataTypes){
-    alias = "Subcategories"
+    alias = "Subcategory"
     cols = {
         name: dataTypes.STRING,
+        deletedAt: dataTypes.DATE
     }
     config = {
         timestamps: false
@@ -10,9 +11,9 @@ var subcategories = function (sequelize, dataTypes){
     const subcategories = sequelize.define(alias,cols,config)
     subcategories.associate = (models) =>{
         // muchas subcategorias entran en una categoria
-        subcategories.belongsTo(models.Categories,{as:"categories", foreignKey: "categories_id"})
+        subcategories.belongsTo(models.Category,{as:"categories", foreignKey: "cateogoriesId"})
         // una subcategoria tiene muchos productos
-        subcategories.hasMany(models.Products,{as:"products", foreignKey: "subcategories_id"})
+        subcategories.hasMany(models.Product,{as:"products", foreignKey: "subcategoriesId"})
     }
     
     return subcategories

@@ -1,8 +1,9 @@
 // modelo brands
 var brands = function (sequelize, dataTypes){
-    alias = "Brands"
+    alias = "Brand"
     cols = {
         name: dataTypes.STRING,
+        deletedAt: dataTypes.DATE
     }
     config = {
         timestamps: false
@@ -10,7 +11,7 @@ var brands = function (sequelize, dataTypes){
     const brands = sequelize.define(alias,cols,config)
     brands.associate = (models) =>{
         // una marca encierra muchos productos
-        brands.hasMany(models.Products,{as:"products", foreignKey: "brands_id"})       
+        brands.hasMany(models.Product,{as:"products", foreignKey: "brandsId"})       
     }
     
     return brands

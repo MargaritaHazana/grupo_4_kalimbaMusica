@@ -17,56 +17,57 @@
         <label class="pregunta" for="">Nombre</label>
         <input  class="respuesta" type="text" name="name">
 
-        <label class="pregunta" for="">Tipo</label>
-        <input class="respuesta" type="text" name="type">
-
-        <label class="pregunta" for="">Marca</label>
-        <input class="respuesta" type="text" name="brand">
-
-        <label class="pregunta" for="">Categoría</label>
-        <select class="respuesta" name="category" id="">
-            <option value="cuerdas">Cuerdas</option>
-            <option value="teclas">Teclas</option>
-            <option value="percusion">Percusion</option>
-            <option value="equipamiento">Equipamiento</option>
-        </select>
-
         <label class="pregunta" for="">Precio</label>
         <input class="respuesta" type="number" name="price">
-
-        <label class="pregunta" for="">Imagen del producto</label>
-        <input class="respuesta" type="file" name="image">
 
         <label class="pregunta" for="">Descuento</label>
         <input class="respuesta" type="number" name="discount">
 
-        <label class="pregunta" for="">Tamaño</label>
-        <input class="respuesta" type="text" name="size">
-
         <label class="pregunta" for="">Descripción</label>
         <textarea class="respuesta" name="description" id="" cols="10" rows="3" ></textarea>
 
+        <label class="pregunta" for="">Marca</label>
+        <select name="brandsId" id="">
+            <% brands.forEach(brand => { %>
+             <option value="<%= brand.id %>" > <%= brand.name %> </option>
+            <% }) %>
+        </select>
+
+        <label class="pregunta" for="">Categoría</label>
+        <select name="categoriesId" id="">
+            <% categories.forEach(category => { %>
+             <option value="<%= category.id %>" > <%= category.name %> </option>
+            <% }) %>
+        </select>
+
+        <label class="pregunta" for="">Subcategoría</label>
+        <select name="subcategoriesId" id="">
+            <% subcategories.forEach(subcategory => { %>
+             <option value="<%= subcategory.id %>" > <%= subcategory.name %> </option>
+            <% }) %>
+        </select>
+
+        <label class="pregunta" for="">Tipo</label>
+        <select name="typesId" id="">
+            <% types.forEach(type => { %>
+             <option value="<%= type.id %>" > <%= type.name %> </option>
+            <% }) %>
+        </select>
+
+        <label class="pregunta" for="">Imagen del producto</label>
+        <input class="respuesta" type="file" name="image">
 
         <label class="pregunta" for="">Colores disponibles</label>
-        <!-- <div class="respuesta3">
-        
-        <p class="p-option"><input class="respuesta" type="checkbox" name="color" value="negro">Negro</p>
-        <p class="p-option"><input class="respuesta" type="checkbox" name="color" value="marron">Marron</p>
-        <p class="p-option"><input class="respuesta" type="checkbox" name="color" value="gris">Gris</p>
-        <p class="p-option" id="p-option"><textarea class="respuesta2" name="comentario" id="" ></textarea>Otro</p>
-        </div> -->
-        <select name="coloresDisponibles" class="respuesta"id="" multiple>
-            <option value="Blanco">Blanco</option>
-            <option value="Negro">Negro</option>
-            <option value="Rojo">Rojo</option>
-            <option value="Marron">Marron</option>
-            <option value="Azul">Azul</option>
+        <select name="colorsId" id="">
+            <% colors.forEach(color => { %>
+             <option value="<%= color.id %>" > <%= color.name %> </option>
+            <% }) %>
         </select>
     
         <label class="pregunta" for="">Stock</label>
         <select class="respuesta" name="stock" id="">
-            <option value="true">Sí</option>
-            <option value="false">No</option>
+            <option value="1">Sí</option>
+            <option value="0">No</option>
         </select>
 
         <button type="submit" class="enter">Finalizar</button>

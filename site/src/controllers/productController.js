@@ -2,8 +2,6 @@ const path = require('path');
 const fs = require("fs");
 
 const DB = require('../database/models');
-const categories = require('../database/models/categories');
-const types = require('../database/models/types');
 const OP = DB.Sequelize.Op;
 
 
@@ -76,26 +74,26 @@ productController = {
     },
 
     // Renderiza la view del Carro de los Productos
-    productCart:function(req,res){
+    productCart:function(req, res){
         // ID del usuario en sesion
         let sessionUserID = req.session.userID;
         res.render('productCart', { view: 'carrito', destacados, sessionUserID });
     },
 
     // Renderiza la view que permite agregar productos
-    productAdd: async (req,res)=>{
+    productAdd: async (req,res, next)=>{
         // ID del usuario en sesion
         let sessionUserID = req.session.userID;
         try {
-            let categories = await DB.Categories.findAll();
-            let subcategories = await DB.Subcategories.findAll();
-            let types = await DB.Types.findAll();
-            let brands = await DB.Brands.findAll();
-            let colors = await DB.Colors.findAll();
+            let categories = await DB.Category.findAll();
+            let subcategories = await DB.Subcategory.findAll();
+            let types = await DB.Type.findAll();
+            let brands = await DB.Brand.findAll();
+            let colors = await DB.Color.findAll();
 
             res.render('productAdd', { view: 'forms', sessionUserID, categories, subcategories, types, brands, colors });
         } catch (error) {
-            res.send('Error');
+            res.send(error);
         }
     },
 

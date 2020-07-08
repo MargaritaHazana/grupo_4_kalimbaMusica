@@ -2,6 +2,11 @@
 var colors = function (sequelize, dataTypes){
     alias = "Color"
     cols = {
+        id:{
+            type: dataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
         name: dataTypes.STRING,
         // deletedAt: dataTypes.DATE
     }

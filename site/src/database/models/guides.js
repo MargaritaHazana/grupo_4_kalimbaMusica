@@ -2,6 +2,11 @@
 var guides = function (sequelize, dataTypes){
     alias = "Guide"
     cols = {
+        id:{
+            type: dataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
         content: dataTypes.STRING,
         deletedAt: dataTypes.DATE
     }

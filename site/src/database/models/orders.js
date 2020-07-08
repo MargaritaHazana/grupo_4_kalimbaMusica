@@ -2,6 +2,11 @@
 var orders = function (sequelize, dataTypes){
     alias = "Order"
     cols = {
+        id:{
+            type: dataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
         shipping_city: dataTypes.STRING,
         shipping_postalcode: dataTypes.INTEGER,
         shipping_date: dataTypes.DATE,

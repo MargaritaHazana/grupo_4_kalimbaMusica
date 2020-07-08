@@ -8,7 +8,6 @@ module.exports = {
     "define": {
       "paranoid":true,
     }
-
   },
   "test": {
     "username": "root",

@@ -2,6 +2,11 @@
 var categories = function (sequelize, dataTypes){
     alias = "Category"
     cols = {
+        id:{
+            type: dataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
         name: dataTypes.STRING,
         deletedAt: dataTypes.DATE
     }

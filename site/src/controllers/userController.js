@@ -25,15 +25,14 @@ userController = {
             res.render('register', { view: 'forms', mensaje});
         },
     
-        register: function(req, res){
+    register: function(req, res){
             
-           
             let errors = validationResult(req);
             let mensaje = []
             // Valida los datos del form
             if (!errors.isEmpty()) {
                  mensaje.push(errors)
-                // Si hay errores - Redirige al login y envía errores
+                // Si hay errores - Redirige al register y envía errores
                 return res.render('register', { view: 'forms', mensaje, errors: errors.errors});
             } 
     
@@ -48,17 +47,14 @@ userController = {
                     username: req.body.username,
                     password: bcrypt.hashSync (req.body.password, 10), 
                     category: 2,
-                    image: req.files[0].filename,
-                    
+                    image: req.files[0].filename,    
                 }
         
                 dataUsers.push(newUser);
         
                 fs.writeFileSync(rutaUsersJson, JSON.stringify(dataUsers));
-                res.redirect('/')
+                res.redirect('/users/login')
             }
-            
-    
     
         },
      // Renderiza la view de Inicio de Sesion
@@ -138,12 +134,12 @@ userController = {
     },
     edit: function(req, res){
        
-
         let sessionUserID = req.session.userID;
         let userToEdit = dataUsers.find((user)=> sessionUserID == user.id);
 
         if(req.files[0] == undefined){
             userToEdit = {
+                id: req.session.userID,
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,
                 email: req.body.email,
@@ -158,6 +154,7 @@ userController = {
         }
         else {
             userToEdit = {
+                id: req.session.userID,
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,
                 email: req.body.email,
@@ -175,9 +172,11 @@ userController = {
             }
         })
         fs.writeFileSync(rutaUsersJson, JSON.stringify(dataUsers));
+        
+        req.session.destroy();
 
-        res.redirect('/')
-        },
+        res.redirect('/users/login');
+    },
     userList: (req,res)=>{
         // ID del usuario en sesion
         let sessionUserID = req.session.userID;

@@ -2,6 +2,11 @@
 var products = function (sequelize, dataTypes){
     alias = "Product"
     cols = {
+        id:{
+            type: dataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
         name: dataTypes.STRING,
         price: dataTypes.DECIMAL,
         discount: dataTypes.INTEGER,

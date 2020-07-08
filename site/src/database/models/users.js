@@ -2,6 +2,11 @@
 var users = function (sequelize, dataTypes){
     alias = "User"
     cols = {
+        id:{
+            type: dataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
         first_name: dataTypes.STRING,
         last_name: dataTypes.STRING,
         role: dataTypes.DECIMAL,

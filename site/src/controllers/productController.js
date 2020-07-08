@@ -89,7 +89,7 @@ productController = {
             let subcategories = await DB.Subcategory.findAll();
             let types = await DB.Type.findAll();
             let brands = await DB.Brand.findAll();
-            let colors = await DB.Color.findAll();
+            let colors = await DB.Color.findAll();   
 
             res.render('productAdd', { view: 'forms', sessionUserID, categories, subcategories, types, brands, colors });
         } catch (error) {
@@ -107,11 +107,12 @@ productController = {
                 discount: req.body.discount,
                 stock: req.body.stock,
                 description: req.body.description,
-                type: req.body.type,
                 brand: req.body.brand,
-                category: req.body.category,
+                categories: req.body.categoriesId,
+                subcategories: req.body.subcategoriesId,
+                types: req.body.typesId,
                 image: req.files[0].filename,
-                coloresDisponibles: req.body.coloresDisponibles,
+                colors: req.body.colorsId,
             })
         } catch (error) {
             res.send('Error');

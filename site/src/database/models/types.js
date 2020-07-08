@@ -3,7 +3,7 @@ var types = function (sequelize, dataTypes){
     alias = "Type"
     cols = {
         name: dataTypes.STRING,
-        deletedAt: dataTypes.DATE
+        // deletedAt: dataTypes.DATE
     }
     config = {
         timestamps: false
@@ -13,7 +13,7 @@ var types = function (sequelize, dataTypes){
         // muchos tipos entran en una subcategorias
         types.belongsTo(models.Subcategory,{as:"subcategories", foreignKey: "subcategoriesId"})
         // un tipo tiene muchos productos
-        types.hasMany(models.Product,{as:"products", foreignKey: "TypesId"})
+        types.hasMany(models.Product,{as:"products", foreignKey: "typesId"})
     }
     
     return types

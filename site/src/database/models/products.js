@@ -19,6 +19,7 @@ var products = function (sequelize, dataTypes){
         products.belongsTo(models.Category,{as:"categories", foreignKey: "categoriesId"})
         products.belongsTo(models.Subcategory,{as:"subcategories", foreignKey: "subcategoriesId"})
         products.belongsTo(models.Brand,{as:"brands", foreignKey: "brandsId"})
+        products.belongsTo(models.Type,{as:"types", foreignKey: "typesId"})
         // un producto tiene muchas imagenes
         products.hasMany(models.Image,{as:"images", foreignKey: "productsId"})
         // muchos productos tienen muchas ordenes

@@ -3,7 +3,7 @@ var colors = function (sequelize, dataTypes){
     alias = "Color"
     cols = {
         name: dataTypes.STRING,
-        deletedAt: dataTypes.DATE
+        // deletedAt: dataTypes.DATE
     }
     config = {
         timestamps: false

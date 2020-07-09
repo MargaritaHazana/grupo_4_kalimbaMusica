@@ -7,12 +7,12 @@ var users = function (sequelize, dataTypes){
             primaryKey: true,
             autoIncrement: true
         },
-        first_name: dataTypes.STRING,
-        last_name: dataTypes.STRING,
+        firstName: dataTypes.STRING,
+        lastName: dataTypes.STRING,
         role: dataTypes.DECIMAL,
         tel: dataTypes.INTEGER,
-        birth_date: dataTypes.DATE,
-        username: dataTypes.STRING,
+        birthDate: dataTypes.DATE,
+        email: dataTypes.STRING,
         password: dataTypes.STRING,
         image: dataTypes.STRING,
         deletedAt: dataTypes.DATE

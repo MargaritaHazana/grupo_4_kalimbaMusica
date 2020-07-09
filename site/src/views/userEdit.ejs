@@ -4,38 +4,38 @@
     <!-- Trayendo el header -->
     <%- include('partials/header') %>
 
-    <section class="contenedor-gral">
-        <h1>Mi perfil</h1>
-        <!-- zona izq -->
-        <div class="cont-info">
-            <div class="cont-foto">
-                <img class="foto" src="/avatars/<%=user.image %>" >
-            </div>
-            
-        </div>
-        <!-- zona der -->
+    <section class="contenedor-gral todo">
+        <h1>Editar perfil</h1>
+
         <div class="cont-info2">
             <form class="cont-boton" action="/users/edit/<%= user.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
-            <div class="cont-name cont-data">
-                <p class="preg">Nombre: </p><input class="resp" value="<%= user.first_name %>" name="first_name">  <input value="<%= user.last_name %>" name="last_name">   
-            </div>
-            <div class="cont-mail cont-data">
-                <p class="preg">Mail: </p><input class="resp" value="<%= user.email %>" name="email"> 
-            </div>
-            <div class="cont-nombreu cont-data">
-                <p class="preg">Nombre de usuario: </p><input class="resp" value="<%= user.username %>" name="username">
-            </div>
-            <div class="cont-tel cont-data">
-                <p class="preg">Teléfono: </p><input class="resp" value="<%= user.tel %>" name="tel">
-            </div>
-            <div class="cont-fecha cont-data">
-                <p class="preg">Fecha de nacimiento: </p><input class="resp" value="<%= user.birth_date %>" name="birth_date">
-            </div>
+                <div class="cont-edit cont-data">
+                    <p class="preg">Nombre: </p>
+                    <input class="resp edit" value="<%= user.firstName %>" name="firstName">     
+                </div>
+                <div class="cont-edit cont-data">
+                    <p class="preg">Apellido: </p>
+                    <input class="resp edit" value="<%= user.lastName %>" name="lastName">     
+                </div>
+                <div class="cont-edit cont-data">
+                    <p class="preg">Mail: </p><input class="resp edit" value="<%= user.email %>" name="email"> 
+                </div>
+                <div class="cont-edit cont-data">
+                    <p class="preg">Constraseña: </p> <a href="" class="resp edit">Cambiar contraseña</a>
+                </div>
+                <div class="cont-edit cont-data">
+                    <p class="preg">Teléfono: </p><input class="resp edit" value="<%= user.tel %>" name="tel">
+                </div>
+                <div class="cont-edit cont-data">
+                    <p class="preg">Fecha de nacimiento: </p><input class="resp edit" value="<%= user.birthDate %>" name="birthDate">
+                </div>
+                <div class="cont-edit cont-data">
+                    <p class="preg">Avatar: </p> <input type="file" class="resp edit">
+                </div>
+                <button type="submit" class="boton">Editar perfil</button>
+            </form>
         </div>
-
         
-            <button type="submit" class="boton">Editar perfil</button>
-        </form>
     </section>
     
 </body>

@@ -1,18 +1,17 @@
 <!-- Trayendo el head -->
-<%- include('partials/head', {title: 'Registrarme'}) %>
+<%- include('partials/head', {title: 'Mi perfil'}) %>
 <body>
     <!-- Trayendo el header -->
     <%- include('partials/header') %>
 
     <section class="contenedor-gral">
-        <h1>Mi perfil</h1>
         <!-- zona izq -->
         <div class="cont-info">
+            <div class="cont-nombre">
+                <p class="nombre"> <%= user.firstName %> <%= user.lastName %> </p>
+            </div>
             <div class="cont-foto">
                 <img class="foto" src="/avatars/<%=user.image%>">
-            </div>
-            <div class="cont-nombre">
-                <p class="nombre"> <%= user.first_name %> </p> <p class="nombre"> <%= user.last_name %> </p>
             </div>
         </div>
         <!-- zona der -->
@@ -20,20 +19,19 @@
             <div class="cont-mail cont-data">
                 <p class="preg">Mail: </p><p class="resp"> <%= user.email %></p>
             </div>
-            <div class="cont-nombreu cont-data">
-                <p class="preg">Nombre de usuario: </p><p class="resp"> <%= user.username %> </p>
-            </div>
             <div class="cont-tel cont-data">
                 <p class="preg">Teléfono: </p><p class="resp"> <%= user.tel %> </p>
             </div>
             <div class="cont-fecha cont-data">
-                <p class="preg">Fecha de nacimiento: </p><p class="resp"> <%= user.birth_date %></p>
+                <p class="preg">Fecha de nacimiento: </p><p class="resp"> <%= user.birthDate %></p>
             </div>
+            <form class="cont-boton" action="/users/edit/<%= user.id %>" method="GET">
+                <button type="submit" class="boton">Editar perfil</button>
+            </form>
         </div>
-
-        <form class="cont-boton" action="/users/edit/<%= user.id %>" method="GET">
-            <button type="submit" class="boton">Editar perfil</button>
-        </form>
     </section>
     
 </body>
+
+<!-- Trayendo el footer -->
+<%- include('partials/footer') %>

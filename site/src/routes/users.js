@@ -4,6 +4,12 @@ const {check, validationResult, body} = require('express-validator');
 var multer = require('multer');
 var path = require('path')
 
+//Requiriendo el controller
+const userController = require('../controllers/userController');
+// Requiriendo el middleware
+const loginMiddleware = require('../middlewares/loginMiddleware');
+const authAdmins = require('../middlewares/authAdmins');
+
 //Métodos para guardar imagenes
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -15,11 +21,7 @@ var storage = multer.diskStorage({
   })
   var upload = multer({ storage: storage })
 
-//Requiriendo el controller
-const userController = require('../controllers/userController');
-// Requiriendo el middleware
-const loginMiddleware = require('../middlewares/loginMiddleware');
-const authAdmins = require('../middlewares/authAdmins');
+
 
 // Rutas login
 router.get('/login', userController.loginView);

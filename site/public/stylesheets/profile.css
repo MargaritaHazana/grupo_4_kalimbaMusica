@@ -8,41 +8,59 @@
 .contenedor-gral {
     margin: 5% 2% 0 2%;
     width: 90%;
-
+    display: flex;
+    flex-wrap: wrap;
+}
+.todo{
+    justify-content: center;
 }
 h1{
     width: 100%;
+    font-size: 200%;
+    padding-left: 10%;
 }
 .cont-info {
     width: 40%;
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: 25%;
 }
-
+.cont-foto{
+    padding: 5%;
+    padding-bottom: 0px;
+}
 .foto {
-    width: 115%;
+    width: 100%;
     display: flex;
 }
 .cont-nombre {
     width: 100%;
     display: flex;
-
+    padding-left: 6%;
+    justify-content: center;
 }
 .nombre{
     font-size: 180%;
    
 }
 .cont-info2{
-    width: 100%;
-    
+    width: 60%;  
 }
+
 .cont-data{
     width: 100%;
     font-size: 140%;
     border-bottom: 1px dashed #41426f;
     margin: 1% 1% 4% 1%;
     padding: 1% 1% 1% 1%;
+}
+.cont-edit{
+    display: flex;
+    line-height: 1;
+}
+.edit{
+    height: fit-content;
+    margin-left: 3%;
+    align-self: center;
+    border: none;
+    border-radius: 3%;
 }
 .preg{
     padding: 0%;
@@ -62,11 +80,24 @@ input{
     font-size: 100%;
 }
 /* Media querys */
-@media(min-width:600px){
-    /* ver centrar foto */
+@media(max-width:600px){
+    .contenedor-gral{
+        display: block;
+        margin: 20%;
+    }
+    .cont-edit{
+        display: block;
+    }
+    .edit{
+        height: auto;
+    }
+    .boton{
+        width: 100%;
+        margin-left: 0px;
+    }
 }
-@media(min-width:1000px){
-    .cont-foto{
-        margin-left: 30%;
+@media(max-width:380px){
+    .todo{
+        justify-content: left;
     }
 }

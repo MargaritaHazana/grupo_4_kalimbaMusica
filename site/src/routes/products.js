@@ -5,6 +5,9 @@ var path = require('path');
 
 //Requiriendo el controller
 var productController = require('../controllers/productController');
+// Requiriendo el middleware
+const loginMiddleware = require('../middlewares/loginMiddleware');
+const authAdmins = require('../middlewares/authAdmins');
 
 //Métodos para guardar imagenes
 var storage = multer.diskStorage({
@@ -31,18 +34,18 @@ router.get('/productDetail/:id', productController.productDetail);
 router.get('/productCart', productController.productCart);
 
 //  GET product add
-router.get('/product/create', productController.productAdd);
+router.get('/product/create', authAdmins, productController.productAdd);
 // POST product add
 router.post('/product/add', upload.any(), productController.addingProduct);
 
 
 // GET product edit
-router.get('/product/:id/edit', productController.productEdit);
+router.get('/product/:id/edit', authAdmins, productController.productEdit);
 // PUT product edit
 router.put('/product/:id', upload.any(), productController.editingProduct);
 
 //DELETE
-router.delete('/product/delete/:id', productController.delete);
+router.delete('/product/delete/:id', authAdmins, productController.delete);
 
 
 

@@ -116,7 +116,7 @@ CREATE TABLE `colors_products` (
 
 LOCK TABLES `colors_products` WRITE;
 /*!40000 ALTER TABLE `colors_products` DISABLE KEYS */;
-INSERT INTO `colors_products` VALUES (3,2,NULL),(3,1,NULL),(4,2,NULL),(4,5,NULL),(5,7,NULL),(5,3,NULL),(6,4,NULL),(6,3,NULL),(7,4,NULL),(8,4,NULL),(8,7,NULL),(9,7,NULL),(9,6,NULL),(10,6,NULL),(10,1,NULL),(11,1,NULL),(11,3,NULL),(12,7,NULL),(19,2,NULL);
+INSERT INTO `colors_products` VALUES (3,2,NULL),(3,1,NULL),(4,2,NULL),(4,5,NULL),(5,7,NULL),(5,3,NULL),(6,4,NULL),(6,3,NULL),(7,4,NULL),(8,4,NULL),(8,7,NULL),(9,7,NULL),(9,6,NULL),(10,6,NULL),(10,1,NULL),(11,1,NULL),(11,3,NULL),(12,7,NULL);
 /*!40000 ALTER TABLE `colors_products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,7 +162,7 @@ CREATE TABLE `images` (
   PRIMARY KEY (`id`),
   KEY `products_id_idx` (`productsId`),
   CONSTRAINT `fk_images_products_id` FOREIGN KEY (`productsId`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -258,7 +258,7 @@ CREATE TABLE `products` (
   CONSTRAINT `fk_products_categories_id` FOREIGN KEY (`categoriesId`) REFERENCES `categories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_products_subcategories_id` FOREIGN KEY (`subcategoriesId`) REFERENCES `subcategories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_products_typesId` FOREIGN KEY (`typesId`) REFERENCES `types` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -267,7 +267,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (3,'Guitarra eléctrica Stratocaster',20000,10,1,'Una guitarra diseñana para diestros, de origen  Mexicano, madera de arce, un color customizable con un acabado brilloso, las comunes 6 cuerdas, 22 trastes y 3 microfonos\n',1,1,1,1,NULL),(4,'Guitarra Eléctrica RGX121Z - Humbucker - HSH',15000,15,1,'Pastillas humbucker cerámicas abiertas para la RGX220DZ/121Z\nLos imanes cerámicos se utilizan por su mayor potencia y su rango tonal más amplio. Estas pastillas producen una distorsión más clara.\n',1,1,3,1,NULL),(5,'Piano Digital P-121 de 73 teclas\n',15000,15,1,'El Yamaha P-121 es un piano digital compacto de 73 teclas que combina una interpretación pianística excelente con un nuevo diseño sencillo y minimalista. Fácilmente transportable y muy accesible; la versatilidad de este instrumento te permite disfrutar de la sensación de tocar un piano, en cualquier lugar.\n',2,8,3,13,NULL),(6,'Piano de cola clásico - Yamaha',50000,20,1,'Un piano de armazon negro y teclas de marfil, con un requerimiento espacial de 3 metros cuadrados, ademas posee 7 octavas y 3 pedales para generar sonidos inolvidables.\nPiano de cola Clasico\n',2,8,3,12,NULL),(7,'Cajon Peruano Leonard Cajpee Guatambu Rustico\n',10000,0,1,'Este instrumento ofrece bellos sonidos de cajón verdaderamente auténticas para satisfacer a los jugadores más exigentes. La construcción de cola de milano de carpintería se utiliza para una mirada tradicional detallada.\n',3,13,7,19,NULL),(8,'Kalimba RXT-300 modelo 1914\n',4000,0,1,'El kalimba consta de 7 piezas metalicas, que resuenan sobre su caja de resonancia, que es similar a un caparazon de tortuga. Cada nota se sostiene permitiendo generar un clima calido y armonico.\n\n',3,18,4,26,NULL),(9,'Armonica Folkmaster En Sol 1072 G\n',2000,0,1,'La armónica Folkmaster 1072 es fácil de tocar y a la vez económica para comprar. Su claridad de sonido excepcional y puesta a punto perfecta es posible gracias a un proceso exclusivo de fabricación láser.\n',4,21,3,32,NULL),(10,'Flauta dulce soprano - YRS312\n',2500,0,1,'Flauta dulce, ideal para tus primeros pasos en la musica, muy popular en instituciones de enseñanza basica. Tiene un sonido muy delicado, y en las manos de un maestro se puede cautivar un publico sin el apoyo de ningun otro instrumento.\n',4,19,3,28,NULL),(11,'Parlante Bluetooth Fender Newport 30 Watts Compacto Portatil\n',3700,0,1,'Nos encontramos ante un altavoz que no solo busca enamorar con su diseño clásico, sino además con su gran reproducción de los graves mediante la implementación de 2 woofers, y la novedosa incorporación de un micrófono para poder atender las llamadas de tu Smartphone.\n',5,27,1,43,NULL),(12,'Afinador RX - Taylor\n',3700,0,1,'Afinador para guitarras, consta de afinaciones estandar y no estandar, con este afinador de tu lado si tus notas suenan mal lamentablemente no es el instrumento sos vos );\n\n',5,28,2,44,NULL),(19,'Parlante inalámbrico JBL',3000,0,1,'Parlante',5,27,1,44,NULL);
+INSERT INTO `products` VALUES (3,'Guitarra eléctrica Stratocaster',20000,10,1,'Una guitarra diseñana para diestros, de origen  Mexicano, madera de arce, un color customizable con un acabado brilloso, las comunes 6 cuerdas, 22 trastes y 3 microfonos\n',1,1,1,1,NULL),(4,'Guitarra Eléctrica RGX121Z - Humbucker - HSH',15000,15,1,'Pastillas humbucker cerámicas abiertas para la RGX220DZ/121Z\nLos imanes cerámicos se utilizan por su mayor potencia y su rango tonal más amplio. Estas pastillas producen una distorsión más clara.\n',1,1,3,1,NULL),(5,'Piano Digital P-121 de 73 teclas\n',15000,15,1,'El Yamaha P-121 es un piano digital compacto de 73 teclas que combina una interpretación pianística excelente con un nuevo diseño sencillo y minimalista. Fácilmente transportable y muy accesible; la versatilidad de este instrumento te permite disfrutar de la sensación de tocar un piano, en cualquier lugar.\n',2,8,3,13,NULL),(6,'Piano de cola clásico - Yamaha',50000,20,1,'Un piano de armazon negro y teclas de marfil, con un requerimiento espacial de 3 metros cuadrados, ademas posee 7 octavas y 3 pedales para generar sonidos inolvidables.\nPiano de cola Clasico\n',2,8,3,12,NULL),(7,'Cajon Peruano Leonard Cajpee Guatambu Rustico\n',10000,0,1,'Este instrumento ofrece bellos sonidos de cajón verdaderamente auténticas para satisfacer a los jugadores más exigentes. La construcción de cola de milano de carpintería se utiliza para una mirada tradicional detallada.\n',3,13,7,19,NULL),(8,'Kalimba RXT-300 modelo 1914\n',4000,0,1,'El kalimba consta de 7 piezas metalicas, que resuenan sobre su caja de resonancia, que es similar a un caparazon de tortuga. Cada nota se sostiene permitiendo generar un clima calido y armonico.\n\n',3,18,4,26,NULL),(9,'Armonica Folkmaster En Sol 1072 G\n',2000,0,1,'La armónica Folkmaster 1072 es fácil de tocar y a la vez económica para comprar. Su claridad de sonido excepcional y puesta a punto perfecta es posible gracias a un proceso exclusivo de fabricación láser.\n',4,21,3,32,NULL),(10,'Flauta dulce soprano - YRS312\n',2500,0,1,'Flauta dulce, ideal para tus primeros pasos en la musica, muy popular en instituciones de enseñanza basica. Tiene un sonido muy delicado, y en las manos de un maestro se puede cautivar un publico sin el apoyo de ningun otro instrumento.\n',4,19,3,28,NULL),(11,'Parlante Bluetooth Fender Newport 30 Watts Compacto Portatil\n',3700,0,1,'Nos encontramos ante un altavoz que no solo busca enamorar con su diseño clásico, sino además con su gran reproducción de los graves mediante la implementación de 2 woofers, y la novedosa incorporación de un micrófono para poder atender las llamadas de tu Smartphone.\n',5,27,1,43,NULL),(12,'Afinador RX - Taylor\n',3700,0,1,'Afinador para guitarras, consta de afinaciones estandar y no estandar, con este afinador de tu lado si tus notas suenan mal lamentablemente no es el instrumento sos vos );\n\n',5,28,2,44,NULL);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -369,4 +369,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-09 12:45:21
+-- Dump completed on 2020-07-09 14:25:54

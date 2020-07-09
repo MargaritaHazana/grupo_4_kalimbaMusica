@@ -15,8 +15,8 @@ var colors = function (sequelize, dataTypes){
     }
     const colors = sequelize.define(alias,cols,config)
     colors.associate = (models)=>{
-        // un color encierra muchos productos
-        colors.hasMany(models.Product,{as:"products", foreignKey: "colorsId"})
+        // muchas colores tienen muchos productos
+        colors.belongsToMany(models.Product,{as:"products", through:"colors_products", foreignKey:"colorsId", otherKey:"productsId", timestamps:false})
     }    
 
     return colors

@@ -84,7 +84,9 @@ productController = {
     productAdd: async (req,res, next)=>{
         // ID del usuario en sesion
         let sessionUserID = req.session.userID;
+        
         try {
+            // Hace el pedido a la DB 
             let categories = await DB.Category.findAll();
             let subcategories = await DB.Subcategory.findAll();
             let types = await DB.Type.findAll();
@@ -92,6 +94,7 @@ productController = {
             let colors = await DB.Color.findAll();   
 
             res.render('productAdd', { view: 'forms', sessionUserID, categories, subcategories, types, brands, colors });
+
         } catch (error) {
             res.send(error);
         }
@@ -101,8 +104,16 @@ productController = {
     addingProduct : async (req, res, next)=>{
        
         try {
-            await DB.Product.create(req.body)
+            const newProduct = await DB.Product.create(req.body);
+            await newProduct.addColors(req.body.colorsId);
+
+            const newImage = await DB.Image.create({
+                name: req.files[0].filename,
+                productsId: newProduct.id
+            });
+
             res.redirect('/products');
+            
         } catch (error) {
             res.send(error);
         }
@@ -138,31 +149,31 @@ productController = {
                 brand: req.body.brand,
                 category: req.body.category,
                 price: req.body.price,
-                image:  "Bajo.jpg",
+                image:  productoEncontrado.image,
                 discount: req.body.discount,
                 size: req.body.size,
                 description: req.body.description,
                 stock: req.body.stock,
                 coloresDisponibles: req.body.coloresDisponibles,
-            };}
-        else{
-                productoEncontrado = {
-            id: req.params.id,
-            name: req.body.name,
-            type: req.body.type,
-            brand: req.body.brand,
-            category: req.body.category,
-            price: req.body.price,
-            image:  req.files[0].filename,
-            discount: req.body.discount,
-            size: req.body.size,
-            description: req.body.description,
-            stock: req.body.stock,
-            coloresDisponibles: req.body.coloresDisponibles,
-        };
+            };
+        } else {
+
+            productoEncontrado = {
+                id: req.params.id,
+                name: req.body.name,
+                type: req.body.type,
+                brand: req.body.brand,
+                category: req.body.category,
+                price: req.body.price,
+                image:  req.files[0].filename,
+                discount: req.body.discount,
+                size: req.body.size,
+                description: req.body.description,
+                stock: req.body.stock,
+                coloresDisponibles: req.body.coloresDisponibles,
+            };
         }
-        
-        
+          
         dataProductos.map(function(producto){
             if(producto.id == idProducto){
                 let posicionAEditar = dataProductos.indexOf(producto);

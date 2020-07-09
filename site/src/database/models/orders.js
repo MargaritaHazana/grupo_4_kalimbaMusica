@@ -20,7 +20,7 @@ var orders = function (sequelize, dataTypes){
         // una orden pertenece a muchos usuarios (aparentemente)
         orders.belongsTo(models.User,{as:"users", foreignKey: "usersId"})
         // muchas ordenes tienen muchos productos
-        orders.belongsToMany(models.Product,{as:"products", through: "orders_products", foreignKey: "ordersId",otherKey: "productsId",timestamps:false})
+        orders.belongsToMany(models.Product,{as:"products", through: "orders_products", foreignKey: "ordersId", otherKey: "productsId", timestamps:false})
     }
     
     return orders

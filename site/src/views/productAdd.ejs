@@ -27,38 +27,38 @@
         <textarea class="respuesta" name="description" id="" cols="10" rows="3" ></textarea>
 
         <label class="pregunta" for="">Marca</label>
-        <select name="brands" id="">
+        <select name="brandsId" id="">
             <% brands.forEach(brand => { %>
              <option value="<%= brand.id %>" > <%= brand.name %> </option>
             <% }) %>
         </select>
 
         <label class="pregunta" for="">Categoría</label>
-        <select name="categories" id="">
+        <select name="categoriesId" id="">
             <% categories.forEach(category => { %>
              <option value="<%= category.id %>" > <%= category.name %> </option>
             <% }) %>
         </select>
 
         <label class="pregunta" for="">Subcategoría</label>
-        <select name="subcategories" id="">
+        <select name="subcategoriesId" id="">
             <% subcategories.forEach(subcategory => { %>
              <option value="<%= subcategory.id %>" > <%= subcategory.name %> </option>
             <% }) %>
         </select>
 
         <label class="pregunta" for="">Tipo</label>
-        <select name="types" id="">
+        <select name="typesId" id="">
             <% types.forEach(type => { %>
              <option value="<%= type.id %>" > <%= type.name %> </option>
             <% }) %>
         </select>
 
         <label class="pregunta" for="">Imagen del producto</label>
-        <input class="respuesta" type="file" name="image">
+        <input class="respuesta" type="file" name="image" >
 
         <label class="pregunta" for="">Colores disponibles</label>
-        <select name="colors" id="">
+        <select name="colorsId" id="" multiple>
             <% colors.forEach(color => { %>
              <option value="<%= color.id %>" > <%= color.name %> </option>
             <% }) %>

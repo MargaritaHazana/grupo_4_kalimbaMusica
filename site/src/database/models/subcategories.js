@@ -8,7 +8,6 @@ var subcategories = function (sequelize, dataTypes){
             autoIncrement: true
         },
         name: dataTypes.STRING,
-        // categoriesId: dataTypes.INTEGER,
         deletedAt: dataTypes.DATE
     }
     config = {

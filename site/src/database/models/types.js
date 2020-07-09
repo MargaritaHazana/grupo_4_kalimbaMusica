@@ -2,8 +2,13 @@
 var types = function (sequelize, dataTypes){
     alias = "Type"
     cols = {
+        id:{
+            type: dataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
         name: dataTypes.STRING,
-        // deletedAt: dataTypes.DATE
+        deletedAt: dataTypes.DATE
     }
     config = {
         timestamps: false

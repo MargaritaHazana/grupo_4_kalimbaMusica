@@ -101,24 +101,11 @@ productController = {
     addingProduct : async (req, res, next)=>{
        
         try {
-            const newProduct = await DB.Products.create({
-                name: req.body.name,
-                price: req.body.price,
-                discount: req.body.discount,
-                stock: req.body.stock,
-                description: req.body.description,
-                brand: req.body.brand,
-                categories: req.body.categoriesId,
-                subcategories: req.body.subcategoriesId,
-                types: req.body.typesId,
-                image: req.files[0].filename,
-                colors: req.body.colorsId,
-            })
+            await DB.Product.create(req.body)
+            res.redirect('/products');
         } catch (error) {
-            res.send('Error');
+            res.send(error);
         }
-
-        res.redirect('/products');
     },
 
     productEdit: function(req, res){

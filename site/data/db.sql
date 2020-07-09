@@ -93,6 +93,34 @@ INSERT INTO `colors` VALUES (1,'Rojo',NULL),(2,'Azul',NULL),(3,'Negro',NULL),(4,
 UNLOCK TABLES;
 
 --
+-- Table structure for table `colors_products`
+--
+
+DROP TABLE IF EXISTS `colors_products`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `colors_products` (
+  `productsId` int(11) NOT NULL,
+  `colorsId` int(11) NOT NULL,
+  `deletedAt` datetime(6) DEFAULT NULL,
+  KEY `fk_colos_productsId_idx` (`productsId`),
+  KEY `fk_products_colorsId_idx` (`colorsId`),
+  CONSTRAINT `fk_colos_productsId` FOREIGN KEY (`productsId`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_products_colorsId` FOREIGN KEY (`colorsId`) REFERENCES `colors` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `colors_products`
+--
+
+LOCK TABLES `colors_products` WRITE;
+/*!40000 ALTER TABLE `colors_products` DISABLE KEYS */;
+INSERT INTO `colors_products` VALUES (3,2,NULL),(3,1,NULL),(4,2,NULL),(4,5,NULL),(5,7,NULL),(5,3,NULL),(6,4,NULL),(6,3,NULL),(7,4,NULL),(8,4,NULL),(8,7,NULL),(9,7,NULL),(9,6,NULL),(10,6,NULL),(10,1,NULL),(11,1,NULL),(11,3,NULL),(12,7,NULL),(19,2,NULL);
+/*!40000 ALTER TABLE `colors_products` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `guides`
 --
 
@@ -219,21 +247,18 @@ CREATE TABLE `products` (
   `categoriesId` int(11) NOT NULL,
   `subcategoriesId` int(11) NOT NULL,
   `brandsId` int(11) NOT NULL,
-  `colorsId` int(11) NOT NULL,
   `typesId` int(11) NOT NULL,
   `deletedAt` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `brands_id_idx` (`brandsId`),
   KEY `category_id_idx` (`categoriesId`),
   KEY `types_id_idx` (`subcategoriesId`),
-  KEY `colors_id_idx` (`colorsId`),
   KEY `fk_products_typesId_idx` (`typesId`),
   CONSTRAINT `fk_products_brands_id` FOREIGN KEY (`brandsId`) REFERENCES `brands` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_products_categories_id` FOREIGN KEY (`categoriesId`) REFERENCES `categories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_products_colors_id` FOREIGN KEY (`colorsId`) REFERENCES `colors` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_products_subcategories_id` FOREIGN KEY (`subcategoriesId`) REFERENCES `subcategories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_products_typesId` FOREIGN KEY (`typesId`) REFERENCES `types` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -242,7 +267,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (3,'Guitarra eléctrica Stratocaster',20000,10,1,'Una guitarra diseñana para diestros, de origen  Mexicano, madera de arce, un color customizable con un acabado brilloso, las comunes 6 cuerdas, 22 trastes y 3 microfonos\n',1,1,1,2,1,NULL),(4,'Guitarra Eléctrica RGX121Z - Humbucker - HSH',15000,15,1,'Pastillas humbucker cerámicas abiertas para la RGX220DZ/121Z\nLos imanes cerámicos se utilizan por su mayor potencia y su rango tonal más amplio. Estas pastillas producen una distorsión más clara.\n',1,1,3,3,1,NULL),(5,'Piano Digital P-121 de 73 teclas\n',15000,15,1,'El Yamaha P-121 es un piano digital compacto de 73 teclas que combina una interpretación pianística excelente con un nuevo diseño sencillo y minimalista. Fácilmente transportable y muy accesible; la versatilidad de este instrumento te permite disfrutar de la sensación de tocar un piano, en cualquier lugar.\n',2,8,3,1,13,NULL),(6,'Piano de cola clásico - Yamaha',50000,20,1,'Un piano de armazon negro y teclas de marfil, con un requerimiento espacial de 3 metros cuadrados, ademas posee 7 octavas y 3 pedales para generar sonidos inolvidables.\nPiano de cola Clasico\n',2,8,3,2,12,NULL),(7,'Cajon Peruano Leonard Cajpee Guatambu Rustico\n',10000,0,1,'Este instrumento ofrece bellos sonidos de cajón verdaderamente auténticas para satisfacer a los jugadores más exigentes. La construcción de cola de milano de carpintería se utiliza para una mirada tradicional detallada.\n',3,13,7,3,19,NULL),(8,'Kalimba RXT-300 modelo 1914\n',4000,0,1,'El kalimba consta de 7 piezas metalicas, que resuenan sobre su caja de resonancia, que es similar a un caparazon de tortuga. Cada nota se sostiene permitiendo generar un clima calido y armonico.\n\n',3,18,4,4,26,NULL),(9,'Armonica Folkmaster En Sol 1072 G\n',2000,0,1,'La armónica Folkmaster 1072 es fácil de tocar y a la vez económica para comprar. Su claridad de sonido excepcional y puesta a punto perfecta es posible gracias a un proceso exclusivo de fabricación láser.\n',4,21,3,5,32,NULL),(10,'Flauta dulce soprano - YRS312\n',2500,0,1,'Flauta dulce, ideal para tus primeros pasos en la musica, muy popular en instituciones de enseñanza basica. Tiene un sonido muy delicado, y en las manos de un maestro se puede cautivar un publico sin el apoyo de ningun otro instrumento.\n',4,19,3,1,28,NULL),(11,'Parlante Bluetooth Fender Newport 30 Watts Compacto Portatil\n',3700,0,1,'Nos encontramos ante un altavoz que no solo busca enamorar con su diseño clásico, sino además con su gran reproducción de los graves mediante la implementación de 2 woofers, y la novedosa incorporación de un micrófono para poder atender las llamadas de tu Smartphone.\n',5,27,1,1,43,NULL),(12,'Afinador RX - Taylor\n',3700,0,1,'Afinador para guitarras, consta de afinaciones estandar y no estandar, con este afinador de tu lado si tus notas suenan mal lamentablemente no es el instrumento sos vos );\n\n',5,28,2,4,44,NULL);
+INSERT INTO `products` VALUES (3,'Guitarra eléctrica Stratocaster',20000,10,1,'Una guitarra diseñana para diestros, de origen  Mexicano, madera de arce, un color customizable con un acabado brilloso, las comunes 6 cuerdas, 22 trastes y 3 microfonos\n',1,1,1,1,NULL),(4,'Guitarra Eléctrica RGX121Z - Humbucker - HSH',15000,15,1,'Pastillas humbucker cerámicas abiertas para la RGX220DZ/121Z\nLos imanes cerámicos se utilizan por su mayor potencia y su rango tonal más amplio. Estas pastillas producen una distorsión más clara.\n',1,1,3,1,NULL),(5,'Piano Digital P-121 de 73 teclas\n',15000,15,1,'El Yamaha P-121 es un piano digital compacto de 73 teclas que combina una interpretación pianística excelente con un nuevo diseño sencillo y minimalista. Fácilmente transportable y muy accesible; la versatilidad de este instrumento te permite disfrutar de la sensación de tocar un piano, en cualquier lugar.\n',2,8,3,13,NULL),(6,'Piano de cola clásico - Yamaha',50000,20,1,'Un piano de armazon negro y teclas de marfil, con un requerimiento espacial de 3 metros cuadrados, ademas posee 7 octavas y 3 pedales para generar sonidos inolvidables.\nPiano de cola Clasico\n',2,8,3,12,NULL),(7,'Cajon Peruano Leonard Cajpee Guatambu Rustico\n',10000,0,1,'Este instrumento ofrece bellos sonidos de cajón verdaderamente auténticas para satisfacer a los jugadores más exigentes. La construcción de cola de milano de carpintería se utiliza para una mirada tradicional detallada.\n',3,13,7,19,NULL),(8,'Kalimba RXT-300 modelo 1914\n',4000,0,1,'El kalimba consta de 7 piezas metalicas, que resuenan sobre su caja de resonancia, que es similar a un caparazon de tortuga. Cada nota se sostiene permitiendo generar un clima calido y armonico.\n\n',3,18,4,26,NULL),(9,'Armonica Folkmaster En Sol 1072 G\n',2000,0,1,'La armónica Folkmaster 1072 es fácil de tocar y a la vez económica para comprar. Su claridad de sonido excepcional y puesta a punto perfecta es posible gracias a un proceso exclusivo de fabricación láser.\n',4,21,3,32,NULL),(10,'Flauta dulce soprano - YRS312\n',2500,0,1,'Flauta dulce, ideal para tus primeros pasos en la musica, muy popular en instituciones de enseñanza basica. Tiene un sonido muy delicado, y en las manos de un maestro se puede cautivar un publico sin el apoyo de ningun otro instrumento.\n',4,19,3,28,NULL),(11,'Parlante Bluetooth Fender Newport 30 Watts Compacto Portatil\n',3700,0,1,'Nos encontramos ante un altavoz que no solo busca enamorar con su diseño clásico, sino además con su gran reproducción de los graves mediante la implementación de 2 woofers, y la novedosa incorporación de un micrófono para poder atender las llamadas de tu Smartphone.\n',5,27,1,43,NULL),(12,'Afinador RX - Taylor\n',3700,0,1,'Afinador para guitarras, consta de afinaciones estandar y no estandar, con este afinador de tu lado si tus notas suenan mal lamentablemente no es el instrumento sos vos );\n\n',5,28,2,44,NULL),(19,'Parlante inalámbrico JBL',3000,0,1,'Parlante',5,27,1,44,NULL);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -258,6 +283,7 @@ CREATE TABLE `subcategories` (
   `name` varchar(100) NOT NULL,
   `categoriesId` int(11) NOT NULL,
   `deletedAt` datetime(6) DEFAULT NULL,
+  `subcategoriesId` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `category_id_idx` (`categoriesId`),
   CONSTRAINT `fk_subcategories_categories_id` FOREIGN KEY (`categoriesId`) REFERENCES `categories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -270,7 +296,7 @@ CREATE TABLE `subcategories` (
 
 LOCK TABLES `subcategories` WRITE;
 /*!40000 ALTER TABLE `subcategories` DISABLE KEYS */;
-INSERT INTO `subcategories` VALUES (1,'Guitarras',1,NULL),(2,'Bajos',1,NULL),(3,'Violines',1,NULL),(4,'Ukeleles',1,NULL),(5,'Contrabajo',1,NULL),(6,'Charangos',1,NULL),(7,'Arpas',1,NULL),(8,'Pianos',2,NULL),(9,'Pianos',2,NULL),(10,'Teclados',2,NULL),(11,'Acordeón',2,NULL),(12,'Baterías',3,NULL),(13,'Cajones peruanos',3,NULL),(14,'Bombos',3,NULL),(15,'Bongos',3,NULL),(16,'Panderetas',3,NULL),(17,'Triangulos',3,NULL),(18,'Kalimbas',3,NULL),(19,'Flautas',4,NULL),(20,'Saxos',4,NULL),(21,'Armonicas',4,NULL),(22,'Trompetas',4,NULL),(23,'Trombones',4,NULL),(24,'Bandoneón',4,NULL),(25,'Cuerdas',5,NULL),(26,'Amplificadores',5,NULL),(27,'Parlantes',5,NULL),(28,'Afinadores',5,NULL),(29,'Accesorios',5,NULL),(30,'Transformadores',5,NULL),(31,'Cables',5,NULL),(32,'Placas de sonido',5,NULL);
+INSERT INTO `subcategories` VALUES (1,'Guitarras',1,NULL,NULL),(2,'Bajos',1,NULL,NULL),(3,'Violines',1,NULL,NULL),(4,'Ukeleles',1,NULL,NULL),(5,'Contrabajo',1,NULL,NULL),(6,'Charangos',1,NULL,NULL),(7,'Arpas',1,NULL,NULL),(8,'Pianos',2,NULL,NULL),(9,'Pianos',2,NULL,NULL),(10,'Teclados',2,NULL,NULL),(11,'Acordeón',2,NULL,NULL),(12,'Baterías',3,NULL,NULL),(13,'Cajones peruanos',3,NULL,NULL),(14,'Bombos',3,NULL,NULL),(15,'Bongos',3,NULL,NULL),(16,'Panderetas',3,NULL,NULL),(17,'Triangulos',3,NULL,NULL),(18,'Kalimbas',3,NULL,NULL),(19,'Flautas',4,NULL,NULL),(20,'Saxos',4,NULL,NULL),(21,'Armonicas',4,NULL,NULL),(22,'Trompetas',4,NULL,NULL),(23,'Trombones',4,NULL,NULL),(24,'Bandoneón',4,NULL,NULL),(25,'Cuerdas',5,NULL,NULL),(26,'Amplificadores',5,NULL,NULL),(27,'Parlantes',5,NULL,NULL),(28,'Afinadores',5,NULL,NULL),(29,'Accesorios',5,NULL,NULL),(30,'Transformadores',5,NULL,NULL),(31,'Cables',5,NULL,NULL),(32,'Placas de sonido',5,NULL,NULL);
 /*!40000 ALTER TABLE `subcategories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,8 +313,8 @@ CREATE TABLE `types` (
   `subcategoriesId` int(11) NOT NULL,
   `deletedAt` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_types_subcategoriesID_idx` (`subcategoriesId`),
-  CONSTRAINT `fk_types_subcategoriesID` FOREIGN KEY (`subcategoriesId`) REFERENCES `subcategories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_types_subcategories_id_idx` (`subcategoriesId`),
+  CONSTRAINT `fk_types_subcategories_id` FOREIGN KEY (`subcategoriesId`) REFERENCES `subcategories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -343,4 +369,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-07 21:02:29
+-- Dump completed on 2020-07-09 12:45:21

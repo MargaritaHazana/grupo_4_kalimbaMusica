@@ -119,70 +119,62 @@ productController = {
         }
     },
 
-    productEdit: function(req, res){
-        // ID del usuario en sesion
-        let sessionUserID = req.session.userID;
+    productEdit: async (req, res)=>{
+        try { 
+                // para cookies
+            let sessionUserID = req.session.userID;
+            let idProducto = req.params.id;
+            let productoAEditar = await DB.Product.findByPk(idProducto,{include: ['colors','brands','subcategories','categories','types']})
+            
+            // para el select de categorias en la view
+            let categorias = await DB.Category.findAll()
+            let colores = await DB.Color.findAll()
+            let subcategorias = await DB.Subcategory.findAll()
+            let tipos = await DB.Type.findAll()
         
-        let idProducto = req.params.id;
-
-        let productoAEditar = dataProductos.find((product)=> idProducto == product.id);
-        // Esto es facilmente reemplazable una vez que podamos usar Sql
-        var coloresDisponiblesGeneral = ["Blanco","Negro","Azul","Rojo","Marron"]
-        
-        res.render('productEdit', {view: 'forms', productoAEditar, coloresDisponiblesGeneral, sessionUserID});
-
+            // hay que hacer el select de colores pero primero hay que cambiar la base de datos
+            res.render('productEdit', {view: 'forms', productoAEditar, categorias, colores, subcategorias, tipos, sessionUserID});
+            }
+        catch (error) {
+            res.send(error)
+        }
     },
 
-    editingProduct: function(req, res){
-        
-        let idProducto = req.params.id;
-
-        let productoEncontrado = dataProductos.find((producto)=>{
-            idProducto == producto.id
-        });
-        if(req.files[0] == undefined){
+    editingProduct: async(req, res)=>{
+        try { 
             
-            productoEncontrado = {
-                id: req.params.id,
-                name: req.body.name,
-                type: req.body.type,
-                brand: req.body.brand,
-                category: req.body.category,
-                price: req.body.price,
-                image:  productoEncontrado.image,
-                discount: req.body.discount,
-                size: req.body.size,
-                description: req.body.description,
-                stock: req.body.stock,
-                coloresDisponibles: req.body.coloresDisponibles,
-            };
-        } else {
 
-            productoEncontrado = {
-                id: req.params.id,
-                name: req.body.name,
-                type: req.body.type,
-                brand: req.body.brand,
-                category: req.body.category,
-                price: req.body.price,
-                image:  req.files[0].filename,
-                discount: req.body.discount,
-                size: req.body.size,
-                description: req.body.description,
-                stock: req.body.stock,
-                coloresDisponibles: req.body.coloresDisponibles,
-            };
+
+            
+            let idProducto = req.params.id;
+            let producto= await DB.Product.findByPk(idProducto,{include: ['colors','brands','subcategories','categories','types']})
+            
+            // update de cosas relacionadas al producto
+            await DB.Product.update(req.body, {where : {id : idProducto}})
+            // update de tablas externas
+            
+            // colors
+            await producto.removeColor(producto.colors)
+            await producto.addColor(req.body.colors)
+            // brands
+            // await producto.removeBrand(producto.brands)
+            // await producto.addBrand(req.body.brand)
+            // // categories
+            // await producto.removeCategory(producto.categories)
+            // await producto.addCategory(req.body.category)
+            // // types
+            // await producto.removeType(producto.types)
+            // await producto.addType(req.body.type)
+            // // subcategories
+            // await producto.removeSubcategory(producto.Subcategory)
+            // await producto.addSubcategory(req.body.type)
+            res.redirect('/products')
         }
-          
-        dataProductos.map(function(producto){
-            if(producto.id == idProducto){
-                let posicionAEditar = dataProductos.indexOf(producto);
-                dataProductos.splice(posicionAEditar, 1, productoEncontrado);
-            }
-        });
+        catch (error) {
+            res.send(error)
+        }
+       
         
-        fs.writeFileSync(rutaProductosJson, JSON.stringify(dataProductos));
-        res.redirect('/products');
     },
     // Borra un producto
     delete: function(req,res){
@@ -201,6 +193,17 @@ productController = {
         productDestroyer(idProducto,dataProductos)
         fs.writeFileSync(rutaProductosJson, JSON.stringify(dataProductos));
         res.redirect('/products');
+    },
+    tester: async (req, res)=>{
+        try { 
+            
+            var products = await DB.Category.findAll()
+            
+            res.send(products)
+        }
+        catch (error) {
+            res.send(error)
+        }
     }
 }
 

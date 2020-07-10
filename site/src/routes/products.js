@@ -47,6 +47,8 @@ router.put('/product/:id', upload.any(), productController.editingProduct);
 //DELETE
 router.delete('/product/delete/:id', authAdmins, productController.delete);
 
+router.get('test', productController.tester)
+
 
 
 

@@ -119,6 +119,7 @@ productController = {
         }
     },
 
+    // Renderiza la vista de edicion del producto
     productEdit: async (req, res)=>{
         try { 
                 // para cookies
@@ -131,51 +132,33 @@ productController = {
             let colores = await DB.Color.findAll()
             let subcategorias = await DB.Subcategory.findAll()
             let tipos = await DB.Type.findAll()
+            let marcas = await DB.Brand.findAll()
         
             // hay que hacer el select de colores pero primero hay que cambiar la base de datos
-            res.render('productEdit', {view: 'forms', productoAEditar, categorias, colores, subcategorias, tipos, sessionUserID});
+            res.render('productEdit', {view: 'forms', productoAEditar, categorias, colores,marcas, subcategorias, tipos, sessionUserID});
             }
         catch (error) {
             res.send(error)
         }
     },
 
+    // Actualiza la base de datos con la informacion nueva
     editingProduct: async(req, res)=>{
         try { 
-            
-
-
-            
             let idProducto = req.params.id;
-            let producto= await DB.Product.findByPk(idProducto,{include: ['colors','brands','subcategories','categories','types']})
-            
-            // update de cosas relacionadas al producto
-            await DB.Product.update(req.body, {where : {id : idProducto}})
-            // update de tablas externas
-            
-            // colors
+            let producto= await DB.Product.findByPk( idProducto,{ include: [ 'colors','brands','subcategories','categories','types' ] } )
+            // update de caracteriticas del producto y tablas relacionadas 1:n
+            await producto.update(req.body)         
+             // update de relaciones n:m
             await producto.removeColor(producto.colors)
             await producto.addColor(req.body.colors)
-            // brands
-            // await producto.removeBrand(producto.brands)
-            // await producto.addBrand(req.body.brand)
-            // // categories
-            // await producto.removeCategory(producto.categories)
-            // await producto.addCategory(req.body.category)
-            // // types
-            // await producto.removeType(producto.types)
-            // await producto.addType(req.body.type)
-            // // subcategories
-            // await producto.removeSubcategory(producto.Subcategory)
-            // await producto.addSubcategory(req.body.type)
             res.redirect('/products')
         }
         catch (error) {
             res.send(error)
         }
-       
-        
     },
+
     // Borra un producto
     delete: function(req,res){
        
@@ -194,11 +177,11 @@ productController = {
         fs.writeFileSync(rutaProductosJson, JSON.stringify(dataProductos));
         res.redirect('/products');
     },
+
+    // Funcion de pruebas
     tester: async (req, res)=>{
         try { 
-            
-            var products = await DB.Category.findAll()
-            
+            var products = await DB.User.findAll()
             res.send(products)
         }
         catch (error) {

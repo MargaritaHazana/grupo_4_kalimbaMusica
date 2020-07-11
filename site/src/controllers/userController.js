@@ -151,50 +151,49 @@ userController = {
     },
 
     // Procesa la edición del perfil
-    edit: function(req, res){
-       
-        let sessionUserID = req.session.userID;
-        let userToEdit = dataUsers.find((user)=> sessionUserID == user.id);
+    edit: async (req, res)=>{
+        try { 
+            let userId = req.params.id
+            let usuario = await DB.User.findByPk(userId)
 
-        if(req.files[0] == undefined){
-            userToEdit = {
-                id: req.session.userID,
-                first_name: req.body.first_name,
-                last_name: req.body.last_name,
-                email: req.body.email,
-                tel: req.body.tel,
-                birth_date: req.body.birth_date,
-                username: req.body.username, 
-                password: userToEdit.password,
-                category: 2,
-                image: userToEdit.image
-                
-            } 
+            await usuario.update(req.body) 
+            res.redirect('/users/login')
         }
-        else {
-            userToEdit = {
-                id: req.session.userID,
-                first_name: req.body.first_name,
-                last_name: req.body.last_name,
-                email: req.body.email,
-                tel: req.body.tel,
-                birth_date: req.body.birth_date,
-                username: req.body.username, 
-                password: user.password,
-                category: 2,
-                image: req.files[0].filename,
-        }}
-        dataUsers.map(function(user){
-            if(user.id == sessionUserID){
-                let posicionAEditar = dataUsers.indexOf(user);
-                dataUsers.splice(posicionAEditar, 1, userToEdit);
-            }
-        })
-        fs.writeFileSync(rutaUsersJson, JSON.stringify(dataUsers));
-        
-        req.session.destroy();
+        catch (error) {
+            res.send(error)
+        }
+    },
 
-        res.redirect('/users/login');
+    passwordChangeView: async(req, res)=>{
+        // ID del usuario en sesion
+        let error = "lala"
+        let sessionUserID = req.session.userID;
+        try {
+            const user = await DB.User.findByPk(sessionUserID);
+            res.render('passwordChangeView', {view: 'profile', sessionUserID, user, error})
+        } catch (error) {
+            res.redirect('/users/login');
+        }  
+    },
+
+    // Procesa el cambio de contraseña
+    passwordChange: async (req,res)=>{
+        try {
+            let sessionUserID = req.session.userID;
+            let usuarioEditandose = await DB.User.findByPk(sessionUserID)
+            let contraseñaPrevia = req.body.oldPassword
+            let password = bcrypt.hashSync (req.body.password, 10)
+            let error = "lala"
+            if (bcrypt.compareSync(  contraseñaPrevia,usuarioEditandose.password)) {
+                await usuarioEditandose.update({password: password}) 
+                res.redirect('/')
+            } else {
+                let error = '/users/edit/' + req.session.userID + '/password'
+                res.redirect(error)
+            }
+        } catch (error) {
+            
+        }
     },
 
     // Renderiza la vista del listado de usuarios

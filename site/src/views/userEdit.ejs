@@ -21,7 +21,7 @@
                     <p class="preg">Mail: </p><input class="resp edit" value="<%= user.email %>" name="email"> 
                 </div>
                 <div class="cont-edit cont-data">
-                    <p class="preg">Constraseña: </p> <a href="" class="resp edit">Cambiar contraseña</a>
+                    <p class="preg">Constraseña: </p> <a href="/users/edit/<%= user.id %>/password " class="resp edit">Cambiar contraseña</a>
                 </div>
                 <div class="cont-edit cont-data">
                     <p class="preg">Teléfono: </p><input class="resp edit" value="<%= user.tel %>" name="tel">
@@ -30,7 +30,7 @@
                     <p class="preg">Fecha de nacimiento: </p><input class="resp edit" value="<%= user.birthDate %>" name="birthDate">
                 </div>
                 <div class="cont-edit cont-data">
-                    <p class="preg">Avatar: </p> <input type="file" class="resp edit">
+                    <p class="preg">Avatar: </p> <input type="file" class="resp edit" name="image">
                 </div>
                 <button type="submit" class="boton">Editar perfil</button>
             </form>

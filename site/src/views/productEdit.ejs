@@ -12,25 +12,46 @@
 
         <div class="titulo-form"><p class="texto-titulo-form"> Editando producto <%= productoAEditar.name %> 
         </p></div>
+
+
         <label class="pregunta" for="">Nombre</label>
         <input  class="respuesta" type="text" name="name" value="<%= productoAEditar.name %> ">
 
+
+
         <label class="pregunta" for="">Tipo</label>
-        <input class="respuesta" type="text" name="type" value="<%= productoAEditar.types.name %> ">
+        <select name="typesId" id="" class="respuesta">
+            <% for( let i = 0; i < tipos.length; i++ ) { %>
+                <% if (tipos[i].id==productoAEditar.types.id) { %>
+                    <option value="<%= tipos[i].id %>" selected><%= tipos[i].name %> </option>
+                    <% } else { %>
+                    <option value="<%= tipos[i].id %>"><%= tipos[i].name %> </option>
+                <% } %>
+            <% } %>
+        </select>
+
+
 
         <label class="pregunta" for="">Marca</label>
-        <input class="respuesta" type="text" name="brand" value="<%= productoAEditar.brands.name %> ">
+        <select name="brandsId" id="" class="respuesta">
+            <% for( let i = 0; i < marcas.length; i++ ) { %>
+                <% if (marcas[i].id==productoAEditar.brands.id) { %>
+                    <option value="<%= marcas[i].id %>" selected><%= marcas[i].name %> </option>
+                    <% } else { %>
+                    <option value="<%= marcas[i].id %>"><%= marcas[i].name %> </option>
+                <% } %>
+            <% } %>
+        </select>
+
+
 
         <label class="pregunta" for="">Categoría</label>
-
-
-
-        <select class="respuesta" name="category" id="">
+        <select class="respuesta" name="categoriesId" id="">
             <% for( let index = 0; index < categorias.length; index++ ) { %>
                 <% if (categorias[index].id == productoAEditar.categories.id) { %>
-                    <option value="<%= productoAEditar.categories.name %> " selected><%= productoAEditar.categories.name %> </option>
+                    <option value="<%= productoAEditar.categories.id %> " selected><%= productoAEditar.categories.name %> </option>
                 <% } else { %>
-                    <option value="<%= categorias[index].name %> " ><%= categorias[index].name %> </option>
+                    <option value="<%= categorias[index].id %> " ><%= categorias[index].name %> </option>
                 <% } %>
                 
             <% } %>
@@ -41,24 +62,43 @@
             
         </select>
 
+
+
         <label class="pregunta" for="">Precio</label>
         <input class="respuesta" type="text" name="price" value="<%= productoAEditar.price %> ">
+
+
 
         <label class="pregunta" for="">Imagen del producto</label>
         <input class="respuesta" type="file" name="image" value="<%= productoAEditar.image %> ">
 
+
+
         <label class="pregunta" for="">Descuento</label>
         <input class="respuesta" type="text" name="discount" value="<%= productoAEditar.discount %> ">
 
+
+
         <label class="pregunta" for="">Subcategoria</label>
-        <input class="respuesta" type="text" name="subcategory" value="<%= productoAEditar.subcategories.name %> ">
+        <select name="subcategoriesId" id="" class="respuesta">
+            <% for( let i = 0; i < subcategorias.length; i++ ) { %>
+                <% if (subcategorias[i].id==productoAEditar.subcategories.id) { %>
+                    <option value="<%= subcategorias[i].id %>" selected><%= subcategorias[i].name %> </option>
+                    <% } else { %>
+                    <option value="<%= subcategorias[i].id %>"><%= subcategorias[i].name %> </option>
+                <% } %>
+            <% } %>
+        </select>
+
+
 
         <label class="pregunta" for="">Descripción</label>
         <textarea class="respuesta" name="description" id="" cols="10" rows="3" > <%= productoAEditar.description %> </textarea>
 
 
+
         <label class="pregunta" for="">Colores disponibles</label>
-        <select name="colors" id="" class="respuesta" multiple>
+        <select name="coloresDisponibles" id="" class="respuesta" multiple>
             <!-- Choclo muy complicado para hacer el selected de colores -- LO VAMOS A MEJORAR -->
             <% var coloresNoSeleccionadosSinDuplicados = [] %> 
             <% var coloresNoSeleccionados= [] %>
@@ -90,6 +130,7 @@
         </select> 
         
 
+
         <label class="pregunta" for="">Stock</label>
         <select class="respuesta" name="stock" id="">
             <% if (productoAEditar.stock == 1) { %>
@@ -100,6 +141,8 @@
                 <option value="0" selected>No</option>
             <% } %>
         </select>
+
+
 
         <button type="submit" class="enter">Finalizar</button>
     </form>

@@ -49,6 +49,8 @@ router.get('/profile/:id', loginMiddleware, userController.profile);
 // Ruta editar perfil
 router.get('/edit/:id', loginMiddleware, userController.editView);
 router.put('/edit/:id', loginMiddleware, upload.any(), userController.edit)
+router.get('/edit/:id/password', loginMiddleware, userController.passwordChangeView);
+router.put('/edit/:id/password', loginMiddleware, userController.passwordChange);
 
 // Rutas logout
 router.get('/logout', userController.logoutView);

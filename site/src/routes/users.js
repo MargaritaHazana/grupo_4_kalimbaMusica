@@ -38,7 +38,6 @@ router.post('/register', upload.any(), [
     check('email').notEmpty().withMessage('El campo email no puede estar vacío').trim(),
     check('tel').notEmpty().withMessage('El campo telefono no puede estar vacío').isNumeric().withMessage('El campo telefono debe ser numérico'),
     check('birth_date').notEmpty().withMessage('El campo fecha de nacimiento no puede estar vacío'),
-    check('username').notEmpty().withMessage('El campo nombre de usuario no puede estar vacío'),
     check('password').notEmpty().withMessage('El campo constraseña no puede estar vacío').isLength({min:8}).withMessage('La contraseña debe tener al menos 8 caracteres'),
    
 ], userController.register);
@@ -56,6 +55,8 @@ router.put('/edit/:id/password', loginMiddleware, userController.passwordChange)
 router.get('/logout', userController.logoutView);
 router.post('/logout', userController.logout);
 
-// RUTA DE PRUEBA ADMINS
-router.get('/userList', authAdmins, userController.userList)
+// Ruta listado de usuarios para admins
+router.get('/userList', authAdmins, userController.userList);
+
+
 module.exports = router;

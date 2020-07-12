@@ -8,6 +8,8 @@
         <form class="formulario" action="/users/register" method="POST" enctype="multipart/form-data">
             <div class="titulo-form"><p class="texto-titulo-form"> Unite a nuestra comunidad!
             </p></div>
+            <!-- Muestra los errores de la validación -->
+        <div class="errors">
             <% if (typeof errors != 'undefined') { %>
                 <ul>
                     <% errors.forEach(error => { %>
@@ -17,7 +19,10 @@
                     <% }) %>
                 </ul>
             <% } %>
-              
+            <% if (typeof mensaje[0] != 'null') { %>
+                <p> <%= mensaje %> </p>
+            <% } %>  
+        </div>
               
         <label class="pregunta" for="">Nombre</label>
         <input  class="respuesta" type="text" name="first_name">
@@ -33,9 +38,6 @@
 
         <label class="pregunta" for="">Fecha de nacimiento</label>
         <input class="respuesta" type="date" name="birth_date">
-
-        <label class="pregunta" for="">Nombre de Usuario</label>
-        <input class="respuesta" type="text" name="username">
 
         <label class="pregunta" for="">Contraseña</label>
         <input class="respuesta" type="password" name="password">

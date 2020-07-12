@@ -17,6 +17,13 @@
     color: white;
     padding-left: 4%;
 }
+ul{
+    width: 100%;
+}
+.container{
+    width: 100%;
+    display: flex;
+}
 .pregunta{
     width: 45%;
     display: block;
@@ -25,7 +32,7 @@
     padding-left: 13%;
 }
 .respuesta{
-    width: 40%;
+    width: 45%;
     margin-top: 3%;
     font-size: 200%;
     font-weight: 100;
@@ -52,6 +59,10 @@
     font-size: 143%;
     float: left;
     width: 60%;
+}
+select{
+    line-height: 1;
+    width: fit-content;
 }
 .respuesta3{
     width: 47%;

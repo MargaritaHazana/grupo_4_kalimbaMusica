@@ -12,10 +12,12 @@
         <!-- Buscador -->
         <div class="SDIV001">
                 <div class="search">
-                        <input type="text" class="searchTerm" placeholder="¿Que buscas?">
+                    <form action="/product/search" method="post" class="search">
+                        <input type="text" class="searchTerm" name="search" placeholder="¿Que buscas?">
                         <button type="submit" class="searchButton">
-                    <i class="fa fa-search"></i>
-                </button>
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
                 </div>
         </div>
         <!-- Pregunta si hay un usuario logueado -->

@@ -122,19 +122,18 @@ productController = {
     // Renderiza la vista de edicion del producto
     productEdit: async (req, res)=>{
         try { 
-                // para cookies
+            // ID del usuario en session
             let sessionUserID = req.session.userID;
             let idProducto = req.params.id;
             let productoAEditar = await DB.Product.findByPk(idProducto,{include: ['colors','brands','subcategories','categories','types']})
             
-            // para el select de categorias en la view
+            // Para el select en la view
             let categorias = await DB.Category.findAll()
             let colores = await DB.Color.findAll()
             let subcategorias = await DB.Subcategory.findAll()
             let tipos = await DB.Type.findAll()
             let marcas = await DB.Brand.findAll()
         
-            // hay que hacer el select de colores pero primero hay que cambiar la base de datos
             res.render('productEdit', {view: 'forms', productoAEditar, categorias, colores,marcas, subcategorias, tipos, sessionUserID});
             }
         catch (error) {
@@ -162,7 +161,7 @@ productController = {
     // Borra un producto
     delete: function(req,res){
        
-        var idProducto = req.params.id;
+        let idProducto = req.params.id;
 
         function productDestroyer(id,data){
             data.map(function(producto){
@@ -178,13 +177,21 @@ productController = {
         res.redirect('/products');
     },
 
-    // Funcion de pruebas
-    tester: async (req, res)=>{
-        try { 
-            var products = await DB.User.findAll()
-            res.send(products)
-        }
-        catch (error) {
+    search: async(req,res)=>{
+        // ID del usuario en sesion
+        let sessionUserID = req.session.userID;
+        let busqueda = req.body.search;
+
+        try {
+            const result = await DB.Product.findAll({
+                where: {
+                    name: {
+                        [OP.like]: '%' + busqueda + '%'
+                    }
+                }
+            });
+            res.render('searchList', {sessionUserID, result, view: 'list', busqueda, numberWithCommas});
+        } catch (error) {
             res.send(error)
         }
     }

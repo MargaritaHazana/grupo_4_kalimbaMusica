@@ -3,6 +3,8 @@ var router = express.Router();
 var multer = require('multer');
 var path = require('path');
 
+let apiController = require('../controllers/apiController');
+
 router.get('/products-total', (req,res)=>{
         res.json([
             {
@@ -52,4 +54,16 @@ router.get('/products-all-info', (req,res)=>{
         stock: 245
         }])
 })
+
+// Muestra todas las categorías
+router.get('/products/categories/all', apiController.categoriesAll);
+// Muestra todas las subcategorías dentro de una categoría
+router.get('/products/categories/:id', apiController.categories);
+// Muestra todas las subcategorías
+router.get('/products/subcategories', apiController.subcategoriesAll);
+// Muestra todos los tipos dentro de una subcategoría
+router.get('/products/subcategories/:id', apiController.subcategories);
+// Muestra todos los tipos
+router.get('/products/types', apiController.types);
+
 module.exports = router;

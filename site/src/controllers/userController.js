@@ -34,39 +34,29 @@ userController = {
             mensaje.push(errors)
             // Si hay errores - Redirige al register y envía errores
             return res.render('register', { view: 'forms', mensaje, errors: errors.errors});
-        
-        // Si no hay errores
+
         } else {
             try {
-                // Busca si ya existe un usuario con ese email
-                const user = await DB.User.findAll({where: {email: req.body.email}});
-                // Si el usuario ya existe - Redirige al login y manda mensaje de error
-                mensaje.push('Ya existe un usuario con el email ' + req.body.email); 
-                    
-                res.render('register', { view: 'forms', mensaje});
+                // Crea el usuario nuevo en la DB
+                const newUser = await DB.User.create({
+                    firstName: req.body.first_name,
+                    lastName: req.body.last_name,
+                    email: req.body.email,
+                    tel: req.body.tel,
+                    birthDate: req.body.birth_date,
+                    password: bcrypt.hashSync (req.body.password, 10), 
+                    role: 2,
+                    image: req.files[0].filename,    
+                })
 
-            // Si no existe un usuario con ese email
+                res.redirect('/users/login');
+
             } catch (error) {
-                try {
-                    // Crea el usuario nuevo en la DB
-                    const newUser = await DB.User.create({
-                        firstName: req.body.first_name,
-                        lastName: req.body.last_name,
-                        email: req.body.email,
-                        tel: req.body.tel,
-                        birthDate: req.body.birth_date,
-                        password: bcrypt.hashSync (req.body.password, 10), 
-                        role: 2,
-                        image: req.files[0].filename,    
-                    })
-
-                    res.redirect('/users/login');
-                } catch (error) {
-                    res.send(error)
-                }
+                res.send(error)
             }
         }    
     },
+
 
     // Renderiza la view de Inicio de Sesion
     loginView: (req,res)=>{
@@ -208,10 +198,12 @@ userController = {
     },
 
     // Renderiza la vista del listado de usuarios
-    userList: (req,res)=>{
+    userList: async (req,res)=>{
         // ID del usuario en sesion
         let sessionUserID = req.session.userID;
-        res.render('userList', {view: 'index', dataUsers, sessionUserID});
+        let usuarios = await DB.User.findAll()
+
+        res.render('userList', {view: 'index', usuarios, sessionUserID});
     }
 }
 

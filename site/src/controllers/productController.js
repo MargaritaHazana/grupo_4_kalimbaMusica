@@ -26,20 +26,21 @@ var numberWithCommas = x => {
 }
 
 // Variable que pasa los productos destacados
-let destacados = [dataProductos[1],dataProductos[2],dataProductos[3],dataProductos[4]];
+// let destacados = [dataProductos[1],dataProductos[2],dataProductos[3],dataProductos[4]];
 
 
 productController = {
     // Renderiza la view del Index
-    index: function(req,res){
+    index: async function(req,res){
         // ID del usuario en sesion
         let sessionUserID = req.session.userID;
-
+        let destacados = await DB.Product.findAll({
+            limit:4, include: ['images']})
         res.render('index', { view: 'index', destacados, sessionUserID });
     },
 
     // Renderiza la lista de los productos
-    list: function(req,res){
+    list: async function(req,res){
         // ID del usuario en sesion
         let sessionUserID = req.session.userID;
         // Chequea si el user en session es admin
@@ -48,11 +49,13 @@ productController = {
             dataUsers.find((user)=>user.id == sessionUserID);
             categoryUser = 1
         }
-        res.render('list', {view: 'list', dataProductos, numberWithCommas, sessionUserID, categoryUser});
+        let productos = await DB.Product.findAll()
+
+        res.render('list', {view: 'list', productos, numberWithCommas, sessionUserID, categoryUser});
     },
 
     // Renderiza la view del Detalle del Producto
-    productDetail:function(req,res){
+    productDetail: async function(req,res){
         // ID del usuario en sesion
         let sessionUserID = req.session.userID;
         // Chequea si el user en session es admin
@@ -63,7 +66,7 @@ productController = {
         }
         // Encontrando el producto
         var idProducto = req.params.id;
-        var producto = dataProductos.find((product)=> idProducto == product.id);
+         let producto = await DB.Product.findByPk(idProducto)
         // Calculando el precio con descuento
         var precioViejo = "$" + numberWithCommas(Math.round(producto.price));
         var descuento = producto.price * (producto.discount / 100);
@@ -159,21 +162,15 @@ productController = {
     },
 
     // Borra un producto
-    delete: function(req,res){
+    delete: async function(req,res){
        
-        let idProducto = req.params.id;
-
-        function productDestroyer(id,data){
-            data.map(function(producto){
-                if(producto.id == id){
-                    let position = data.indexOf(producto);
-                    data.splice(position,1);
-                }
-            })
-        }
-
-        productDestroyer(idProducto,dataProductos)
-        fs.writeFileSync(rutaProductosJson, JSON.stringify(dataProductos));
+        
+        await DB.Product.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+        
         res.redirect('/products');
     },
 

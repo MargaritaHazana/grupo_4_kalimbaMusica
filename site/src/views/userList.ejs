@@ -6,9 +6,9 @@
         <p class="P020 left">Id</p><p class="P020 center">Nombre y Mail</p><p class="P020 right">Acciones</p>
     </div>
     <div class="Parent020">
-        <% for( let i = 0; i < dataUsers.length; i++ ) { %>
+        <% for( let i = 0; i < usuarios.length; i++ ) { %>
             <div class="DIV020">
-                <p class="P020 left"><%= dataUsers[i].id %> </p><p class="P020 center"> <%= dataUsers[i].first_name %> <%= dataUsers[i].last_name %>  <br> <%= dataUsers[i].email %></p><p class="P020 right"><a href="">Editar</a>         <a href="">Eliminar</a></p>
+                <p class="P020 left"><%= usuarios[i].id %> </p><p class="P020 center"> <%= usuarios[i].first_name %> <%= usuarios[i].last_name %>  <br> <%= usuarios[i].email %></p><p class="P020 right"><a href=" ">Editar</a> <br><a href="">Eliminar</a></p>
             </div>
         <% } %>
     </div>

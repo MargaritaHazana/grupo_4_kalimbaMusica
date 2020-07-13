@@ -1,40 +1,40 @@
-    <!-- Trayendo el head -->
-    <%- include('partials/head') %> 
+     <!-- Trayendo el head -->
+     <%- include('partials/head') %> 
 
-<body>
-    
-    <!-- Trayendo el header -->
-    <%- include('partials/header') %> 
-
-    <div class="DIV010">
-            <div class="h-container">
-                <h2> Productos disponibles </h2>
-                <!-- Si el user es admin - Muestra el botón para ir a create -->
-                <% if (categoryUser == 1) { %>
-                    <a href="/product/create" class="a">Agregar producto</a>
-                <% } %>
-            </div>
-        <% for( let i = 0; i < dataProductos.length; i++ ) { %>
-            <a class="A010" href="/productDetail/<%= dataProductos[i].id %> ">
-                <div class="SDIV010">
-                    <img class="IMG010" src="/images/<%= dataProductos[i].image %> " alt="">
-                    <div class="p-container">
-                        <div class="p-container">
-                            <p class="P010" id="P010"> <%= dataProductos[i].name %> </p>
-                        </div>
-                        <div class="p-container2">
-                            <p class="P010">$<%= numberWithCommas(dataProductos[i].price) %> </p>
-                            <% if (dataProductos[i].discount !== "0") { %>
-                                <p class="P011"><%= dataProductos[i].discount %>% OFF </p>
-                            <% } %>
-                        </div>
-                        
-                    </div>
-                </div>
-            </a>
-        <% } %>
-
-        
-    </div>
-    <%- include('partials/footer') %> 
-</body>
+     <body>
+         
+         <!-- Trayendo el header -->
+         <%- include('partials/header') %> 
+     
+         <div class="DIV010">
+                 <div class="h-container">
+                     <h2> Productos disponibles </h2>
+                     <!-- Si el user es admin - Muestra el botón para ir a create -->
+                     <% if (categoryUser == 1) { %>
+                         <a href="/product/create" class="a">Agregar producto</a>
+                     <% } %>
+                 </div>
+             <% for( let i = 0; i < productos.length; i++ ) { %>
+                 <a class="A010" href="/productDetail/<%= productos[i].id %> ">
+                     <div class="SDIV010">
+                         <img class="IMG010" src="/images/<%= productos[i].image %> " alt="">
+                         <div class="p-container">
+                             <div class="p-container">
+                                 <p class="P010" id="P010"> <%= productos[i].name %> </p>
+                             </div>
+                             <div class="p-container2">
+                                 <p class="P010">$<%= numberWithCommas(productos[i].price) %> </p>
+                                 <% if (productos[i].discount !== 0) { %>
+                                     <p class="P011"><%= productos[i].discount %>% OFF </p>
+                                 <% } %>
+                             </div>
+                             
+                         </div>
+                     </div>
+                 </a>
+             <% } %>
+     
+             
+         </div>
+         <%- include('partials/footer') %> 
+     </body>

@@ -158,6 +158,7 @@ userController = {
             let usuario = await DB.User.findByPk(userId)
 
             await usuario.update(req.body) 
+            await usuario.update({image : req.files[0].filename})
             res.redirect('/users/login')
         }
         catch (error) {

@@ -1,11 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
-    const colors_actors = sequelize.define(
+    const colors_products = sequelize.define(
         'Color_product',
         {   productsId: DataTypes.INTEGER,
             colorsId: DataTypes.INTEGER,
             deletedAt: DataTypes.DATE
         },
-        {tableName: 'colors_actors'}
+        {tableName: 'colors_products'}
     )
-    return colors_actors;
+    return colors_products;
 }

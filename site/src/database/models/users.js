@@ -24,6 +24,8 @@ var users = function (sequelize, dataTypes){
     users.associate = (models) =>{
         // un usuario puede hacer multiples ordenes
         users.hasMany(models.Order,{as:"orders", foreignKey: "usersId"})
+        // CARRITO - muchos productos tienen muchos usuarios
+        users.belongsToMany(models.Product,{as:"products", through:"products_users", foreignKey:"usersId", otherKey:"productsId", timestamps:false})
     }
     
     return users

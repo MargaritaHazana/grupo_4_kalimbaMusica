@@ -26,7 +26,7 @@ var numberWithCommas = x => {
 }
 
 // Variable que pasa los productos destacados
-// let destacados = [dataProductos[1],dataProductos[2],dataProductos[3],dataProductos[4]];
+let destacados = [dataProductos[1],dataProductos[2],dataProductos[3],dataProductos[4]];
 
 
 productController = {

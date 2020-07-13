@@ -50,5 +50,7 @@ router.delete('/product/delete/:id', authAdmins, productController.delete);
 // POST buscador
 router.post('/product/search', productController.search);
 
+// POST agregar al carrito
+// router.post('/product/addToCart/:id', productController.addToCart);
 
 module.exports = router;

@@ -30,6 +30,8 @@ var products = function (sequelize, dataTypes){
         products.belongsToMany(models.Order,{as:"orders", through: "orders_products", foreignKey: "productsId", otherKey:"ordersId" ,timestamps:false})
         // muchas colores tienen muchos productos
         products.belongsToMany(models.Color,{as:"colors", through:"colors_products", foreignKey:"productsId", otherKey:"colorsId", timestamps:false})
+        // CARRITO - muchos usuarios tienen muchos productos
+        products.belongsToMany(models.User,{as:"users", through:"products_users", foreignKey:"productsId", otherKey:"usersIs", timestamps:false})
     }
     
     return products

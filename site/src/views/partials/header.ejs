@@ -60,7 +60,6 @@
                 <button onclick="myFunction()" class="dropbtn"><i class="fas fa-bars"></i></button>
                 <div id="myDropdown" class="dropdown-content">
                 <a href="/products">Productos</a>
-                <a href="/products">Marcas</a>
                 <a href="/products">Ofertas</a>
                 <a href="/products">Locales</a>
                 <a href="/products">Ayuda</a>
@@ -70,19 +69,32 @@
         </div>
         <!-- Menu de Laptop y Tablet -->
         
-        <div class="SDIV003">
-            <a class="P001" href="/products">Productos <i class="fas fa-caret-down"></i></a>
-        </div>
-        <div class="SDIV003">
-            <a class="P001">Marcas <i class="fas fa-caret-down"></i></a>
-        </div>
-        <div class="SDIV003">
+        <div class="navbarnotmobile">
+            <div class="dropdowncontainerProd">
+                <div class="dropdownProd">
+                    <button onclick="myFunctionProd()" class="dropbtnProd">Productos </button>
+                    <div id="myDropdownProd" class="dropdown-contentProd">
+                    <% for( let i = 0; i < categorias.length; i++ ) { %>
+                        <a href="/products/<%= categorias[i].name %> "><%= categorias[i].name %> </a>
+                    <% } %>
+                
+                    </div>
+                </div>
+            </div>
+            <!-- MARCAS -->
+            <div class="dropdowncontainerMarc">
+                <div class="dropdownMarc">
+                    <button onclick="myFunctionMarc()" class="dropbtnMarc">Marcas </button>
+                    <div id="myDropdownMarc" class="dropdown-contentMarc">
+                        <% for( let i = 0; i < marcas.length; i++ ) { %>
+                            <a href="/products/<%= marcas[i].name %> "><%= marcas[i].name %> </a>
+                        <% } %>
+                
+                    </div>
+                </div>
+            </div>
             <a class="P001">Ofertas</a>
-        </div>
-        <div class="SDIV003">
             <a class="P001">Locales</a>
-        </div>
-        <div class="SDIV003">
             <a class="P001" >Ayuda</a>
         </div>
 
@@ -110,6 +122,7 @@
 <script>
     /* When the user clicks on the button,
     toggle between hiding and showing the dropdown content */
+     // Funcion para el menu colapasable de MOBILE -----------------------------------------------------------------------------------------------------------
     function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
     }
@@ -118,6 +131,42 @@
     window.onclick = function(event) {
     if (!event.target.matches('.dropbtn')) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+        }
+        }
+    }
+    }
+    // Funcion para el menu colapasable de productos -----------------------------------------------------------------------------------------------------------
+    function myFunctionProd() {
+    document.getElementById("myDropdownProd").classList.toggle("show");
+    }
+
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function(event) {
+    if (!event.target.matches('.dropbtnProd')) {
+        var dropdowns = document.getElementsByClassName("dropdown-contentProd");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+        }
+        }
+    }
+    }
+    // Funcion para el menu colapasable de Marcas -----------------------------------------------------------------------------------------------------------
+    function myFunctionMarc() {
+    document.getElementById("myDropdownMarc").classList.toggle("show");
+    }
+
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function(event) {
+    if (!event.target.matches('.dropbtnMarc')) {
+        var dropdowns = document.getElementsByClassName("dropdown-contentMarc");
         var i;
         for (i = 0; i < dropdowns.length; i++) {
         var openDropdown = dropdowns[i];

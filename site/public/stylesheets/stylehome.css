@@ -218,24 +218,122 @@ body{
     padding-left: 20%;
     padding-right: 20%;
 }
-.SDIV003{
-    border-radius: 5px;
-    margin-top: 0.75%;
-    margin-bottom: 0.75%;
-    height: 15%;
-    width: 25%;
-    justify-content: center;
-    border-radius: 5px;
-    transition: 0.3s;
-    
+.navbarnotmobile{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 }
-.SDIV003:hover{
-    background-color: #e75f3e;
-    
+
+
+/* Colapsable de productos */
+.dropbtnProd {
+background-color: #ff724a;
+margin: 5px;
+font-size: 20px;
+border: none;
+cursor: pointer;
+border-radius: 5px;
 }
+
+/* Dropdown button on hover & focus */
+.dropbtnProd:hover, .dropbtn:focus {
+background-color: #f35b31;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdownProd {
+position: relative;
+display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-contentProd {
+    font-size: 16px;
+display: none;
+position: absolute;
+background-color: #f1f1f1;
+min-width: 160px;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+z-index: 1;
+left: -25%;
+width: 100px;
+}
+
+/* Links inside the dropdown */
+.dropdown-contentProd a {
+color: black;
+padding: 12px 16px;
+text-decoration: none;
+display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-contentProd a:hover {background-color: #ddd}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
+
+/* Colapsable de Marcas */
+.dropbtnMarc {
+background-color: #ff724a;
+margin: 5px;
+font-size: 20px;
+border: none;
+cursor: pointer;
+border-radius: 5px;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtnMarc:hover, .dropbtn:focus {
+background-color: #f35b31;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdownMarc {
+position: relative;
+display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-contentMarc {
+font-size: 16px;
+display: none;
+position: absolute;
+background-color: #f1f1f1;
+min-width: 160px;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+z-index: 1;
+left: -50%;
+width: 100px;
+}
+
+/* Links inside the dropdown */
+.dropdown-contentMarc a {
+color: black;
+padding: 12px 16px;
+text-decoration: none;
+display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-contentMarc a:hover {background-color: #ddd}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+/* Categorias para tablet y laptop */
+.DIV003{
+display: flex;
+justify-content: space-evenly;
+text-align: center;
+font-size: 23px;
+padding-left: 20%;
+padding-right: 20%;
+}
+
 .P001{
-    font-size: 20px;
-    margin: 1.5%;
+font-size: 20px;
+margin: 5px;
 }
 /* -----------------Termina el Header----------------- */
 /* -----------------Comienza el cuerpo del Home------------------- */
@@ -557,6 +655,9 @@ body{
     }
 }
 @media(max-width: 568px){
+    .navbarnotmobile{
+        display: none;   
+    }
     .DIV001{
         flex-wrap: wrap;
     }

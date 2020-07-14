@@ -36,7 +36,10 @@ productController = {
         let sessionUserID = req.session.userID;
         let destacados = await DB.Product.findAll({
             limit:4, include: ['images']})
-        res.render('index', { view: 'index', destacados, sessionUserID });
+        // para el menu colapsable del Header
+        let categorias = await DB.Category.findAll()
+        let marcas = await DB.Brand.findAll()
+        res.render('index', { view: 'index', destacados, sessionUserID, categorias, marcas });
     },
 
     // Renderiza la lista de los productos
@@ -50,8 +53,11 @@ productController = {
             categoryUser = 1
         }
         let productos = await DB.Product.findAll()
-
-        res.render('list', {view: 'list', productos, numberWithCommas, sessionUserID, categoryUser});
+        // para el menu colapsable del Header
+        let categorias = await DB.Category.findAll()
+        let marcas = await DB.Brand.findAll()
+        
+        res.render('list', {view: 'list', productos, numberWithCommas, sessionUserID, categoryUser, categorias, marcas});
     },
 
     // Renderiza la view del Detalle del Producto
@@ -72,15 +78,20 @@ productController = {
         var descuento = producto.price * (producto.discount / 100);
         var precioDescuento = Math.round(producto.price - descuento);
         var precioFinal = "$" + numberWithCommas(precioDescuento);
-        
-        res.render('productDetail', { view: 'detail' , producto, precioViejo, precioFinal, destacados, sessionUserID, categoryUser });
+        // para el menu colapsable del Header
+        let categorias = await DB.Category.findAll()
+        let marcas = await DB.Brand.findAll()
+        res.render('productDetail', { view: 'detail' , producto, precioViejo, precioFinal, destacados, sessionUserID, categoryUser, marcas, categorias });
     },
 
     // Renderiza la view del Carro de los Productos
-    productCart:function(req, res){
+    productCart: async function(req, res){
         // ID del usuario en sesion
         let sessionUserID = req.session.userID;
-        res.render('productCart', { view: 'carrito', destacados, sessionUserID });
+        // para el menu colapsable del Header
+        let categorias = await DB.Category.findAll()
+        let marcas = await DB.Brand.findAll()
+        res.render('productCart', { view: 'carrito', destacados, sessionUserID, marcas, categorias });
     },
 
     // Renderiza la view que permite agregar productos
@@ -95,8 +106,10 @@ productController = {
             let types = await DB.Type.findAll();
             let brands = await DB.Brand.findAll();
             let colors = await DB.Color.findAll();   
-
-            res.render('productAdd', { view: 'forms', sessionUserID, categories, subcategories, types, brands, colors });
+            // para el menu colapsable del Header
+            let categorias = await DB.Category.findAll()
+            let marcas = await DB.Brand.findAll()
+            res.render('productAdd', { view: 'forms', sessionUserID, categories, subcategories, types, brands, colors, categorias,marcas });
 
         } catch (error) {
             res.send(error);
@@ -136,7 +149,8 @@ productController = {
             let subcategorias = await DB.Subcategory.findAll()
             let tipos = await DB.Type.findAll()
             let marcas = await DB.Brand.findAll()
-        
+            // para el menu colapsable del Header
+            
             res.render('productEdit', {view: 'forms', productoAEditar, categorias, colores,marcas, subcategorias, tipos, sessionUserID});
             }
         catch (error) {
@@ -194,7 +208,10 @@ productController = {
                     }
                 }
             });
-            res.render('searchList', {sessionUserID, result, view: 'list', busqueda, numberWithCommas});
+            // para el menu colapsable del Header
+            let categorias = await DB.Category.findAll()
+            let marcas = await DB.Brand.findAll()
+            res.render('searchList', {sessionUserID, result, view: 'list', busqueda, numberWithCommas, categorias, marcas});
         } catch (error) {
             res.send(error)
         }

@@ -7,15 +7,15 @@
     <section class="contenedor-gral">
         <!-- zona izq -->
         <div class="cont-info">
-            <div class="cont-nombre">
-                <p class="nombre"> <%= user.firstName %> <%= user.lastName %> </p>
-            </div>
             <div class="cont-foto">
                 <img class="foto" src="/avatars/<%=user.image%>">
             </div>
         </div>
         <!-- zona der -->
         <div class="cont-info2">
+            <div class="cont-nombre">
+                <p class="nombre"> <%= user.firstName %> <%= user.lastName %> </p>
+            </div>
             <div class="cont-mail cont-data">
                 <p class="preg">Mail: </p><p class="resp"> <%= user.email %></p>
             </div>

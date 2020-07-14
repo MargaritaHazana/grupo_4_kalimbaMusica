@@ -32,6 +32,10 @@ router.get('/productDetail/:id', productController.productDetail);
 
 // GET product cart
 router.get('/productCart', productController.productCart);
+// POST agregar al carrito
+router.post('/product/addToCart/:id', productController.addToCart);
+// POST eliminar del carrito
+router.post('/product/deleteCart/:id', productController.deleteCart);
 
 //  GET product add
 router.get('/product/create', authAdmins, productController.productAdd);
@@ -50,7 +54,5 @@ router.delete('/product/delete/:id', authAdmins, productController.delete);
 // POST buscador
 router.post('/product/search', productController.search);
 
-// POST agregar al carrito
-// router.post('/product/addToCart/:id', productController.addToCart);
 
 module.exports = router;

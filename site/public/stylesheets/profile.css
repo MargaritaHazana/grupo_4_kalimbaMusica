@@ -34,7 +34,6 @@ h1{
     width: 100%;
     display: flex;
     padding-left: 6%;
-    justify-content: center;
 }
 .nombre{
     font-size: 180%;

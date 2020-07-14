@@ -13,31 +13,37 @@
                 <p class="titulo">Total</p>
             </div>
 
-            <div class="productos">
-                <div class="prod-resumen">
-                    <p class="prod-name">Nombre del producto</p>
-                    <div class="foto-container"><img src="./images/Bajo.jpg" alt="foto"></div>
-                   
-                    <div class="caracteristicas">          
-                        <p>Color</p>
-                        <p> Marca </p>
-                        <p class="cant-mobile">Cantidad</p>
-                        <p class="cant-mobile precio">$999</p>
+            <% productos.forEach(producto => { %>
+                <div class="productos">
+                    <div class="prod-resumen">
+                        <p class="prod-name"><%= producto.name %> </p>
+                        <div class="foto-container"><img src="./images/<%= images.name %> " alt="foto"></div>
+                       
+                        <div class="caracteristicas">          
+                            <p><% producto.colors.forEach(color => { %>
+                                <%= color.name %> 
+                            <% }) %> </p>
+                            <p> <%= producto.brands.name %>  </p>
+                            <p class="cant-mobile">Cantidad</p>
+                            <p class="cant-mobile precio">$<%= numberWithCommas(producto.price) %> </p>
+                        </div>
                     </div>
+    
+                    <p class="cant">1</p>
+    
+                    <div class="final">
+                        <p class="total-prod">$<%= numberWithCommas(producto.price) %> </p>
+                        <form action="/product/deleteCart/<%= producto.id %> " method="post">
+                            <button type="submit" class="quitar">Quitar</button>
+                        </form>
+                    </div>
+                    
                 </div>
-
-                <p class="cant">1</p>
-
-                <div class="final">
-                    <p class="total-prod">$999</p>
-                    <p class="quitar">Quitar</p>
-                </div>
-                
-            </div>
-
+            <% }) %>
+            
             <div class="total">
                 <p>Total:</p>
-                <p>$999</p>
+                <p>$<%= numberWithCommas(total) %> </p>
             </div>
             <button type="submit" class="comprar">Iniciar compra</button>
         </section>

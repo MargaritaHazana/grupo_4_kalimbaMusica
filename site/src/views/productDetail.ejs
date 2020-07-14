@@ -12,16 +12,16 @@
                 <!-- Fotos del costado -->
                 <section class="margen-izq">
 
-                    <img src="/images/<%=producto.image %> " alt="foto" class="foto">
-                    <img src="/images/<%=producto.image %> " alt="foto" class="foto">
-                    <img src="/images/<%=producto.image %> " alt="foto" class="foto">
-                    <img src="/images/<%=producto.image %> " alt="foto" class="foto">
+                    <img src="/images/<%= image %> " alt="foto" class="foto">
+                    <img src="/images/<%= image %> " alt="foto" class="foto">
+                    <img src="/images/<%= image %> " alt="foto" class="foto">
+                    <img src="/images/<%= image %> " alt="foto" class="foto">
 
                 </section>
                 <!-- Foto principal -->
                 <section class= "middle">
 
-                    <img src="/images/<%=producto.image %> " alt="foto" class="foto-principal">
+                    <img src="\images\<%= image %> " alt="foto" class="foto-principal">
                     <!-- Detalles para mobile -->
                     <ul class="list-foto">
                         <li>Marca: <%= producto.brand %> </li>
@@ -89,9 +89,11 @@
                                 <div class="azul">A</div>
                             </div>
                         </section>
-                        <button type="submit" class="boton-comprar">
-                            Añadir a mi carrito
-                        </button>
+                        <form action="/product/addToCart/<%= producto.id %> " method="post">
+                            <button type="submit" class="boton-comprar">
+                                Añadir a mi carrito
+                            </button>
+                        </form>
 
                     </div>
                     <!-- Si el user es admin - Muestra botones de editar y eliminar -->

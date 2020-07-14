@@ -1,0 +1,47 @@
+     <!-- Trayendo el head -->
+     <%- include('partials/head') %> 
+
+     <body>
+         
+         <!-- Trayendo el header -->
+         <%- include('partials/header') %> 
+     
+         <div class="DIV010">
+            <div class="h-container">
+                <h2> Productos en oferta </h2>
+            </div>
+            
+        <% ofertas.forEach(producto => { %>
+            <% if (producto.discount) { %>
+                <a class="A010" href="/productDetail/<%= producto.id %> ">
+                    <div class="SDIV010">
+                        <img class="IMG010" src="/images/<%= producto.image %> " alt="">
+                        <!-- Despues borrar --><img class="IMG010" src="/images/bajo.jpg">
+                        <div class="p-container">
+                            <div class="p-container">
+                                <p class="P010" id="P010"> <%= producto.name %> </p>
+                            </div>
+                            <div class="p-container2">
+                                <p class="P010">$<%= numberWithCommas(producto.price) %> </p>
+                                <% if (producto.discount !== 0) { %>
+                                    <p class="P011"><%= producto.discount %>% OFF </p>
+                                <% } %>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </a>
+             <% } %>
+             
+             
+        <% }) %>
+                
+            
+            </div>
+        
+        
+     
+             
+        
+         <%- include('partials/footer') %> 
+     </body>

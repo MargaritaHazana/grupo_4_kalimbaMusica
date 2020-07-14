@@ -11,6 +11,7 @@ var cors = require('cors');
 var productRouter = require('./routes/products');
 var usersRouter = require('./routes/users');
 var apiRouter = require('./routes/api');
+var navRouter = require('./routes/nav')
 
 
 // Middlewares
@@ -37,6 +38,7 @@ app.use(loginCookie);
 app.use('/', productRouter);
 app.use('/users', usersRouter);
 app.use('/api', apiRouter);
+app.use('/nav', navRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

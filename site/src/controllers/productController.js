@@ -32,32 +32,42 @@ let cartProds = [];
 productController = {
     // Renderiza la view del Index
     index: async function(req,res){
+        try {
+            let sessionUserID = req.session.userID;
+            let destacados = await DB.Product.findAll({
+                limit:4, include: ['images']})
+            // para el menu colapsable del Header
+            let categorias = await DB.Category.findAll()
+            let marcas = await DB.Brand.findAll()
+            res.render('index', { view: 'index', destacados, sessionUserID, categorias, marcas });
+        } catch (error) {
+            res.send(error)
+        }
         // ID del usuario en sesion
-        let sessionUserID = req.session.userID;
-        let destacados = await DB.Product.findAll({
-            limit:4, include: ['images']})
-        // para el menu colapsable del Header
-        let categorias = await DB.Category.findAll()
-        let marcas = await DB.Brand.findAll()
-        res.render('index', { view: 'index', destacados, sessionUserID, categorias, marcas });
+        
     },
 
     // Renderiza la lista de los productos
     list: async function(req,res){
-        // ID del usuario en sesion
-        let sessionUserID = req.session.userID;
-        // Chequea si el user en session es admin
-        let categoryUser = 0
-        if (sessionUserID !== undefined) {
-            dataUsers.find((user)=>user.id == sessionUserID);
-            categoryUser = 1
+        try {
+            // ID del usuario en sesion
+            let sessionUserID = req.session.userID;
+            // Chequea si el user en session es admin
+            let categoryUser = 0
+            if (sessionUserID !== undefined) {
+                dataUsers.find((user)=>user.id == sessionUserID);
+                categoryUser = 1
+            }
+            let productos = await DB.Product.findAll()
+            // para el menu colapsable del Header
+            let categorias = await DB.Category.findAll()
+            let marcas = await DB.Brand.findAll()
+            
+            res.render('list', {view: 'list', productos, numberWithCommas, sessionUserID, categoryUser, categorias, marcas});
+        } catch (error) {
+            res.send(error)
         }
-        let productos = await DB.Product.findAll()
-        // para el menu colapsable del Header
-        let categorias = await DB.Category.findAll()
-        let marcas = await DB.Brand.findAll()
         
-        res.render('list', {view: 'list', productos, numberWithCommas, sessionUserID, categoryUser, categorias, marcas});
     },
 
     // Renderiza la view del Detalle del Producto

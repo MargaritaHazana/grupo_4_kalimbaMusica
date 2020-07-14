@@ -18,12 +18,16 @@ userController = {
 
     // Renderiza la view de Registro
     registerView: async function(req,res){
+        try {
+            let mensaje = []
+            // para el menu colapsable del Header
+            let categorias = await DB.Category.findAll()
+            let marcas = await DB.Brand.findAll()
+            res.render('register', { view: 'forms', mensaje, categorias, marcas});
+        } catch (error) {
+            res.send(error)
+        }
         
-        let mensaje = []
-        // para el menu colapsable del Header
-        let categorias = await DB.Category.findAll()
-        let marcas = await DB.Brand.findAll()
-        res.render('register', { view: 'forms', mensaje, categorias, marcas});
     },
 
     // Procesa el registro del usuario
@@ -69,14 +73,19 @@ userController = {
 
     // Renderiza la view de Inicio de Sesion
     loginView: async (req,res)=>{
-        // ID del usuario en sesion
-        let sessionUserID = req.session.userID;
+        try {
+            // ID del usuario en sesion
+            let sessionUserID = req.session.userID;
 
-        let mensaje = []
-        // para el menu colapsable del Header
-        let categorias = await DB.Category.findAll()
-        let marcas = await DB.Brand.findAll()
-        res.render('login', {view: 'forms', sessionUserID, mensaje, marcas, categorias});
+            let mensaje = []
+            // para el menu colapsable del Header
+            let categorias = await DB.Category.findAll()
+            let marcas = await DB.Brand.findAll()
+            res.render('login', {view: 'forms', sessionUserID, mensaje, marcas, categorias});
+        } catch (error) {
+            res.send(error)
+        }
+        
     },
 
     // Procesa el usuario en login
@@ -126,12 +135,17 @@ userController = {
 
     // Renderiza la vista del logout
     logoutView: async (req,res)=>{
-        // ID del usuario en sesion
-        let sessionUserID = req.session.userID;
-        // para el menu colapsable del Header
-        let categorias = await DB.Category.findAll()
-        let marcas = await DB.Brand.findAll()
-        res.render('logout', {view: 'forms', sessionUserID, categorias, marcas});
+        try {
+            // ID del usuario en sesion
+            let sessionUserID = req.session.userID;
+            // para el menu colapsable del Header
+            let categorias = await DB.Category.findAll()
+            let marcas = await DB.Brand.findAll()
+            res.render('logout', {view: 'forms', sessionUserID, categorias, marcas});
+        } catch (error) {
+            res.send(error)
+        }
+        
     },
 
     // Saca al usuario de sesión y elimina la cookie
@@ -223,13 +237,18 @@ userController = {
 
     // Renderiza la vista del listado de usuarios
     userList: async (req,res)=>{
-        // ID del usuario en sesion
-        let sessionUserID = req.session.userID;
-        let usuarios = await DB.User.findAll()
-        // para el menu colapsable del Header
-        let categorias = await DB.Category.findAll()
-        let marcas = await DB.Brand.findAll()
-        res.render('userList', {view: 'index', usuarios, sessionUserID, categorias, marcas});
+        try {
+            // ID del usuario en sesion
+            let sessionUserID = req.session.userID;
+            let usuarios = await DB.User.findAll()
+            // para el menu colapsable del Header
+            let categorias = await DB.Category.findAll()
+            let marcas = await DB.Brand.findAll()
+            res.render('userList', {view: 'index', usuarios, sessionUserID, categorias, marcas});
+        } catch (error) {
+            res.send(error)
+        }
+        
     }
 }
 

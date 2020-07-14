@@ -151,8 +151,13 @@ productController = {
             let producto = await DB.Product.findByPk ( idProducto,{ include: [ 'colors','brands','subcategories','categories','types','images' ] } )
             let imagen = await DB.Image.findByPk (producto.images[0].id)
             // update de caracteriticas del producto y tablas relacionadas 1:n
-            await producto.update(req.body)  
-            await imagen.update({name : req.files[0].filename})       
+            
+            await producto.update(req.body)   
+            if(req.files[0] != undefined){
+                await imagen.update({name : req.files[0].filename})
+            }
+             
+                
              // update de relaciones n:m
             await producto.removeColor(producto.colors)
             await producto.addColor(req.body.colors)

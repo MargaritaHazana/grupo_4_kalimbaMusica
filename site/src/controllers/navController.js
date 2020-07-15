@@ -5,18 +5,6 @@ const DB = require('../database/models');
 const OP = DB.Sequelize.Op;
 
 
-//Pasando el JSON a JS - DB de productos
-const rutaProductosJson = path.join(__dirname, '../../data/Products.json');
-const productos = fs.readFileSync( rutaProductosJson, 'utf-8');
-const dataProductos = JSON.parse(productos);
-
-//Pasando el JSON a JS - DB de usuarios
-const rutaUsersJson = path.join(__dirname, '../../data/Users.json');
-const users = fs.readFileSync(rutaUsersJson, 'utf-8');
-const dataUsers = JSON.parse(users);
-
-
-
 var numberWithCommas = x => {
     x = x.toString();
     var pattern = /(-?\d+)(\d{3})/;
@@ -27,21 +15,26 @@ var numberWithCommas = x => {
 
 navController = {
     ofertas: async function(req, res, next){
+        // ID y categoría del usuario en sesion
         let sessionUserID = req.session.userID;
+        let categoryUser = req.session.category;
+
         let ofertas = await DB.Product.findAll()
 
         let categorias = await DB.Category.findAll()
         let marcas = await DB.Brand.findAll()
     
-        res.render('ofertas', {view: 'ofertas', sessionUserID, ofertas, numberWithCommas, categorias, marcas})
+        res.render('ofertas', {view: 'ofertas', sessionUserID, ofertas, numberWithCommas, categorias, marcas, categoryUser})
     },
     ayuda: async function(req, res,next){
+        // ID y categoría del usuario en sesion
         let sessionUserID = req.session.userID;
+        let categoryUser = req.session.category;
 
         let categorias = await DB.Category.findAll()
         let marcas = await DB.Brand.findAll()
 
-        res.render('help', {view:'ayuda', sessionUserID, categorias, marcas})
+        res.render('help', {view:'ayuda', sessionUserID, categorias, marcas, categoryUser})
     }
 }
 

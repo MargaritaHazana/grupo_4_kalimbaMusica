@@ -20,15 +20,17 @@ let cartProds = [];
 productController = {
     // Renderiza la view del Index
     index: async function(req,res){
+        // ID y categoría del usuario en sesion
+        let sessionUserID = req.session.userID;
+        let categoryUser = req.session.category;
+        console.log(categoryUser);
         try {
-            // ID del usuario en sesion
-            let sessionUserID = req.session.userID;
             // Productos destacados
             let destacados = await DB.Product.findAll({limit:4})
             // para el menu colapsable del Header
             let categorias = await DB.Category.findAll()
             let marcas = await DB.Brand.findAll()
-            res.render('index', { view: 'index', destacados, sessionUserID, categorias, marcas });
+            res.render('index', { view: 'index', destacados, sessionUserID, categorias, marcas, categoryUser });
         } catch (error) {
             res.send(error)
         }
@@ -36,17 +38,10 @@ productController = {
 
     // Renderiza la lista de los productos
     list: async function(req,res){
-        // ID del usuario en sesion
+        // ID y categoría del usuario en sesion
         let sessionUserID = req.session.userID;
+        let categoryUser = req.session.category;
         try {
-            let categoryUser = 0
-            try {
-                let user = await DB.User.findByPk(sessionUserID);
-                // Chequea si el user en session es admin
-                categoryUser = user.role;
-            } catch (error) {
-                categoryUser = 2
-            }
             let productos = await DB.Product.findAll()
             // para el menu colapsable del Header
             let categorias = await DB.Category.findAll()
@@ -55,29 +50,20 @@ productController = {
             res.render('list', {view: 'list', productos, numberWithCommas, sessionUserID, categoryUser, categorias, marcas});
         } catch (error) {
             res.send(error)
-        }
-        
+        }  
     },
 
     // Renderiza la view del Detalle del Producto
     productDetail: async function(req,res){
-        // ID del usuario en sesion
+        // ID y categoría del usuario en sesion
         let sessionUserID = req.session.userID;
+        let categoryUser = req.session.category;
         // Productos destacados
         let destacados = await DB.Product.findAll({limit: 4});
         
  
         // Encontrando el producto
         try {
-            let categoryUser = 0
-            try {
-                let user = await DB.User.findByPk(sessionUserID);
-                // Chequea si el user en session es admin
-                categoryUser = user.role;
-            } catch (error) {
-                categoryUser = 2
-            }
-
             var idProducto = req.params.id;
             // Encontrando el producto
             let producto = await DB.Product.findByPk(idProducto);
@@ -99,8 +85,9 @@ productController = {
     productCart:async function(req, res){
         // Productos destacados
         let destacados = await DB.Product.findAll({limit: 4});
-        // ID del usuario en sesion
+        // ID y categoría del usuario en sesion
         let sessionUserID = req.session.userID;
+        let categoryUser = req.session.category;
         // Array de productos en el carrito
         let productos = [];
         // Si no hay un usuario logueado
@@ -110,7 +97,7 @@ productController = {
                 // Si no hay productos
                 productos = [];
                 total = 0
-                res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, numberWithCommas, total });
+                res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, numberWithCommas, total, categoryUser });
             // Si hay productos     
             } else {
                 cartProds.forEach(async productId=>{
@@ -125,7 +112,7 @@ productController = {
                             total = total + productos[i].price
                         }
     
-                        res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, numberWithCommas, total });
+                        res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, numberWithCommas, total, categoryUser });
                     } catch (error) {
                         res.send(error)
                     }
@@ -150,13 +137,13 @@ productController = {
                 for (let i = 0; i < productos.length; i++) {
                     total = total + productos[i].price
                 }
-                res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, total, numberWithCommas }); 
+                res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, total, numberWithCommas, categoryUser }); 
                    
             } catch (error) {
                 // Si no hay productos
                 productos = [];
                 total = 0
-                res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, numberWithCommas, total });
+                res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, numberWithCommas, total,categoryUser });
             }   
         }
     },
@@ -221,8 +208,9 @@ productController = {
 
     // Renderiza la view que permite agregar productos
     productAdd: async (req,res, next)=>{
-        // ID del usuario en sesion
+        // ID y categoría del usuario en sesion
         let sessionUserID = req.session.userID;
+        let categoryUser = req.session.category;
         
         try {
             // Hace el pedido a la DB 
@@ -234,7 +222,7 @@ productController = {
             // para el menu colapsable del Header
             let categorias = await DB.Category.findAll()
             let marcas = await DB.Brand.findAll()
-            res.render('productAdd', { view: 'forms', sessionUserID, categories, subcategories, types, brands, colors, categorias,marcas });
+            res.render('productAdd', { view: 'forms', sessionUserID, categories, subcategories, types, brands, colors, categorias,marcas, categoryUser });
 
         } catch (error) {
             res.send(error);
@@ -269,8 +257,10 @@ productController = {
     // Renderiza la vista de edicion del producto
     productEdit: async (req, res)=>{
         try { 
-            // ID del usuario en session
+            // ID y categoría del usuario en sesion
             let sessionUserID = req.session.userID;
+            let categoryUser = req.session.category;
+
             let idProducto = req.params.id;
             let productoAEditar = await DB.Product.findByPk(idProducto,{include: ['colors','brands','subcategories','categories','types']})
             
@@ -282,7 +272,7 @@ productController = {
             let marcas = await DB.Brand.findAll()
             // para el menu colapsable del Header
             
-            res.render('productEdit', {view: 'forms', productoAEditar, categorias, colores,marcas, subcategorias, tipos, sessionUserID});
+            res.render('productEdit', {view: 'forms', productoAEditar, categorias, colores,marcas, subcategorias, tipos, sessionUserID, categoryUser});
             }
         catch (error) {
             res.send(error)
@@ -342,8 +332,9 @@ productController = {
     },
 
     search: async(req,res)=>{
-        // ID del usuario en sesion
+        // ID y categoría del usuario en sesion
         let sessionUserID = req.session.userID;
+        let categoryUser = req.session.category;
         let busqueda = req.body.search;
 
         try {
@@ -357,7 +348,7 @@ productController = {
             // para el menu colapsable del Header
             let categorias = await DB.Category.findAll()
             let marcas = await DB.Brand.findAll()
-            res.render('searchList', {sessionUserID, result, view: 'list', busqueda, numberWithCommas, categorias, marcas});
+            res.render('searchList', {sessionUserID, result, view: 'list', busqueda, numberWithCommas, categorias, marcas, categoryUser});
         } catch (error) {
             res.send(error)
         }

@@ -10,6 +10,6 @@ const loginMiddleware = require('../middlewares/loginMiddleware');
 const authAdmins = require('../middlewares/authAdmins');
 
 router.get('/ofertas', navController.ofertas);
-router.get('/ayuda', navController.ayuda)
+router.get('/ayuda', navController.ayuda);
 
 module.exports = router

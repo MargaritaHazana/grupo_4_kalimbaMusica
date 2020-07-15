@@ -62,7 +62,11 @@
                 <a href="/products">Productos</a>
                 <a href="/nav/ofertas">Ofertas</a>
                 <a href="/nav/ayuda">Locales</a>
-                <a href="/nav/ayuda">Ayuda</a>
+                <% if (categoryUser == 1) { %>
+                    <a href="/nav/admin">Admin</a>
+                <% }  else { %>
+                    <a href="/nav/ayuda">Ayuda</a>
+                <% } %>   
             
                 </div>
             </div>
@@ -95,7 +99,20 @@
             </div>
             <a class="P001" href="/nav/ofertas">Ofertas</a>
             <a class="P001" href="/nav/ayuda/#locales">Locales</a>
-            <a class="P001" href="/nav/ayuda">Ayuda</a>
+            <% if (categoryUser == 1) { %>
+                <div class="dropdowncontainerAdmin">
+                    <div class="dropdownAdmin">
+                        <button onclick="myFunctionAdmin()" class="dropbtnAdmin">Admin </button>
+                        <div id="myDropdownAdmin" class="dropdown-contentAdmin">
+                            <a class="P001" href="/products">Agregar productos</a>
+                            <a class="P001" href="/userList">Listado de usuarios</a>
+                            <a class="P001" href="/register">Crear usuario admin</a>
+                        </div>
+                    </div>
+                </div>
+            <% }  else { %>
+                <a class="P001" href="/nav/ayuda">Ayuda</a>
+            <% } %>   
         </div>
 
         <div class="SDIV0021bis"> 
@@ -167,6 +184,24 @@
     window.onclick = function(event) {
     if (!event.target.matches('.dropbtnMarc')) {
         var dropdowns = document.getElementsByClassName("dropdown-contentMarc");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+        }
+        }
+    }
+    }
+    // Funcion para el menu colapasable de Admin -----------------------------------------------------------------------------------------------------------
+    function myFunctionAdmin() {
+    document.getElementById("myDropdownAdmin").classList.toggle("show");
+    }
+
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function(event) {
+    if (!event.target.matches('.dropbtnAdmin')) {
+        var dropdowns = document.getElementsByClassName("dropdown-contentAdmin");
         var i;
         for (i = 0; i < dropdowns.length; i++) {
         var openDropdown = dropdowns[i];

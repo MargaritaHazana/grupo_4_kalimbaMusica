@@ -7,6 +7,7 @@ var guides = function (sequelize, dataTypes){
             primaryKey: true,
             autoIncrement: true
         },
+        title: dataTypes.STRING,
         content: dataTypes.STRING,
         deletedAt: dataTypes.DATE
     }

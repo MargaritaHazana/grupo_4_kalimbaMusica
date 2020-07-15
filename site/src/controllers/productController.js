@@ -334,14 +334,12 @@ productController = {
     },
 
     // Borra un producto
-    delete: async function(req,res){  
-        let producto = DB.Product.findByPk(req.params.id, {include: ['colors']});
-        const prodDestroy = await DB.Product.destroy({
+    delete: async (req,res)=>{  
+        await DB.Product.destroy({
             where: {
                 id: req.params.id
             }
         })
-        
         res.redirect('/products');
     },
 

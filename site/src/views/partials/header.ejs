@@ -78,7 +78,7 @@
         <div class="navbarnotmobile">
             <div class="dropdowncontainerProd">
                 <div class="dropdownProd">
-                    <button onclick="myFunctionProd()" class="dropbtnProd">Productos </button>
+                    <button onclick="myFunctionProd()" class="dropbtnProd">Productos <i class="fas fa-caret-down"></i></button>
                     <div id="myDropdownProd" class="dropdown-contentProd">
                     <% for( let i = 0; i < categorias.length; i++ ) { %>
                         <a href="/products/<%= categorias[i].name %> "><%= categorias[i].name %> </a>
@@ -90,7 +90,7 @@
             <!-- MARCAS -->
             <div class="dropdowncontainerMarc">
                 <div class="dropdownMarc">
-                    <button onclick="myFunctionMarc()" class="dropbtnMarc">Marcas </button>
+                    <button onclick="myFunctionMarc()" class="dropbtnMarc">Marcas <i class="fas fa-caret-down"></i></button>
                     <div id="myDropdownMarc" class="dropdown-contentMarc">
                         <% for( let i = 0; i < marcas.length; i++ ) { %>
                             <a href="/products/<%= marcas[i].name %> "><%= marcas[i].name %> </a>
@@ -104,7 +104,7 @@
             <% if (categoryUser == 1) { %>
                 <div class="dropdowncontainerAdmin">
                     <div class="dropdownAdmin">
-                        <button onclick="myFunctionAdmin()" class="dropbtnAdmin">Admin </button>
+                        <button onclick="myFunctionAdmin()" class="dropbtnAdmin">Admin <i class="fas fa-caret-down"></i></button>
                         <div id="myDropdownAdmin" class="dropdown-contentAdmin">
                             <a class="P001" href="/products">Agregar productos</a>
                             <a class="P001" href="/users/userList">Listado de usuarios</a>

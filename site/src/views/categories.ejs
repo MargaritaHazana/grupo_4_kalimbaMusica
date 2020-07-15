@@ -1,0 +1,35 @@
+     <!-- Trayendo el head -->
+     <%- include('partials/head') %> 
+
+     <body>
+         
+         <!-- Trayendo el header -->
+         <%- include('partials/header') %> 
+     
+         <div class="DIV010">
+            <div class="h-container">
+                <h2><%= categoria.name %> </h2>
+                
+            </div>
+             <% for( let i = 0; i < producto.length; i++ ) { %>
+                 <a class="A010" href="/productDetail/<%= producto[i].id %> ">
+                     <div class="SDIV010">
+                    <img class="IMG010" src="/images/<%= producto[i].image %> " alt="">
+                         <div class="p-container">
+                             <div class="p-container">
+                                 <p class="P010" id="P010"> <%= producto[i].name %> </p>
+                             </div>
+                             <div class="p-container2">
+                                 <p class="P010">$<%= numberWithCommas(producto[i].price) %> </p>
+                                 <% if (producto[i].discount !== 0) { %>
+                                     <p class="P011"><%= producto[i].discount %>% OFF </p>
+                                 <% } %>
+                             </div>
+                             
+                         </div>
+                     </div>
+                 </a>
+             <% } %>
+         </div>
+         <%- include('partials/footer') %> 
+     </body>

@@ -81,7 +81,7 @@
                     <button onclick="myFunctionProd()" class="dropbtnProd">Productos <i class="fas fa-caret-down"></i></button>
                     <div id="myDropdownProd" class="dropdown-contentProd">
                     <% for( let i = 0; i < categorias.length; i++ ) { %>
-                        <a href="/products/<%= categorias[i].name %> "><%= categorias[i].name %> </a>
+                        <a href="/products/categorias/<%= categorias[i].id %> "><%= categorias[i].name %> </a>
                     <% } %>
                         <a href="/products">Todos</a>
                     </div>
@@ -93,7 +93,7 @@
                     <button onclick="myFunctionMarc()" class="dropbtnMarc">Marcas <i class="fas fa-caret-down"></i></button>
                     <div id="myDropdownMarc" class="dropdown-contentMarc">
                         <% for( let i = 0; i < marcas.length; i++ ) { %>
-                            <a href="/products/<%= marcas[i].name %> "><%= marcas[i].name %> </a>
+                            <a href="/products/marcas/<%= marcas[i].id %> "><%= marcas[i].name %> </a>
                         <% } %>
                 
                     </div>

@@ -54,5 +54,9 @@ router.delete('/product/delete/:id', authAdmins, productController.delete);
 // POST buscador
 router.post('/product/search', productController.search);
 
+router.get('/products/categorias/:id', productController.category);
+
+router.get('/products/marcas/:id', productController.brands)
+
 
 module.exports = router;

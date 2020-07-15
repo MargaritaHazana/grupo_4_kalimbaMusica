@@ -361,6 +361,46 @@ productController = {
         } catch (error) {
             res.send(error)
         }
+    },
+    category: async function(req, res){
+        let sessionUserID = req.session.userID;
+        let categoryUser = req.session.category;
+        let busqueda = req.body.search;
+        
+        let parametro = req.params.id
+        try {
+            let categorias = await DB.Category.findAll()
+            let marcas = await DB.Brand.findAll()
+            
+            let categoria = await DB.Category.findByPk(parametro)
+            let producto = await DB.Product.findAll({where:{categoriesId: parametro}})
+            
+
+            res.render('categories', {view: 'categorias',producto, sessionUserID, busqueda, numberWithCommas,categoria, categorias, marcas, categoryUser});
+        }
+        catch(error){
+            res.send(error)
+        }
+    },
+    brands: async function(req, res){
+        let sessionUserID = req.session.userID;
+        let categoryUser = req.session.category;
+        let busqueda = req.body.search;
+        
+        let parametro = req.params.id
+        try {
+            let categorias = await DB.Category.findAll()
+            let marcas = await DB.Brand.findAll()
+            
+            let categoria = await DB.Brand.findByPk(parametro)
+            let producto = await DB.Product.findAll({where:{brandsId: parametro}})
+            
+
+            res.render('categories', {view: 'categorias',producto, sessionUserID, busqueda, numberWithCommas,categoria, categorias, marcas, categoryUser});
+        }
+        catch(error){
+            res.send(error)
+        }
     }
 }
 

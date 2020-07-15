@@ -66,7 +66,7 @@ productController = {
         try {
             var idProducto = req.params.id;
             // Encontrando el producto
-            let producto = await DB.Product.findByPk(idProducto);
+            let producto = await DB.Product.findByPk(idProducto, {include:['brands', 'categories', 'subcategories', 'types']});
             let colores = await DB.Color_product.findAll({where: {productsId:idProducto}});
             let coloresDisp = []
             for (let i = 0; i < colores.length; i++) {
@@ -323,7 +323,7 @@ productController = {
             // update de relaciones n:m
             await producto.removeColor(producto.colors);
             await producto.addColor(req.body.coloresDisponibles);
-            res.redirect('/products')
+            res.redirect('/products');
         }
         catch (error) {
             res.send(error)

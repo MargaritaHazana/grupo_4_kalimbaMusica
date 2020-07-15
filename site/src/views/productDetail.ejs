@@ -9,11 +9,6 @@
         <!-- Container del producto -->
         <div class="flex-container">
             <div class="parte-izq">
-                <!-- Fotos del costado -->
-                <!-- <section class="margen-izq">
-
-
-                </section> -->
                 <!-- Foto principal -->
                 <section class= "middle">
 
@@ -67,33 +62,27 @@
 
                         </div>
 
-                        <div class="list">
-                            <ul >
-                                <li><i class="fas fa-shipping-fast camion"></i> Envíos a todo el país </li>
-                                <li><i class="fas fa-undo-alt flecha"></i> Devolución gratis por 30 días </li>
-                                <li><i class="fas fa-credit-card tarjeta"></i> Consultá medios de pago </li>
-                            </ul> 
+                        <div>
+                            <p><strong>Marca: </strong> <%= producto.brands.name %></p>
+                            <p><strong>Categoría: </strong> <%= producto.categories.name %></p>
+                            <p><strong>Subcategoría: </strong> <%= producto.subcategories.name %></p>
+                            <p><strong>Tipo: </strong> <%= producto.types.name %></p>
                         </div>
-                        <label for="">Cantidad:</label>
-                        <input class="inputDetail" type="number" value="1" name="cantidad">
-                        <LABEl>Colores:</LABEl>
-                        <select class="selectDetail" name="color" id="" multiple>
-                            
-                            <% coloresDisp.forEach(color => { %>
-                                <option value="<%= color %>" class="<%= color %> " ></option>
-                               <% }) %>
-                        </select>
-                        <!-- <section class="colores">
-                            <p class="colour">Color:</p>
-                            <div class="opciones">
+                        <div class="cant">
+                            <label for="">Cantidad:</label>
+                            <input class="inputDetail" type="number" value="1" name="cantidad">
+                        </div>
+                        <div class="colors">
+                            <label>Colores:</label>
+                            <select class="selectDetail" name="color" id="" multiple>
                                 <% coloresDisp.forEach(color => { %>
-                                 <div class="<%= color %> " ></div>
+                                    <option value="<%= color %>" class="<%= color %> " ></option>
                                 <% }) %>
-                            </div>
-                        </section> -->
+                            </select>
+                        </div>
+                        
                         <section>
-                            
-                        </section>
+
                         <form action="/product/addToCart/<%= producto.id %> " method="post">
                             <button type="submit" class="boton-comprar">
                                 Añadir a mi carrito
@@ -117,9 +106,14 @@
                 <div class="desc-mobile titulo2">
                     <h1 class="">Descripción</h1>
                     <p> <%= producto.description %> </p>
+                    <p><strong>Marca: <%= producto.brands.name %> </strong></p>
+                    <p><strong>Categoría: <%= producto.categories.name %> </strong></p>
+                    <p><strong>Subcategoría: <%= producto.subcategories.name %> </strong></p>
+                    <p><strong>Tipo: <%= producto.types.name %> </strong></p>
                 </div>
                
                 <section class="titulo2">
+
                     <h1>Medios de pago</h1>
                     
                     <div class="tarjetas">
@@ -132,6 +126,20 @@
                         <h1 class="titulomp">Pagá a través de MercadoPago</h1><i class="far fa-handshake mp"></i>
                     </div>
                 </section>
+
+                <section class="titulo2">
+
+                    <h1>Envíos</h1>
+                    
+                    <div class="list">
+                        <ul >
+                            <li><i class="fas fa-shipping-fast camion"></i> Envíos a todo el país </li>
+                            <li><i class="fas fa-undo-alt flecha"></i> Devolución gratis por 30 días </li>
+                            <li><i class="fas fa-credit-card tarjeta"></i> Consultá medios de pago </li>
+                        </ul> 
+                    </div>
+                </section>
+
                 <section class="titulo2">
                     <h1>Formas de entrega</h1>
                     <p class="retiro">Retirá tu compra por cualquiera de nuestros locales</p>

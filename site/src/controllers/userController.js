@@ -32,7 +32,6 @@ userController = {
         // ID y categoría del usuario en sesion
         let sessionUserID = req.session.userID;
         let categoryUser = req.session.category;
-        console.log(categoryUser);
         // para el menu colapsable del Header
         let categorias = await DB.Category.findAll()
         let marcas = await DB.Brand.findAll()
@@ -49,7 +48,7 @@ userController = {
             try {
                 // Busca si ya hay un usuario con ese email
                 const user = await DB.User.findAll({where: {email: req.body.email}});
-                if (user.length = 0) {
+                if (user.length === 0) {
                     // Si no existe el usuario - Crea el usuario nuevo en la DB
                     if (categoryUser == undefined || categoryUser !==  1) {
                         const newUser = await DB.User.create({
@@ -61,8 +60,7 @@ userController = {
                             password: bcrypt.hashSync (req.body.password, 10), 
                             role: 2,
                             image: req.files[0].filename,    
-                        })
-     
+                        }) 
                         res.redirect('/users/login');
                     } else {
                         const newUser = await DB.User.create({
@@ -275,7 +273,17 @@ userController = {
             res.send(error)
         }
         
-    }
+    },
+
+    // Borra un usuario
+    delete: async function(req,res){  
+        await DB.User.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+        res.redirect('/users/userList');
+    },
 }
 
 module.exports = userController;

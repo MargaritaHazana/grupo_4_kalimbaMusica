@@ -334,7 +334,7 @@ border-radius: 5px;
 }
 
 /* Dropdown button on hover & focus */
-.dropbtnAdmin:hover, .dropbtn:focus {
+.dropbtnAdmin:hover, .dropbtnAdmin:focus {
 background-color: #f35b31;
 }
 
@@ -367,6 +367,8 @@ display: block;
 
 /* Change color of dropdown links on hover */
 .dropdown-contentAdmin a:hover {background-color: #ddd}
+
+.show {display:block;}
 
 /* Categorias para tablet y laptop */
 .DIV003{
@@ -830,9 +832,11 @@ margin: 5px;
 .P020{
     font-size: 18px;
     margin: 5px;
-    width: 55%;
+    width: 77%;
     padding-top: 2px;
     padding-bottom: 2px;
+    margin-bottom: 2%;
+    line-height: 1;
 }
 .left{
     text-align: left;
@@ -851,12 +855,25 @@ margin: 5px;
     width: 60%;
     margin-bottom: 1.5%;
     margin-top: 2%;
+    justify-content: space-between;
+    padding-top: 1%;
 }
 .mail{
     font-style: oblique;
 }
 .right{
     width: 15%
+}
+.formEliminar{
+    margin-right: 10%;
+}
+.botonEliminar{
+    background-color: rgb(202, 202, 202);
+    border: none;
+    margin-left: 40%;
+}
+.Parent020{
+    margin-bottom: 4%;
 }
 @media(max-width:768px){
     .P020{

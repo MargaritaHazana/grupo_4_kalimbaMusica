@@ -58,5 +58,8 @@ router.post('/logout', userController.logout);
 // Ruta listado de usuarios para admins
 router.get('/userList', authAdmins, userController.userList);
 
+// Ruta eliminar perfil
+router.post('/delete/:id', authAdmins, userController.delete);
+
 
 module.exports = router;

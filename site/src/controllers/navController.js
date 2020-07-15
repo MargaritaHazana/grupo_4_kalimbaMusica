@@ -35,6 +35,13 @@ navController = {
         let marcas = await DB.Brand.findAll()
 
         res.render('help', {view:'ayuda', sessionUserID, categorias, marcas, categoryUser})
+    },
+    admin: (req,res)=>{
+        // ID y categoría del usuario en sesion
+        let sessionUserID = req.session.userID;
+        let categoryUser = req.session.category;
+
+        res.render()
     }
 }
 

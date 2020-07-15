@@ -11,5 +11,6 @@ const authAdmins = require('../middlewares/authAdmins');
 
 router.get('/ofertas', navController.ofertas);
 router.get('/ayuda', navController.ayuda);
+router.get('/admin',authAdmins, navController.admin);
 
 module.exports = router

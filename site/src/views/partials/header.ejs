@@ -63,7 +63,9 @@
                 <a href="/nav/ofertas">Ofertas</a>
                 <a href="/nav/ayuda">Locales</a>
                 <% if (categoryUser == 1) { %>
-                    <a href="/nav/admin">Admin</a>
+                    <a href="/products">Agregar productos</a>
+                    <a href="/users/userList">Listado de usuarios</a>
+                    <a href="/users/register">Crear usuario admin</a>
                 <% }  else { %>
                     <a href="/nav/ayuda">Ayuda</a>
                 <% } %>   
@@ -105,8 +107,8 @@
                         <button onclick="myFunctionAdmin()" class="dropbtnAdmin">Admin </button>
                         <div id="myDropdownAdmin" class="dropdown-contentAdmin">
                             <a class="P001" href="/products">Agregar productos</a>
-                            <a class="P001" href="/userList">Listado de usuarios</a>
-                            <a class="P001" href="/register">Crear usuario admin</a>
+                            <a class="P001" href="/users/userList">Listado de usuarios</a>
+                            <a class="P001" href="/users/register">Crear usuario admin</a>
                         </div>
                     </div>
                 </div>

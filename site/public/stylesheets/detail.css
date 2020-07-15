@@ -135,18 +135,19 @@ ul{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
     align-items: center;
+    margin-left: 5%;
 }
-.rojo {
+.Rojo {
     width: 15%;
     height: 58%;
     text-align: center;
     padding-top: 2%;
     background-color: red;
     border: 1px solid black;
+    margin-right: 2%;
 }
-.negro {
+.Negro {
     width: 15%;
     height: 58%;
     text-align: center;
@@ -154,30 +155,34 @@ ul{
     background-color: black;
     border: 1px solid black;
     color: white;
+    margin-right: 2%;
 }
-.madera {
+.Madera {
     width: 15%;
     height: 58%;
     text-align: center;
     padding-top: 2%;
     background-color: burlywood;
     border: 1px solid black;
+    margin-right: 2%;
 }
-.blanco {
+.Blanco {
     width: 15%;
     height: 58%;
     text-align: center;
     padding-top: 2%;
     background-color: white;
     border: 1px solid black;
+    margin-right: 2%;
 }
-.azul {
+.Azul {
     width: 15%;
     height: 58%;
     text-align: center;
     padding-top: 2%;
     background-color: #1a4f8e;
     border: 1px solid black;
+    margin-right: 2%;
 }
 .boton-comprar {
     width: 90%;
@@ -315,27 +320,27 @@ ul{
 }
 @media(max-width: 768px) {
     /* Arreglando los colores */
-    .rojo {
+    .Rojo {
         width: 13%;
         height: 50%;
         padding-top: 1%;
     }
-    .negro {
+    .Negro {
         width: 13%;
         height: 50%;
         padding-top: 1%;
     }
-    .madera {
+    .Madera {
         width: 13%;
         height: 50%;
         padding-top: 1%;
     }
-    .blanco {
+    .Blanco {
         width: 13%;
         height: 50%;
         padding-top: 1%;
     }
-    .azul {
+    .Azul {
         width: 13%;
         height: 50%;
         padding-top: 1%;

@@ -78,11 +78,9 @@
                         <section class="colores">
                             <p class="colour">Color:</p>
                             <div class="opciones">
-                                <div class="rojo">R</div>
-                                <div class="negro">N</div>
-                                <div class="madera">M</div>
-                                <div class="blanco">B</div>
-                                <div class="azul">A</div>
+                                <% coloresDisp.forEach(color => { %>
+                                 <div class="<%= color %> " ></div>
+                                <% }) %>
                             </div>
                         </section>
                         <form action="/product/addToCart/<%= producto.id %> " method="post">

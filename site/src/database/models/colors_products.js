@@ -5,7 +5,8 @@ module.exports = (sequelize, DataTypes) => {
             colorsId: DataTypes.INTEGER,
             deletedAt: DataTypes.DATE
         },
-        {tableName: 'colors_products'}
+        {tableName: 'colors_products',
+        timestamps:false}
     )
     return colors_products;
 }

@@ -67,6 +67,12 @@ productController = {
             var idProducto = req.params.id;
             // Encontrando el producto
             let producto = await DB.Product.findByPk(idProducto);
+            let colores = await DB.Color_product.findAll({where: {productsId:idProducto}});
+            let coloresDisp = []
+            for (let i = 0; i < colores.length; i++) {
+                let color = await DB.Color.findByPk(colores[i].colorsId);
+                coloresDisp.push(color.name)
+            }
             // Calculando el precio con descuento
             var precioViejo = "$" + numberWithCommas(Math.round(producto.price));
             var descuento = producto.price * (producto.discount / 100);
@@ -75,7 +81,7 @@ productController = {
             // para el menu colapsable del Header
             let categorias = await DB.Category.findAll()
             let marcas = await DB.Brand.findAll()
-            res.render('productDetail', { view: 'detail' , producto, precioViejo, precioFinal, destacados, sessionUserID, categoryUser, marcas, categorias });
+            res.render('productDetail', { view: 'detail' , producto, precioViejo, precioFinal, destacados, sessionUserID, categoryUser, marcas, categorias, coloresDisp });
         } catch (error) {
             res.send(error)
         }
@@ -85,6 +91,9 @@ productController = {
     productCart:async function(req, res){
         // Productos destacados
         let destacados = await DB.Product.findAll({limit: 4});
+        // para el menu colapsable del Header
+        let categorias = await DB.Category.findAll()
+        let marcas = await DB.Brand.findAll()
         // ID y categoría del usuario en sesion
         let sessionUserID = req.session.userID;
         let categoryUser = req.session.category;
@@ -97,7 +106,7 @@ productController = {
                 // Si no hay productos
                 productos = [];
                 total = 0
-                res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, numberWithCommas, total, categoryUser });
+                res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, numberWithCommas, total, categoryUser, categorias, marcas });
             // Si hay productos     
             } else {
                 cartProds.forEach(async productId=>{
@@ -112,7 +121,7 @@ productController = {
                             total = total + productos[i].price
                         }
     
-                        res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, numberWithCommas, total, categoryUser });
+                        res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, numberWithCommas, total, categoryUser, categorias, marcas });
                     } catch (error) {
                         res.send(error)
                     }
@@ -137,13 +146,13 @@ productController = {
                 for (let i = 0; i < productos.length; i++) {
                     total = total + productos[i].price
                 }
-                res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, total, numberWithCommas, categoryUser }); 
+                res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, total, numberWithCommas, categoryUser, categorias, marcas }); 
                    
             } catch (error) {
                 // Si no hay productos
                 productos = [];
                 total = 0
-                res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, numberWithCommas, total,categoryUser });
+                res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, numberWithCommas, total,categoryUser, categorias, marcas });
             }   
         }
     },
@@ -297,6 +306,9 @@ productController = {
                     typesId: req.body.typesId,
                     image: req.files[0].filename,
                     stock: req.body.stock}); 
+                // update de relaciones n:m
+                await producto.removeColor(producto.colors)
+                await producto.addColor(req.body.colors)
             } else {
                 await producto.update({
                     name: req.body.name,
@@ -309,11 +321,11 @@ productController = {
                     typesId: req.body.typesId,
                     image: producto.image,
                     stock: req.body.stock
-                })
+                });
+                // update de relaciones n:m
+                await producto.removeColor(producto.colors)
+                await producto.addColor(req.body.colors)
             }
-            // update de relaciones n:m
-            await producto.removeColor(producto.colors)
-            await producto.addColor(req.body.colors)
             res.redirect('/products')
         }
         catch (error) {
@@ -323,11 +335,13 @@ productController = {
 
     // Borra un producto
     delete: async function(req,res){  
-        await DB.Product.destroy({
+        let producto = DB.Product.findByPk(req.params.id, {include: ['colors']});
+        const prodDestroy = await DB.Product.destroy({
             where: {
                 id: req.params.id
             }
         })
+        await producto.removeColor(producto.color)
         res.redirect('/products');
     },
 

@@ -74,15 +74,23 @@
                                 <li><i class="fas fa-credit-card tarjeta"></i> Consultá medios de pago </li>
                             </ul> 
                         </div>
-
-                        <section class="colores">
+                        <label for="">Cantidad:</label>
+                        <input class="inputDetail" type="number" value="1" name="cantidad">
+                        <LABEl>Colores:</LABEl>
+                        <select class="selectDetail" name="color" id="" multiple>
+                            
+                            <% coloresDisp.forEach(color => { %>
+                                <option value="<%= color %>" class="<%= color %> " ></option>
+                               <% }) %>
+                        </select>
+                        <!-- <section class="colores">
                             <p class="colour">Color:</p>
                             <div class="opciones">
                                 <% coloresDisp.forEach(color => { %>
-                                    <div class="<%= color %> " ></div>
+                                 <div class="<%= color %> " ></div>
                                 <% }) %>
                             </div>
-                        </section>
+                        </section> -->
                         <section>
                             
                         </section>

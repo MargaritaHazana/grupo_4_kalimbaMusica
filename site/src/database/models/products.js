@@ -12,6 +12,7 @@ var products = function (sequelize, dataTypes){
         discount: dataTypes.INTEGER,
         stock: dataTypes.INTEGER,
         description: dataTypes.STRING,
+        image: dataTypes.STRING,
         deletedAt: dataTypes.DATE
     }
     config = {
@@ -24,8 +25,6 @@ var products = function (sequelize, dataTypes){
         products.belongsTo(models.Subcategory,{as:"subcategories", foreignKey: "subcategoriesId"})
         products.belongsTo(models.Brand,{as:"brands", foreignKey: "brandsId"})
         products.belongsTo(models.Type,{as:"types", foreignKey: "typesId"})
-        // un producto tiene muchas imagenes
-        products.hasMany(models.Image,{as:"images", foreignKey: "productsId"})
         // muchos productos tienen muchas ordenes
         products.belongsToMany(models.Order,{as:"orders", through: "orders_products", foreignKey: "productsId", otherKey:"ordersId" ,timestamps:false})
         // muchas colores tienen muchos productos

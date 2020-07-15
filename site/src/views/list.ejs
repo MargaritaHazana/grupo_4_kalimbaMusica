@@ -7,13 +7,13 @@
          <%- include('partials/header') %> 
      
          <div class="DIV010">
-                 <div class="h-container">
-                     <h2> Productos disponibles </h2>
-                     <!-- Si el user es admin - Muestra el botón para ir a create -->
-                     <% if (categoryUser == 1) { %>
-                         <a href="/product/create" class="a">Agregar producto</a>
-                     <% } %>
-                 </div>
+            <div class="h-container">
+                <h2> Productos disponibles </h2>
+                <!-- Si el user es admin - Muestra el botón para ir a create -->
+                <% if (categoryUser == 1) { %>
+                    <a href="/product/create" class="a">Agregar producto</a>
+                <% } %>
+            </div>
              <% for( let i = 0; i < productos.length; i++ ) { %>
                  <a class="A010" href="/productDetail/<%= productos[i].id %> ">
                      <div class="SDIV010">

@@ -5,18 +5,6 @@ const DB = require('../database/models');
 const OP = DB.Sequelize.Op;
 
 
-//Pasando el JSON a JS - DB de productos
-const rutaProductosJson = path.join(__dirname, '../../data/Products.json');
-const productos = fs.readFileSync( rutaProductosJson, 'utf-8');
-const dataProductos = JSON.parse(productos);
-
-//Pasando el JSON a JS - DB de usuarios
-const rutaUsersJson = path.join(__dirname, '../../data/Users.json');
-const users = fs.readFileSync(rutaUsersJson, 'utf-8');
-const dataUsers = JSON.parse(users);
-
-
-
 var numberWithCommas = x => {
     x = x.toString();
     var pattern = /(-?\d+)(\d{3})/;
@@ -33,9 +21,10 @@ productController = {
     // Renderiza la view del Index
     index: async function(req,res){
         try {
+            // ID del usuario en sesion
             let sessionUserID = req.session.userID;
-            let destacados = await DB.Product.findAll({
-                limit:4, include: ['images']})
+            // Productos destacados
+            let destacados = await DB.Product.findAll({limit:4})
             // para el menu colapsable del Header
             let categorias = await DB.Category.findAll()
             let marcas = await DB.Brand.findAll()
@@ -43,26 +32,26 @@ productController = {
         } catch (error) {
             res.send(error)
         }
-        // ID del usuario en sesion
-        
     },
 
     // Renderiza la lista de los productos
     list: async function(req,res){
+        // ID del usuario en sesion
+        let sessionUserID = req.session.userID;
         try {
-            // ID del usuario en sesion
-            let sessionUserID = req.session.userID;
-            // Chequea si el user en session es admin
             let categoryUser = 0
-            if (sessionUserID !== undefined) {
-                dataUsers.find((user)=>user.id == sessionUserID);
-                categoryUser = 1
+            try {
+                let user = await DB.User.findByPk(sessionUserID);
+                // Chequea si el user en session es admin
+                categoryUser = user.role;
+            } catch (error) {
+                categoryUser = 2
             }
             let productos = await DB.Product.findAll()
             // para el menu colapsable del Header
             let categorias = await DB.Category.findAll()
             let marcas = await DB.Brand.findAll()
-            
+            // res.send(productos)
             res.render('list', {view: 'list', productos, numberWithCommas, sessionUserID, categoryUser, categorias, marcas});
         } catch (error) {
             res.send(error)
@@ -74,24 +63,24 @@ productController = {
     productDetail: async function(req,res){
         // ID del usuario en sesion
         let sessionUserID = req.session.userID;
-        // Chequea si el user en session es admin
-        let categoryUser = 0
-        if (sessionUserID !== undefined) {
-            dataUsers.find((user)=>user.id == sessionUserID);
-            categoryUser = 1
-        }
         // Productos destacados
         let destacados = await DB.Product.findAll({limit: 4});
         
  
         // Encontrando el producto
         try {
+            let categoryUser = 0
+            try {
+                let user = await DB.User.findByPk(sessionUserID);
+                // Chequea si el user en session es admin
+                categoryUser = user.role;
+            } catch (error) {
+                categoryUser = 2
+            }
+
             var idProducto = req.params.id;
             // Encontrando el producto
             let producto = await DB.Product.findByPk(idProducto);
-            // Encontrando las fotos
-            let buscandoImage = await DB.Image.findAll({where: {productsId: idProducto}});
-            let image = buscandoImage[0].dataValues.name;
             // Calculando el precio con descuento
             var precioViejo = "$" + numberWithCommas(Math.round(producto.price));
             var descuento = producto.price * (producto.discount / 100);
@@ -100,7 +89,7 @@ productController = {
             // para el menu colapsable del Header
             let categorias = await DB.Category.findAll()
             let marcas = await DB.Brand.findAll()
-            res.render('productDetail', { view: 'detail' , producto, precioViejo, precioFinal, destacados, sessionUserID, categoryUser, marcas, categorias, image });
+            res.render('productDetail', { view: 'detail' , producto, precioViejo, precioFinal, destacados, sessionUserID, categoryUser, marcas, categorias });
         } catch (error) {
             res.send(error)
         }
@@ -112,18 +101,16 @@ productController = {
         let destacados = await DB.Product.findAll({limit: 4});
         // ID del usuario en sesion
         let sessionUserID = req.session.userID;
-        // Array de productos e imagenes en el carrito
+        // Array de productos en el carrito
         let productos = [];
-        let images = [];
         // Si no hay un usuario logueado
         if (sessionUserID == undefined) {
             // Se fija si hay productos en el carrito de la session
             if (cartProds.length == 0){
                 // Si no hay productos
                 productos = [];
-                images = [];
                 total = 0
-                res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, images, numberWithCommas, total });
+                res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, numberWithCommas, total });
             // Si hay productos     
             } else {
                 cartProds.forEach(async productId=>{
@@ -132,17 +119,13 @@ productController = {
                         let productInfo = await DB.Product.findByPk(productId, {include: ['colors','brands','subcategories','categories','types']});
                         productInfo = productInfo.dataValues
                         productos.push(productInfo);
-                        // Busca la foto de cada producto y lo mete en el array de images
-                        let productImage = await DB.Image.findAll({where: {productsId: productId}});
-                        productImage = productImage[0].dataValues
-                        images.push(productImage);
                         // Calcula el total a pagar
                         let total = 0
                         for (let i = 0; i < productos.length; i++) {
                             total = total + productos[i].price
                         }
     
-                        res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, images, numberWithCommas, total });
+                        res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, numberWithCommas, total });
                     } catch (error) {
                         res.send(error)
                     }
@@ -162,25 +145,18 @@ productController = {
                     const productInfo = await DB.Product.findByPk(products[i].productsId, {include: ['colors','brands','subcategories','categories','types']} );
                     productos.push(productInfo.dataValues)  
                 }
-                // Busca la foto de cada producto y lo mete en el array de images
-                for (let i = 0; i < products.length; i++) {
-                    let productImage = await DB.Image.findAll({where: {productsId: products[i].productsId}});
-                    images.push(productImage[0].dataValues); 
-                }
-                
                 // Calcula el total a pagar
                 let total = 0
                 for (let i = 0; i < productos.length; i++) {
                     total = total + productos[i].price
                 }
-                res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, images, total, numberWithCommas }); 
+                res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, total, numberWithCommas }); 
                    
             } catch (error) {
                 // Si no hay productos
                 productos = [];
-                images = [];
                 total = 0
-                res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, images, numberWithCommas, total });
+                res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, numberWithCommas, total });
             }   
         }
     },
@@ -240,7 +216,6 @@ productController = {
                 usersId: sessionUserID
             }
         })
-        
         res.redirect('/productCart');
     },
 
@@ -270,13 +245,19 @@ productController = {
     addingProduct : async (req, res, next)=>{
        
         try {
-            const newProduct = await DB.Product.create(req.body);
+            const newProduct = await DB.Product.create({
+                name: req.body.name,
+                price: req.body.price,
+                discount: req.body.discount,
+                description: req.body.description,
+                brandsId: req.body.brandsId,
+                categoriesId: req.body.categoriesId,
+                subcategoriesId: req.body.subcategoriesId,
+                typesId: req.body.typesId,
+                image: req.files[0].filename,
+                stock: req.body.stock
+            }); 
             await newProduct.addColors(req.body.colorsId);
-
-            const newImage = await DB.Image.create({
-                name: req.files[0].filename,
-                productsId: newProduct.id
-            });
 
             res.redirect('/products');
             
@@ -312,17 +293,35 @@ productController = {
     editingProduct: async(req, res)=>{
         try { 
             let idProducto = req.params.id;
-            let producto = await DB.Product.findByPk ( idProducto,{ include: [ 'colors','brands','subcategories','categories','types','images' ] } )
-            let imagen = await DB.Image.findByPk (producto.images[0].id)
-            // update de caracteriticas del producto y tablas relacionadas 1:n
-            
-            await producto.update(req.body)   
+            let producto = await DB.Product.findByPk ( idProducto,{ include: [ 'colors','brands','subcategories','categories','types' ] } )
+            // update de caracteriticas del producto y tablas relacionadas 1:n 
             if(req.files[0] != undefined){
-                await imagen.update({name : req.files[0].filename})
+                await producto.update({
+                    name: req.body.name,
+                    price: req.body.price,
+                    discount: req.body.discount,
+                    description: req.body.description,
+                    brandsId: req.body.brandsId,
+                    categoriesId: req.body.categoriesId,
+                    subcategoriesId: req.body.subcategoriesId,
+                    typesId: req.body.typesId,
+                    image: req.files[0].filename,
+                    stock: req.body.stock}); 
+            } else {
+                await producto.update({
+                    name: req.body.name,
+                    price: req.body.price,
+                    discount: req.body.discount,
+                    description: req.body.description,
+                    brandsId: req.body.brandsId,
+                    categoriesId: req.body.categoriesId,
+                    subcategoriesId: req.body.subcategoriesId,
+                    typesId: req.body.typesId,
+                    image: producto.image,
+                    stock: req.body.stock
+                })
             }
-             
-                
-             // update de relaciones n:m
+            // update de relaciones n:m
             await producto.removeColor(producto.colors)
             await producto.addColor(req.body.colors)
             res.redirect('/products')
@@ -339,7 +338,6 @@ productController = {
                 id: req.params.id
             }
         })
-        
         res.redirect('/products');
     },
 

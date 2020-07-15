@@ -79,7 +79,7 @@ CREATE TABLE `colors` (
   `name` varchar(100) NOT NULL,
   `deletedAt` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -88,7 +88,7 @@ CREATE TABLE `colors` (
 
 LOCK TABLES `colors` WRITE;
 /*!40000 ALTER TABLE `colors` DISABLE KEYS */;
-INSERT INTO `colors` VALUES (1,'Rojo',NULL),(2,'Azul',NULL),(3,'Negro',NULL),(4,'Marrón',NULL),(5,'Blanco',NULL),(6,'Gris',NULL),(7,'Plateado',NULL);
+INSERT INTO `colors` VALUES (1,'Rojo',NULL),(2,'Azul',NULL),(3,'Negro',NULL),(4,'Marrón',NULL),(5,'Blanco',NULL),(6,'Gris',NULL),(7,'Plateado',NULL),(8,'Dorado',NULL),(9,'Amarillo',NULL),(10,'Ninguno',NULL);
 /*!40000 ALTER TABLE `colors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -105,7 +105,7 @@ CREATE TABLE `colors_products` (
   `deletedAt` datetime(6) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +114,7 @@ CREATE TABLE `colors_products` (
 
 LOCK TABLES `colors_products` WRITE;
 /*!40000 ALTER TABLE `colors_products` DISABLE KEYS */;
-INSERT INTO `colors_products` VALUES (86,3,NULL,19);
+INSERT INTO `colors_products` VALUES (86,3,NULL,19),(0,3,'0000-00-00 00:00:00.000000',23),(3,1,NULL,24),(3,4,NULL,25),(4,4,NULL,26),(4,6,NULL,27),(5,6,NULL,28),(5,7,NULL,29),(6,7,NULL,30),(6,2,NULL,31),(7,2,NULL,32),(8,2,NULL,33),(8,9,NULL,34),(9,9,NULL,35),(10,9,NULL,36),(11,9,NULL,37),(12,9,NULL,38),(52,9,NULL,39),(53,9,NULL,40),(54,9,NULL,41),(55,9,NULL,42),(56,9,NULL,43),(57,9,NULL,44),(57,2,NULL,45),(58,2,NULL,46),(59,2,NULL,47),(60,2,NULL,48),(61,2,NULL,49),(62,2,NULL,50),(63,2,NULL,51),(64,2,NULL,52),(65,2,NULL,53),(66,2,NULL,54),(67,2,NULL,55),(68,2,NULL,56),(69,2,NULL,57),(70,2,NULL,58),(71,2,NULL,59),(72,2,NULL,60),(73,2,NULL,61),(74,2,NULL,62),(75,2,NULL,63),(76,2,NULL,64),(78,2,NULL,65),(79,2,NULL,66),(80,2,NULL,67),(81,2,NULL,68),(83,2,NULL,69),(84,2,NULL,70);
 /*!40000 ALTER TABLE `colors_products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,9 +188,13 @@ DROP TABLE IF EXISTS `orders_products`;
 CREATE TABLE `orders_products` (
   `ordersId` int(11) NOT NULL,
   `productsId` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `colorsId` int(11) NOT NULL,
   `deletedAt` datetime(6) DEFAULT NULL,
   KEY `products_id_idx` (`productsId`),
   KEY `orders_id_idx` (`ordersId`),
+  KEY `fk_cart_colorsId_idx` (`colorsId`),
+  CONSTRAINT `fk_cart_colorsId` FOREIGN KEY (`colorsId`) REFERENCES `colors` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_ordersproducts_orders_id` FOREIGN KEY (`ordersId`) REFERENCES `orders` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_ordersproducts_products_id` FOREIGN KEY (`productsId`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -377,4 +381,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-15 17:55:30
+-- Dump completed on 2020-07-15 19:34:37

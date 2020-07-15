@@ -2,7 +2,7 @@
 <%- include('partials/head', {title: 'Cargar producto'}) %>
 
 <body>
-    <script src="../../public/js/productAdd.js"></script>
+    
 <!-- Trayendo el header -->
 <%- include('partials/header') %>
 
@@ -43,28 +43,24 @@
         
         <div class="container">
             <label class="pregunta" for="">Categoría</label>
-            <select name="categoriesId" class="respuesta">
+            <select name="categoriesId" class="respuesta category">
                 <% categories.forEach(category => { %>
-                <option value="<%= category.id %>" class="category" <%= category.name %> </option>
+                <option value="<%= category.id %>"> <%= category.name %> </option>
                 <% }) %>
             </select>
         </div>
         
         <div class="container">
             <label class="pregunta" for="">Subcategoría</label>
-            <select name="subcategoriesId" class="respuesta subcategories">
-                <% subcategories.forEach(subcategory => { %>
-                    <option value="<%= subcategory.id %>" > <%= subcategory.name %> </option>
-                <% }) %>
+            <select name="subcategoriesId" class="respuesta subcategory">
+                
             </select>
         </div>
         
         <div class="container">
             <label class="pregunta" for="">Tipo</label>
-            <select name="typesId" class="respuesta">
-                <% types.forEach(type => { %>
-                <option value="<%= type.id %>" > <%= type.name %> </option>
-                <% }) %>
+            <select name="typesId" class="respuesta type">
+                
             </select>
         </div> 
        

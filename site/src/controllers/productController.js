@@ -341,7 +341,7 @@ productController = {
                 id: req.params.id
             }
         })
-        await producto.removeColor(producto.color)
+        
         res.redirect('/products');
     },
 

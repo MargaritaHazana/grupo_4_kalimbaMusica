@@ -8,8 +8,10 @@ var guides = function (sequelize, dataTypes){
             autoIncrement: true
         },
         title: dataTypes.STRING,
-        content: dataTypes.STRING,
-        deletedAt: dataTypes.DATE
+        deletedAt: dataTypes.DATE,
+        text1: dataTypes.STRING,
+        text2: dataTypes.STRING,
+        text3: dataTypes.STRING,
     }
     config = {
         timestamps: false

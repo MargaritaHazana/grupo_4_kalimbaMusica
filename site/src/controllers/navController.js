@@ -42,6 +42,28 @@ navController = {
         let categoryUser = req.session.category;
 
         res.render()
+    },
+    tutoriales: async function(req, res, next){
+        let sessionUserID = req.session.userID;
+        let categoryUser = req.session.category;
+
+        let categorias = await DB.Category.findAll();
+        let marcas = await DB.Brand.findAll();
+
+        res.render('tutoriales', {view: 'tutoriales', sessionUserID, categoryUser, categorias, marcas})
+
+    },
+    guias: async function(req, res, next){
+        let sessionUserID = req.session.userID;
+        let categoryUser = req.session.category;
+
+        let categorias = await DB.Category.findAll();
+        let marcas = await DB.Brand.findAll();
+
+        let guias = await DB.Guide.findAll();
+
+        res.render('guias', {view: 'tutoriales', sessionUserID, categoryUser, categorias, marcas, guias})
+
     }
 }
 

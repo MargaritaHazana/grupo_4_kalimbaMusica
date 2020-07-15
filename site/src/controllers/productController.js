@@ -306,9 +306,6 @@ productController = {
                     typesId: req.body.typesId,
                     image: req.files[0].filename,
                     stock: req.body.stock}); 
-                // update de relaciones n:m
-                await producto.removeColor(producto.colors)
-                await producto.addColor(req.body.colors)
             } else {
                 await producto.update({
                     name: req.body.name,
@@ -322,10 +319,10 @@ productController = {
                     image: producto.image,
                     stock: req.body.stock
                 });
-                // update de relaciones n:m
-                await producto.removeColor(producto.colors)
-                await producto.addColor(req.body.colors)
             }
+            // update de relaciones n:m
+            await producto.removeColor(producto.colors);
+            await producto.addColor(req.body.coloresDisponibles);
             res.redirect('/products')
         }
         catch (error) {

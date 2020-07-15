@@ -1,13 +1,15 @@
--- MySQL dump 10.13  Distrib 8.0.20, for macos10.15 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `kalimba_musica` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+USE `kalimba_musica`;
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: kalimba_musica
+-- Host: 127.0.0.1    Database: kalimba_musica
 -- ------------------------------------------------------
--- Server version	5.7.26
+-- Server version	5.5.5-10.4.11-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,7 +23,7 @@
 
 DROP TABLE IF EXISTS `brands`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `brands` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -46,7 +48,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -71,11 +73,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `colors`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `colors` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
-  `deleltedAt` datetime(6) DEFAULT NULL,
+  `deletedAt` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -96,7 +98,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `colors_products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `colors_products` (
   `productsId` int(11) NOT NULL,
   `colorsId` int(11) NOT NULL,
@@ -122,7 +124,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `guides`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `guides` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL DEFAULT 'Guía',
@@ -153,7 +155,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `orders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `shippingCity` varchar(100) NOT NULL,
@@ -182,7 +184,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `orders_products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orders_products` (
   `ordersId` int(11) NOT NULL,
   `productsId` int(11) NOT NULL,
@@ -209,12 +211,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `price` bigint(100) NOT NULL,
-  `discount` int(11) DEFAULT '0',
+  `discount` int(11) DEFAULT 0,
   `stock` tinyint(4) NOT NULL,
   `description` varchar(500) NOT NULL,
   `image` varchar(100) NOT NULL DEFAULT 'error.png',
@@ -251,14 +253,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `products_users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `products_users` (
   `productsId` int(11) NOT NULL,
   `usersId` int(11) NOT NULL,
   `deletedAt` varchar(45) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `colorsId` int(11) NOT NULL,
-  `cantidad` int(11) DEFAULT '1',
+  `cantidad` int(11) DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `fk_productsId_users_idx` (`productsId`),
   KEY `fk_usersId_products_idx` (`usersId`),
@@ -283,7 +285,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `subcategories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `subcategories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -312,7 +314,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -340,7 +342,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `role` int(11) NOT NULL,
@@ -375,4 +377,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-15 17:42:39
+-- Dump completed on 2020-07-15 17:55:30

@@ -17,7 +17,7 @@
 .SDIV010{
     border-radius: 5px;
     width: 15%;
-    border:  #41426f solid 5px;
+    border:  #41426f solid 2.5px;
     margin: 1%;
     transition: 0.1s;
     background-color: rgb(238, 238, 238);

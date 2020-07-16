@@ -14,6 +14,9 @@
             <form action="/nav/guiasEdit/<%=guias[i].id%>" method="GET">
                 <button class="ayuda">Editar</button>
             </form>
+            <form action="/nav/guiaDelete/<%=guias[i].id%>?_method=DELETE" method="POST">
+                <button class="ayuda">Eliminar</button>
+            </form>
         <% } %>
 
 

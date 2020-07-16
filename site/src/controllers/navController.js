@@ -96,21 +96,88 @@ navController = {
         let parametro = req.params.id
         let sessionUserID = req.session.userID;
         let categoryUser = req.session.category;
-        res.send(req.body)
+        
+        let body = req.body
 
         try{
             let categorias = await DB.Category.findAll();
             let marcas = await DB.Brand.findAll();
-            let guia = await DB.Guide.findByPk(parametro);  
+            //let guia = await DB.Guide.findByPk(parametro);  
             
-            await guia.update({
+            await DB.Guide.update({
                 title: req.body.title,
                 text1: req.body.text1,
                 text2: req.body.text2,
-                text3: req.body.text3,
+                text3: req.body.text3
+                },
+                {
+                    where: {id: parametro}
+                }
+                )
+            res.redirect('/nav/guias')
+        }
+        catch(error){
+            res.send(error)
+        }
+    },
+    guiasAdd: async function(req, res, next){
+        let sessionUserID = req.session.userID;
+        let categoryUser = req.session.category;
+
+        let categorias = await DB.Category.findAll();
+        let marcas = await DB.Brand.findAll();
+        let subcategories = await DB.Subcategory.findAll()
+
+        res.render('guiasAdd', {view: 'forms',sessionUserID,subcategories, categoryUser, categorias, marcas})
+    },
+    addingGuia: async function(req, res, next){
+        
+        let sessionUserID = req.session.userID;
+        let categoryUser = req.session.category;
+
+        try {
+            let categorias = await DB.Category.findAll();
+            let marcas = await DB.Brand.findAll();
+            const newGuide = await DB.Guide.create({
+                subcategoriesId: req.body.subcategory,
+                title: req.body.title,
+                text1: req.body.text1,
+                text2: req.body.text2,
+                text3: req.body.text3
             })
-            
-            //res.redirect('/nav/guias')
+
+            res.redirect('/nav/guias')
+        }
+        catch(error){
+            res.send(error)
+        }
+    },
+    deleteGuia: async function(req, res, next){
+        let sessionUserID = req.session.userID;
+        let categoryUser = req.session.category;
+
+        try {
+            let categorias = await DB.Category.findAll();
+            let marcas = await DB.Brand.findAll();
+        }
+        catch(error){
+            res.send(error)
+        }
+    },
+    deletingGuia: async function(req, res, next){
+        let sessionUserID = req.session.userID;
+        let categoryUser = req.session.category;
+
+        try {
+            let categorias = await DB.Category.findAll();
+            let marcas = await DB.Brand.findAll();
+
+            await DB.Guide.destroy({
+                where: {
+                    id: req.params.id
+                }
+            })
+            res.redirect('/nav/guias')
         }
         catch(error){
             res.send(error)

@@ -1,0 +1,47 @@
+<!-- Trayendo el head -->
+<%- include('partials/head', {title: 'Editando producto'}) %>
+
+<body>
+
+<!-- Trayendo el header -->
+<%- include('partials/header') %>
+
+<!-- Form -->
+<div class="contenedor-form" >
+        <form class="formulario" action="/nav/guiasAdd" method="POST" enctype="multipart/form-data">
+
+            <div class="titulo-form" id="t-f"><p class="texto-titulo-form"> Creando guía 
+            </p></div>
+            <label class="pregunta" id="p1" for="">Título</label>
+            <textarea  class="respuesta" type="text" id="r1" name="title"> </textarea>
+    
+            <label class="pregunta" id="p1" for="">Primer texto</label>
+            <textarea  class="respuesta" type="text" id="r1" name="text1"></textarea>
+    
+            <label class="pregunta" id="p1" for="">Segundo texto</label>
+            <textarea  class="respuesta" type="text" id="r1" name= "text2"></textarea>
+    
+            <label class="pregunta" id="p1" for="">Tercer texto</label>
+            <textarea  class="respuesta" type="text" id="r1" name="text3" > </textarea>
+
+            <label class="pregunta" id="p1" for="">Subcategoria</label>
+            <select name="subcategory"> 
+                <% for( let i = 0; i < subcategories.length; i++ ) { %>
+
+                <option value="<%= subcategories[i].id %>"> <%= subcategories[i].name %></option>
+
+            <% } %></select>
+            
+    
+    
+            <button type="submit" id="fin" class="enter">Finalizar</button>
+        </form>
+     
+    
+</div>
+
+<!-- Trayendo el footer -->
+<%- include('partials/footer') %>
+
+</body>
+</html>

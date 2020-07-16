@@ -7,6 +7,7 @@ var session = require('express-session');
 var methodOverride = require('method-override');
 var cors = require('cors');
 
+
 // Routers
 var productRouter = require('./routes/products');
 var usersRouter = require('./routes/users');
@@ -20,6 +21,7 @@ var loginCookie = require('./middlewares/loginCookieMiddleware.js');
 var app = express();
 
 // view engine setup
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 

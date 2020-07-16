@@ -9,6 +9,17 @@ var navController = require('../controllers/navController');
 const loginMiddleware = require('../middlewares/loginMiddleware');
 const authAdmins = require('../middlewares/authAdmins');
 
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/images')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+  })
+  var upload = multer({ storage: storage })
+  
+
 router.get('/ofertas', navController.ofertas);
 
 router.get('/ayuda', navController.ayuda);
@@ -24,6 +35,14 @@ router.get('/elegirGuia', navController.elegirGuia)
 // Vista para editar la guia
 router.get('/guiasEdit/:id', navController.guiasEdit);
 // Editando guia
-router.put('/guiasEdit/:id', navController.guiasEdited);
+router.put('/guiasEdit/:id',upload.any(), navController.guiasEdited);
+
+// Creando guia
+router.get('/guiasAdd', navController.guiasAdd);
+router.post('/guiasAdd',upload.any(), navController.addingGuia);
+
+// Eliminando guia
+router.get('/guiaDelete', navController.deleteGuia);
+router.delete('/guiaDelete/:id', navController.deletingGuia)
 
 module.exports = router

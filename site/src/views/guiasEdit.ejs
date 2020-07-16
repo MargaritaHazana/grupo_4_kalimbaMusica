@@ -8,25 +8,25 @@
 
 <!-- Form -->
 <div class="contenedor-form" >
-        <form class="formulario" action="/product/<%=guia.id%>?_method=PUT" method="POST" enctype="multipart/form-data">
+        <form class="formulario" action="/nav/guiasEdit/<%=guia.id%>?_method=PUT" method="POST" enctype="multipart/form-data">
 
-            <div class="titulo-form"><p class="texto-titulo-form"> Editando guía <%= guia.title %> 
+            <div class="titulo-form" id="t-f"><p class="texto-titulo-form"> Editando guía: <%= guia.title %> 
             </p></div>
-            <label class="pregunta" for="">Título</label>
-            <input  class="respuesta" type="text" name="name" value="<%= guia.title %> ">
+            <label class="pregunta" id="p1" for="">Título</label>
+            <textarea  class="respuesta" id="r1" name="title" value="<%= guia.title %> "><%= guia.title %></textarea>
     
-            <label class="pregunta" for="">Primer texto</label>
-            <input  class="respuesta" type="text" name="name" value="<%= guia.text1 %> ">
+            <label class="pregunta" id="p1" for="">Primer texto</label>
+            <textarea  class="respuesta" id="r1" name="text1" ><%= guia.text1 %> </textarea>
     
-            <label class="pregunta" for="">Segundo texto</label>
-            <input  class="respuesta" type="text" name="name" value="<%= guia.text2 %> ">
+            <label class="pregunta" id="p1" for="">Segundo texto</label>
+            <textarea  class="respuesta"  id="r1" name= "text2"><%= guia.text2 %></textarea> 
     
-            <label class="pregunta" for="">Tercer texto</label>
-            <input  class="respuesta" type="text" name="name" value="<%= guia.text3 %> ">
+            <label class="pregunta" id="p1" for="">Tercer texto</label>
+            <textarea  class="respuesta" id="r1" name="text3" ><%= guia.text3 %></textarea>
             
     
     
-            <button type="submit" class="enter">Finalizar</button>
+            <button type="submit" id="fin" class="enter">Finalizar</button>
         </form>
      
     

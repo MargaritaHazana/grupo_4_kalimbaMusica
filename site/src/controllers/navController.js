@@ -91,6 +91,30 @@ navController = {
             res.send(error)
         }
         
+    },
+    guiasEdited: async function(req, res, next){
+        let parametro = req.params.id
+        let sessionUserID = req.session.userID;
+        let categoryUser = req.session.category;
+        res.send(req.body)
+
+        try{
+            let categorias = await DB.Category.findAll();
+            let marcas = await DB.Brand.findAll();
+            let guia = await DB.Guide.findByPk(parametro);  
+            
+            await guia.update({
+                title: req.body.title,
+                text1: req.body.text1,
+                text2: req.body.text2,
+                text3: req.body.text3,
+            })
+            
+            //res.redirect('/nav/guias')
+        }
+        catch(error){
+            res.send(error)
+        }
     }
 }
 

@@ -19,8 +19,11 @@ router.get('/tutoriales', navController.tutoriales);
 
 router.get('/guias', navController.guias);
 
+// Eligiendo guia a editar
 router.get('/elegirGuia', navController.elegirGuia)
-
-router.get('/guiasEdit/:id', navController.guiasEdit)
+// Vista para editar la guia
+router.get('/guiasEdit/:id', navController.guiasEdit);
+// Editando guia
+router.put('/guiasEdit/:id', navController.guiasEdited);
 
 module.exports = router

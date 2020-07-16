@@ -82,6 +82,19 @@ select{
     padding-left: 10%;
 }
 
+/* Clases guias */
+#t-f{
+    font-size: 150%;
+}
+#p1{
+    font-size: 150%;
+}
+#r1{
+    font-size: 150%;
+}
+#fin{
+    font-size: 150%;
+}
 @media(max-width: 1020px){
     .enter{
         font-size: 240%;

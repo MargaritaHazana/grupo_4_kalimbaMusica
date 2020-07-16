@@ -214,8 +214,11 @@ userController = {
             let usuario = await DB.User.findByPk(userId)
 
             await usuario.update(req.body) 
-            await usuario.update({image : req.files[0].filename})
-            res.redirect('/users/login')
+            if (req.files[0] != undefined) {
+                await usuario.update({image : req.files[0].filename})
+            }
+            
+            res.redirect('/')
         }
         catch (error) {
             res.send(error)
@@ -223,8 +226,8 @@ userController = {
     },
     // Renderiza la vista para cambiar constraseña
     passwordChangeView: async(req, res)=>{
-        let error = "error"
         // ID y categoría del usuario en sesion
+        let mensaje = []
         let sessionUserID = req.session.userID;
         let categoryUser = req.session.category;
         try {
@@ -232,7 +235,7 @@ userController = {
             // para el menu colapsable del Header
             let categorias = await DB.Category.findAll()
             let marcas = await DB.Brand.findAll()
-            res.render('passwordChangeView', {view: 'profile', sessionUserID, user, error, marcas, categorias, categoryUser})
+            res.render('passwordChangeView', {view: 'profile', sessionUserID, user, marcas, categorias, categoryUser, mensaje})
         } catch (error) {
             res.redirect('/users/login');
         }  
@@ -240,18 +243,22 @@ userController = {
 
     // Procesa el cambio de contraseña
     passwordChange: async (req,res)=>{
+       
         try {
+            let mensaje = []
+            let categoryUser = req.session.category;
+            let categorias = await DB.Category.findAll()
+            let marcas = await DB.Brand.findAll()
             let sessionUserID = req.session.userID;
-            let usuarioEditandose = await DB.User.findByPk(sessionUserID)
+            let user = await DB.User.findByPk(sessionUserID)
             let contraseñaPrevia = req.body.oldPassword
             let password = bcrypt.hashSync (req.body.password, 10)
-            let error = "lala"
-            if (bcrypt.compareSync(  contraseñaPrevia,usuarioEditandose.password)) {
-                await usuarioEditandose.update({password: password}) 
+            if (bcrypt.compareSync(  contraseñaPrevia,user.password)) {
+                await user.update({password: password}) 
                 res.redirect('/')
             } else {
-                let error = '/users/edit/' + req.session.userID + '/password'
-                res.redirect(error)
+                mensaje.push("Contraseña previa incorrecta")
+                res.render('passwordChangeView',{view: 'profile',sessionUserID, user,mensaje, categorias, categoryUser, marcas}) 
             }
         } catch (error) {
             

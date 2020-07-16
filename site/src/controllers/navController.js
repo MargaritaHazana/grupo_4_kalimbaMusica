@@ -84,13 +84,8 @@ navController = {
         try{
             let categorias = await DB.Category.findAll();
             let marcas = await DB.Brand.findAll();
-    
-    
-            let guias = await DB.Guide.findAll();
-
-            let guia = guias.findIndex(parametro -1)
-            
-            res.render('guiasEdit', {view: 'forms',guias,parametro, sessionUserID, categoryUser, categorias, marcas, guiaAEditar})
+            let guia = await DB.Guide.findByPk(parametro);           
+            res.render('guiasEdit', {view: 'forms',guia, sessionUserID, categoryUser, categorias, marcas})
         }
         catch(error){
             res.send(error)

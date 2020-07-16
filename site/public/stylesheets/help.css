@@ -40,7 +40,10 @@ h3{
 .imagenmapa{
     width: 30%;
 }
-.mapa iframe{width:100%;}
+.mapa iframe{
+    width: 60%;
+    height:450px
+}
 .h3{
     
     font-size: 140%;
@@ -57,5 +60,9 @@ h3{
    }
    .ayuda{
        font-size: 150%;
+   }
+   iframe{
+       width: 100%;
+  
    }
 }

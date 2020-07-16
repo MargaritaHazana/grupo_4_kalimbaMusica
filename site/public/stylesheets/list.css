@@ -84,7 +84,7 @@ h2{
         margin-top: 5%;
     }
 }
-@media(max-width: 320px){
+@media(max-width: 427px){
     .SDIV010{
         width: 90%
     }

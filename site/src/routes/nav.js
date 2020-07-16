@@ -17,6 +17,10 @@ router.get('/admin',authAdmins, navController.admin);
 
 router.get('/tutoriales', navController.tutoriales);
 
-router.get('/guias', navController.guias)
+router.get('/guias', navController.guias);
+
+router.get('/elegirGuia', navController.elegirGuia)
+
+router.get('/guiasEdit/:id', navController.guiasEdit)
 
 module.exports = router

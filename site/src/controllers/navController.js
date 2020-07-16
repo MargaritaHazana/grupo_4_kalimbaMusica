@@ -64,6 +64,38 @@ navController = {
 
         res.render('guias', {view: 'tutoriales', sessionUserID, categoryUser, categorias, marcas, guias})
 
+    },
+    elegirGuia: async function(req, res, next){
+        let sessionUserID = req.session.userID;
+        let categoryUser = req.session.category;
+
+        let categorias = await DB.Category.findAll();
+        let marcas = await DB.Brand.findAll();
+
+        let guias = await DB.Guide.findAll();
+
+        res.render('elegirGuia', {view: 'tutoriales', sessionUserID, categoryUser, categorias, marcas, guias})
+    },
+    guiasEdit: async function(req, res, next){
+        let parametro = req.params.id
+        let sessionUserID = req.session.userID;
+        let categoryUser = req.session.category;
+        
+        try{
+            let categorias = await DB.Category.findAll();
+            let marcas = await DB.Brand.findAll();
+    
+    
+            let guias = await DB.Guide.findAll();
+
+            let guia = guias.findIndex(parametro -1)
+            
+            res.render('guiasEdit', {view: 'forms',guias,parametro, sessionUserID, categoryUser, categorias, marcas, guiaAEditar})
+        }
+        catch(error){
+            res.send(error)
+        }
+        
     }
 }
 

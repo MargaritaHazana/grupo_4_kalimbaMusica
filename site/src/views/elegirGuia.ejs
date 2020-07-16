@@ -1,0 +1,23 @@
+<!-- Trayendo el head -->
+<%- include('partials/head') %> 
+
+<body>
+    
+    <!-- Trayendo el header -->
+    <%- include('partials/header') %> 
+
+    <div class="DIV010">
+        <div class="h-container">Guías para informarte más!</div>
+        <% for( let i = 0; i < guias.length; i++ ) { %>
+            
+            <h3 class="h3"><%= guias[i].title %></h3>
+            <form action="/nav/guiasEdit/<%=guias[i].id%>" method="GET">
+                <button class="ayuda">Editar</button>
+            </form>
+        <% } %>
+
+
+        
+    </div>
+    <%- include('partials/footer') %> 
+</body>

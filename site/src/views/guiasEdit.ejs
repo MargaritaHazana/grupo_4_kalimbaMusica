@@ -1,0 +1,39 @@
+<!-- Trayendo el head -->
+<%- include('partials/head', {title: 'Editando producto'}) %>
+
+<body>
+
+<!-- Trayendo el header -->
+<%- include('partials/header') %>
+
+<!-- Form -->
+<div class="contenedor-form" >
+        <form class="formulario" action="/product/<%=guia.id%>?_method=PUT" method="POST" enctype="multipart/form-data">
+
+            <div class="titulo-form"><p class="texto-titulo-form"> Editando guía <%= guia.title %> 
+            </p></div>
+            <label class="pregunta" for="">Título</label>
+            <input  class="respuesta" type="text" name="name" value="<%= guia.title %> ">
+    
+            <label class="pregunta" for="">Primer texto</label>
+            <input  class="respuesta" type="text" name="name" value="<%= guia.text1 %> ">
+    
+            <label class="pregunta" for="">Segundo texto</label>
+            <input  class="respuesta" type="text" name="name" value="<%= guia.text2 %> ">
+    
+            <label class="pregunta" for="">Tercer texto</label>
+            <input  class="respuesta" type="text" name="name" value="<%= guia.text3 %> ">
+            
+    
+    
+            <button type="submit" class="enter">Finalizar</button>
+        </form>
+     
+    
+</div>
+
+<!-- Trayendo el footer -->
+<%- include('partials/footer') %>
+
+</body>
+</html>

@@ -24,7 +24,7 @@ productController = {
         // ID y categoría del usuario en sesion
         let sessionUserID = req.session.userID;
         let categoryUser = req.session.category;
-        console.log(categoryUser);
+        
         try {
             // Productos destacados
             let destacados = await DB.Product.findAll({limit:4})
@@ -109,14 +109,13 @@ productController = {
                 res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, numberWithCommas, total, categoryUser, categorias, marcas });
             // Si hay productos     
             } else {
+                // Busca la info de cada producto en la DB, le agrega el color y cantidad y lo mete en el array de productos
                 for (let i = 0; i < cartProds.length; i++) {
                     try {
-                        // Busca la info de cada producto y lo mete en el array de productos
                         let productInfo = await DB.Product.findByPk(cartProds[i].id, {include: ['brands','subcategories','categories','types']});
                         productInfo.description = cartProds[i].colorName
-                        productInfo.discount = cartProds[i].cantidad
+                        productInfo.categoriesId = cartProds[i].cantidad
                         productos.push(productInfo);
-                        // productos[i].prod = undefined
                     } catch (error) {
                         res.send(error)
                     }
@@ -124,9 +123,12 @@ productController = {
                 // Calcula el total a pagar
                 let total = 0
                 for (let i = 0; i < productos.length; i++) {
-                    total = total + productos[i].price
+                    if (productos[i].discount == 0) {
+                        total = total + (productos[i].price * productos[i].categoriesId)
+                    } else {
+                        total = total + ((productos[i].price - (productos[i].price * (productos[i].discount/100))) * productos[i].categoriesId);
+                    }
                 }
-                // res.send(typeof productos.prod.name)
                 res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, numberWithCommas, total, categoryUser, categorias, marcas });
             }
         // Si hay un usuario logueado
@@ -140,13 +142,18 @@ productController = {
                 
                 // Busca la info de cada producto y lo mete en el array de productos
                 for (let i = 0; i < productos.length; i++) {
-                    const productInfo = await DB.Product.findByPk(productos[i].productsId, {include: ['brands','subcategories','categories','types']} );
-                    productos[i].prod = productInfo   
+                    const productInfo = await DB.Product.findByPk(productos[i].productsId, {include: ['brands','subcategories','categories','types']} );   
+                    productos[i].prod = productInfo
                 }
                 // Calcula el total a pagar
                 let total = 0
                 for (let i = 0; i < productos.length; i++) {
-                    total = total + productos[i].prod.price
+                    if (productos[i].discount == 0) {
+                        total = total + (productos[i].prod.price * productos[i].prod.cantidad)
+                    } else {
+                        let precioDesc = productos[i].prod.price - (productos[i].prod.price * (productos[i].prod.discount/100));
+                        total = total + (precioDesc * productos[i].cantidad)
+                    }
                 }
                 res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, total, numberWithCommas, categoryUser, categorias, marcas }); 
                 // res.send(typeof productos[0].prod)
@@ -172,7 +179,13 @@ productController = {
             // Si no hay un usuario logueado - guarda el producto en session
             if (sessionUserID == undefined) {
                 // Si el producto ya está en el carrito - No lo vuelve a agregar
-                if (cartProds.includes(req.params.id)) {
+                let control = false
+                for (let i = 0; i < cartProds.length; i++) {
+                    if (cartProds[i].id == req.params.id) {
+                        control = true
+                    } 
+                }
+                if (control) {
                     res.redirect('/productDetail/' + req.params.id);
                 // Si el producto no esta en el carrito - Lo agrega
                 } else {
@@ -228,7 +241,8 @@ productController = {
             res.redirect('/productCart');
         } else {
             let position = cartProds.indexOf(req.params.id)
-            cartProds.splice(position, 1)
+            cartProds.splice((position-1), 1)
+            req.session.cart = cartProds
             res.redirect('/productCart');
         }
     },
@@ -418,6 +432,37 @@ productController = {
         }
         catch(error){
             res.send(error)
+        }
+    },
+
+    buyView: async(req,res,next)=>{
+        // ID y categoría del usuario en sesion
+        let sessionUserID = req.session.userID;
+        let categoryUser = req.session.category;
+        let mensaje = [];
+        // para el menu colapsable del Header
+        let categorias = await DB.Category.findAll()
+        let marcas = await DB.Brand.findAll()
+        res.render('buy', {sessionUserID, view: 'forms',mensaje, categorias, marcas, categoryUser, sessionUserID});
+    },
+
+    buy:async (req,res)=>{
+        // ID y categoría del usuario en sesion
+        let sessionUserID = req.session.userID;
+        let categoryUser = req.session.category;
+        // para el menu colapsable del Header
+        let categorias = await DB.Category.findAll()
+        let marcas = await DB.Brand.findAll()
+        let errors = validationResult(req);
+        let mensaje = []
+        // Valida los datos del form
+        if (!errors.isEmpty()) {
+            mensaje.push(errors)
+            // Si hay errores - Redirige al register y envía errores
+            return res.render('buy', { view: 'forms', mensaje, errors: errors.errors, sessionUserID, categoryUser, categorias,marcas});
+        // Si no hay errores
+        } else {
+            res.redirect('https://www.mercadopago.com.ar/');
         }
     }
 }

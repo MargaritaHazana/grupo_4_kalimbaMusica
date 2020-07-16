@@ -1,0 +1,50 @@
+<!-- Trayendo el head -->
+<%- include('partials/head', {title: 'Comprar'}) %>
+<body>
+    <!-- Trayendo el header -->
+    <%- include('partials/header') %>
+    <!-- Forms -->
+    <div class="contenedor-form">
+        <form class="formulario" action="/products/buy" method="POST">
+            <div class="titulo-form"><p class="texto-titulo-form"> Datos de envío
+            </p></div>
+            <!-- Muestra los errores de la validación -->
+            <div class="errors">
+                <% if (typeof errors != 'undefined') { %>
+                    <ul>
+                        <% errors.forEach(error => { %>
+                            <li>
+                                <%= error.msg %> 
+                            </li>
+                        <% }) %>
+                    </ul>
+                <% } %>
+                <% if (typeof mensaje[0] != 'null') { %>
+                    <p> <%= mensaje %> </p>
+                <% } %>  
+            </div>
+              
+        <label class="pregunta" for="">Dirección</label>
+        <input  class="respuesta" type="text" name="dirección">
+
+        <label class="pregunta" for="">Provincia</label>
+        <input class="respuesta" type="text" name="provincia">
+
+        <label class="pregunta" for="">Ciudad</label>
+        <input class="respuesta" type="text" name="ciudad">
+
+        <label class="pregunta" for="">Código Postal</label>
+        <input class="respuesta" type="number" name="CP">
+
+        <label class="pregunta" for="">Nombre de la persona que lo recibe</label>
+        <input class="respuesta" type="text" name="nombre">
+
+        <button type="submit" class="enter">Proceder al pago</button>
+        </form>
+    </div>
+
+     <!-- Trayendo el footer -->
+    <%- include('partials/footer') %>
+    
+</body>
+</html>

@@ -24,14 +24,14 @@
                                 <p><strong> Marca: </strong><%= producto.brands.name %>  </p>
                                 <p><strong> Color: </strong><%= producto.description %>  </p>
                                 <p class="cant-mobile">Cantidad</p>
-                                <p class="cant-mobile precio">$<%= numberWithCommas(producto.price) %> </p>
+                                <p class="cant-mobile precio">$<%= numberWithCommas(producto.categoriesId) %> </p>
                             </div>
                         </div>
         
-                        <p class="cant"><%= producto.discount %> </p>
+                        <p class="cant"><%= producto.categoriesId %> </p>
         
                         <div class="final">
-                            <p class="total-prod">$<%= numberWithCommas(producto.price) %> </p>
+                            <p class="total-prod">$<%= numberWithCommas(((producto.price - (producto.price * (producto.discount/100))) * producto.categoriesId)) %> </p>
                             <form action="/product/deleteCart/<%= producto.id %> " method="post">
                                 <button type="submit" class="quitar">Quitar</button>
                             </form>
@@ -58,14 +58,14 @@
                                     <p><strong> Marca: </strong><%= producto.prod.brands.name %>  </p>
                                     <p><strong> Color: </strong><%= producto.colors %>  </p>
                                     <p class="cant-mobile">Cantidad</p>
-                                    <p class="cant-mobile precio">$<%= numberWithCommas(producto.prod.price) %> </p>
+                                    <p class="cant-mobile precio">$<%= numberWithCommas(producto.cantidad) %> </p>
                                 </div>
                             </div>
             
                             <p class="cant"><%= producto.cantidad %> </p>
             
                             <div class="final">
-                                <p class="total-prod">$<%= numberWithCommas(producto.prod.price) %> </p>
+                                <p class="total-prod">$<%= numberWithCommas(((producto.prod.price - (producto.prod.price * (producto.prod.discount/100))) * producto.cantidad)) %> </p>
                                 <form action="/product/deleteCart/<%= producto.prod.id %> " method="post">
                                     <button type="submit" class="quitar">Quitar</button>
                                 </form>
@@ -80,7 +80,9 @@
                 <p>Total:</p>
                 <p>$<%= numberWithCommas(total) %> </p>
             </div>
-            <button type="submit" class="comprar">Iniciar compra</button>
+            <form action="/products/buy" method="get">
+                <button type="submit" class="comprar">Iniciar compra</button>
+            </form>
         </section>
 
         <!-- Trayendo los productos destacados -->

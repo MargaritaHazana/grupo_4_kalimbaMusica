@@ -92,7 +92,7 @@ userController = {
             // ID y categoría del usuario en sesion
             let sessionUserID = req.session.userID;
             let categoryUser = req.session.category;
- 
+            
             let mensaje = []
             // para el menu colapsable del Header
             let categorias = await DB.Category.findAll()
@@ -132,11 +132,34 @@ userController = {
                 // Si está bien - Guarda el userID en session y redirige al home
                 req.session.userID = user.id;
                 req.session.category = user.role
+                let carrito = req.session.cart;
                 // Si tocó recordarme - Guarda el userID en cookies
                 if (req.body.recordarme){
                     res.cookie('userIDCookie', user.id, {maxAge: 604800000});
                 }
-                res.redirect('/');
+
+                if (!carrito || carrito.length == 0) {
+                    res.redirect('/');
+                } else {
+                    for (let i = 0; i < carrito.length; i++) {
+                        try {
+                            // Busca si el producto ya está en el carrito
+                            let control = await DB.Product_user.findAll({where: {productsId: carrito[i].id}});
+                            // Si no está - Lo agrega a la DB
+                            if (control.length == 0) {
+                                const newItem = await DB.Product_user.create({
+                                    productsId: carrito[i].id,
+                                    usersId: user.id,
+                                    cantidad: carrito[i].cantidad,
+                                    colors: carrito[i].colorName
+                                });
+                            } 
+                        } catch (error) {
+                            res.send(error)
+                        }   
+                    }
+                    res.redirect('/');
+                }
             } else {
                 // Si está mal la contraseña - Redirige al login y manda mensaje de error
                 mensaje.push('Email o contraseña invalida'); 

@@ -10,6 +10,7 @@ var productController = require('../controllers/productController');
 const loginMiddleware = require('../middlewares/loginMiddleware');
 const authAdmins = require('../middlewares/authAdmins');
 
+
 //Métodos para guardar imagenes
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -58,6 +59,16 @@ router.post('/product/search', productController.search);
 router.get('/products/categorias/:id', productController.category);
 
 router.get('/products/marcas/:id', productController.brands)
+
+// Get vista de compra
+router.get('/products/buy',loginMiddleware, productController.buyView);
+router.post('/products/buy',[
+  check('dirección').notEmpty().withMessage('El campo dirección no puede estar vacío'),
+  check('provincia').notEmpty().withMessage('El campo provincia no puede estar vacío'),
+  check('ciudad').notEmpty().withMessage('El campo ciudad no puede estar vacío').trim(),
+  check('CP').notEmpty().withMessage('El campo CP no puede estar vacío').isNumeric().withMessage('El campo CP debe ser numérico'),
+  check('nombre').notEmpty().withMessage('El campo nombre no puede estar vacío'),
+], productController.buy);
 
 
 module.exports = router;

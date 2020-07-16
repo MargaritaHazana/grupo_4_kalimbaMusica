@@ -52,6 +52,7 @@
     width: 33%;
     text-align: center;
     align-self: center;
+    justify-content: center;
 }
 .final {
     display: flex;

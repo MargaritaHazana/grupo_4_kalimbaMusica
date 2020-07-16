@@ -381,9 +381,14 @@ padding-right: 20%;
 }
 
 .P001{
-font-size: 20px;
-margin: 5px;
-}
+    font-size: 20px;
+    margin: 5px;
+    padding: 2px;
+    border-radius: 5px;
+    }
+    .P001:hover{
+        background-color: #e75f3e;
+    }
 /* -----------------Termina el Header----------------- */
 /* -----------------Comienza el cuerpo del Home------------------- */
 .HomeView{

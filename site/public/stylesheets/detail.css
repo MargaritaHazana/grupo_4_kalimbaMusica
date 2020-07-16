@@ -27,24 +27,20 @@ main {
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
+    justify-content: center;
 }
 .parte-der{
     width: 35%;
-    border-left: slategray 0.15px solid;
+    border-left: #d9dadb 0.15px solid;
 }
 /* Diseño de la sección de fotos */
-.margen-izq {
-    flex-direction: column;
-    width: 15%;
-    height: fit-content;
-}
 .foto {
     width: 105%;
     margin: 5% 0px;
     border-color: black;
 }
 .middle {
-    width: 80%;
+    width: 70%;
     height: fit-content;
     padding: 1%;
     text-align: center;
@@ -73,6 +69,24 @@ main {
     line-height: 1;
     margin-bottom: 0px;
     font-weight: 700;
+}
+.detail{
+    margin-bottom: 10%;
+    margin-top: 10%;
+}
+.cant{
+    display: flex;
+    margin-bottom: 3%;
+}
+.cant label {
+    margin-right: 1%;
+}
+.colors{
+    display: flex;
+    margin-bottom: 6%;
+}
+.colors label {
+    margin-right: 1%;
 }
 .list {
     width: 100%;
@@ -119,7 +133,7 @@ ul{
     color: gray;
     width: 100%;
     margin-top: 0px;
-    padding-left: 4%;
+    padding-left: 2%;
 }
 .descuento {
     color: #41426f;
@@ -307,7 +321,7 @@ ul{
     padding: 2%;
     width: 100%;
     padding-left: 4%;
-    border-top:  slategray 0.15px solid;;
+    border-top:  #d9dadb 0.15px solid;;
 }
 .titulo3{
     margin-top: 8%;
@@ -353,11 +367,18 @@ ul{
 .d {
     color: #d9dadb;
 }
+.admin{
+    width: 80%;
+    margin-left: 7%;
+    display: flex;
+    justify-content: space-between;
+}
 .boton{
-    border: none;
-    background-color: none;
-    color: grey;
-    margin-right: 2%;
+    border-color:#d9dadb;
+    border-style: solid;
+    border-radius: 10%;
+    background: white;
+    margin-right: 4%;
 }
 
 /* Haciendolo responsive */

@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require("fs");
+const {check, body, validationResult} = require('express-validator');
 
 const DB = require('../database/models');
 const OP = DB.Sequelize.Op;
@@ -60,31 +61,30 @@ productController = {
         let categoryUser = req.session.category;
         // Productos destacados
         let destacados = await DB.Product.findAll({limit: 4});
-        
- 
-        // Encontrando el producto
-        try {
-            var idProducto = req.params.id;
+
             // Encontrando el producto
-            let producto = await DB.Product.findByPk(idProducto, {include:['brands', 'categories', 'subcategories', 'types']});
-            let colores = await DB.Color_product.findAll({where: {productsId:idProducto}});
-            let coloresDisp = []
-            for (let i = 0; i < colores.length; i++) {
-                let color = await DB.Color.findByPk(colores[i].colorsId);
-                coloresDisp.push(color.name)
+            try {
+                var idProducto = req.params.id;
+                // Encontrando el producto
+                let producto = await DB.Product.findByPk(idProducto, {include:['brands', 'categories', 'subcategories', 'types']});
+                let colores = await DB.Color_product.findAll({where: {productsId:idProducto}});
+                let coloresDisp = []
+                for (let i = 0; i < colores.length; i++) {
+                    let color = await DB.Color.findByPk(colores[i].colorsId);
+                    coloresDisp.push(color)
+                }
+                // Calculando el precio con descuento
+                var precioViejo = "$" + numberWithCommas(Math.round(producto.price));
+                var descuento = producto.price * (producto.discount / 100);
+                var precioDescuento = Math.round(producto.price - descuento);
+                var precioFinal = "$" + numberWithCommas(precioDescuento);
+                // para el menu colapsable del Header
+                let categorias = await DB.Category.findAll()
+                let marcas = await DB.Brand.findAll()
+                res.render('productDetail', { view: 'detail' , producto, precioViejo, precioFinal, destacados, sessionUserID, categoryUser, marcas, categorias, coloresDisp });
+            } catch (error) {
+                res.send(error)
             }
-            // Calculando el precio con descuento
-            var precioViejo = "$" + numberWithCommas(Math.round(producto.price));
-            var descuento = producto.price * (producto.discount / 100);
-            var precioDescuento = Math.round(producto.price - descuento);
-            var precioFinal = "$" + numberWithCommas(precioDescuento);
-            // para el menu colapsable del Header
-            let categorias = await DB.Category.findAll()
-            let marcas = await DB.Brand.findAll()
-            res.render('productDetail', { view: 'detail' , producto, precioViejo, precioFinal, destacados, sessionUserID, categoryUser, marcas, categorias, coloresDisp });
-        } catch (error) {
-            res.send(error)
-        }
     },
 
     // Renderiza la view del Carro de los Productos
@@ -104,53 +104,55 @@ productController = {
             // Se fija si hay productos en el carrito de la session
             if (cartProds.length == 0){
                 // Si no hay productos
-                productos = [];
+                productos = [{colors:'', cantidad:'', prod:{name:'No hay productos en tu carrito',price:'', brands:{name:''}, image:''}}];
                 total = 0
                 res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, numberWithCommas, total, categoryUser, categorias, marcas });
             // Si hay productos     
             } else {
-                cartProds.forEach(async productId=>{
+                for (let i = 0; i < cartProds.length; i++) {
                     try {
                         // Busca la info de cada producto y lo mete en el array de productos
-                        let productInfo = await DB.Product.findByPk(productId, {include: ['colors','brands','subcategories','categories','types']});
-                        productInfo = productInfo.dataValues
+                        let productInfo = await DB.Product.findByPk(cartProds[i].id, {include: ['brands','subcategories','categories','types']});
+                        productInfo.description = cartProds[i].colorName
+                        productInfo.discount = cartProds[i].cantidad
                         productos.push(productInfo);
-                        // Calcula el total a pagar
-                        let total = 0
-                        for (let i = 0; i < productos.length; i++) {
-                            total = total + productos[i].price
-                        }
-    
-                        res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, numberWithCommas, total, categoryUser, categorias, marcas });
+                        // productos[i].prod = undefined
                     } catch (error) {
                         res.send(error)
                     }
-                })
-            }
-        // Si hay un usuario logueado
-        } else {
-            try {
-                // Busca los IDs de los productos en el carrito de la DB
-                let productId = await DB.Product_user.findAll({where: {usersId: sessionUserID}});
-                let products = [];
-                productId.forEach(product =>{
-                    products.push(product.dataValues);
-                })
-                // Busca la info de cada producto y lo mete en el array de productos
-                for (let i = 0; i < products.length; i++) {
-                    const productInfo = await DB.Product.findByPk(products[i].productsId, {include: ['colors','brands','subcategories','categories','types']} );
-                    productos.push(productInfo.dataValues)  
                 }
                 // Calcula el total a pagar
                 let total = 0
                 for (let i = 0; i < productos.length; i++) {
                     total = total + productos[i].price
                 }
+                // res.send(typeof productos.prod.name)
+                res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, numberWithCommas, total, categoryUser, categorias, marcas });
+            }
+        // Si hay un usuario logueado
+        } else {
+            try {
+                // Busca los IDs de los productos en el carrito de la DB
+                let productId = await DB.Product_user.findAll({where: {usersId: sessionUserID}});
+                productId.forEach(product =>{
+                    productos.push(product.dataValues);
+                })
+                
+                // Busca la info de cada producto y lo mete en el array de productos
+                for (let i = 0; i < productos.length; i++) {
+                    const productInfo = await DB.Product.findByPk(productos[i].productsId, {include: ['brands','subcategories','categories','types']} );
+                    productos[i].prod = productInfo   
+                }
+                // Calcula el total a pagar
+                let total = 0
+                for (let i = 0; i < productos.length; i++) {
+                    total = total + productos[i].prod.price
+                }
                 res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, total, numberWithCommas, categoryUser, categorias, marcas }); 
-                   
+                // res.send(typeof productos[0].prod)
             } catch (error) {
                 // Si no hay productos
-                productos = [];
+                productos = [{colors:'', cantidad:'', prod:{name:'No hay productos en tu carrito',price:'', brands:{name:''}, image:''}}];ctos = [];
                 total = 0
                 res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, numberWithCommas, total,categoryUser, categorias, marcas });
             }   
@@ -159,60 +161,76 @@ productController = {
 
     // Agrega el producto al carrito
     addToCart: async(req, res)=>{
-        // ID del usuario en sesion
+        // ID y categoría del usuario en sesion
         let sessionUserID = req.session.userID;
+        let categoryUser = req.session.category;
         // Guarda los productos del carrito en session
         req.session.cart = cartProds;
-        // Si no hay un usuario logueado - guarda el producto en session
-        if (sessionUserID == undefined) {
-            // Si el producto ya está en el carrito - No lo vuelve a agregar
-            if (cartProds.includes(req.params.id)) {
-                res.redirect('/productDetail/' + req.params.id);
-            // Si el producto no esta en el carrito - Lo agrega
+        // para el menu colapsable del Header
+        let categorias = await DB.Category.findAll()
+        let marcas = await DB.Brand.findAll()
+            // Si no hay un usuario logueado - guarda el producto en session
+            if (sessionUserID == undefined) {
+                // Si el producto ya está en el carrito - No lo vuelve a agregar
+                if (cartProds.includes(req.params.id)) {
+                    res.redirect('/productDetail/' + req.params.id);
+                // Si el producto no esta en el carrito - Lo agrega
+                } else {
+                    cartProds.push({
+                        id: req.params.id,
+                        colorName: req.body.color,
+                        cantidad: req.body.cantidad
+                    });
+                    res.redirect('/productDetail/' + req.params.id);
+                }
+            // Si hay un usuario en logueado - guarda en producto en la DB
             } else {
-                cartProds.push(req.params.id);
-                res.redirect('/productDetail/' + req.params.id);
-            }
-            
-        // Si hay un usuario en logueado - guarda en producto en la DB
-        } else {
-            try {
-                // Encontrando el producto
-                let producto = await DB.Product.findByPk(req.params.id); 
                 try {
-                    // Busca si el producto ya está en el carrito
-                    let control = await DB.Product_user.findAll({where: {productsId: producto.id}});
-                    // Si no está - Lo agrega a la DB
-                    if (control.length == 0) {
-                        const newItem = await DB.Product_user.create({
-                            productsId: req.params.id,
-                            usersId: sessionUserID
-                        });
-                        res.redirect('/productDetail/' + req.params.id);
-                    // Si ya está en el carrito - No lo agrega
-                    } else {
-                        res.redirect('/productDetail/' + req.params.id);
+                    // Encontrando el producto
+                    let producto = await DB.Product.findByPk(req.params.id); 
+                    try {
+                        // Busca si el producto ya está en el carrito
+                        let control = await DB.Product_user.findAll({where: {productsId: producto.id}});
+                        // Si no está - Lo agrega a la DB
+                        if (control.length == 0) {
+                            const newItem = await DB.Product_user.create({
+                                productsId: req.params.id,
+                                usersId: sessionUserID,
+                                cantidad: req.body.cantidad,
+                                colors: req.body.color
+                            });
+                            res.redirect('/productDetail/' + req.params.id);
+                        // Si ya está en el carrito - No lo agrega
+                        } else {
+                            res.redirect('/productDetail/' + req.params.id);
+                        }
+                    } catch (error) {
+                    res.send(error)
                     }
                 } catch (error) {
-                   res.send(error)
-                }
-            } catch (error) {
-                res.send(error);
-            }   
-        }
+                    res.send(error);
+                }   
+            }
+
     },
  
     // Elimina un producto del carrito
     deleteCart: async(req,res)=>{
         // ID del usuario en sesion
         let sessionUserID = req.session.userID;
-        await DB.Product_user.destroy({
-            where: {
-                productsId: req.params.id,
-                usersId: sessionUserID
-            }
-        })
-        res.redirect('/productCart');
+        if (typeof sessionUserID !== 'undefined') {
+            await DB.Product_user.destroy({
+                where: {
+                    productsId: req.params.id,
+                    usersId: sessionUserID
+                }
+            })
+            res.redirect('/productCart');
+        } else {
+            let position = cartProds.indexOf(req.params.id)
+            cartProds.splice(position, 1)
+            res.redirect('/productCart');
+        }
     },
 
     // Renderiza la view que permite agregar productos

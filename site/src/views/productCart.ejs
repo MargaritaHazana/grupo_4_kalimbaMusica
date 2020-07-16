@@ -13,33 +13,68 @@
                 <p class="titulo">Total</p>
             </div>
 
-            <% productos.forEach(producto => { %>
-                <div class="productos">
-                    <div class="prod-resumen">
-                        <p class="prod-name"><%= producto.name %> </p>
-                        <div class="foto-container"><img src="./images/<%= producto.image %> " alt="foto"></div>
-                       
-                        <div class="caracteristicas">          
-                            <p><% producto.colors.forEach(color => { %>
-                                <%= color.name %> 
-                            <% }) %> </p>
-                            <p> <%= producto.brands.name %>  </p>
-                            <p class="cant-mobile">Cantidad</p>
-                            <p class="cant-mobile precio">$<%= numberWithCommas(producto.price) %> </p>
+            <% if (productos[0].prod == undefined) { %>
+                <% productos.forEach(producto => { %>
+                    <div class="productos">
+                        <div class="prod-resumen">
+                            <p class="prod-name"><%= producto.name %> </p>
+                            <div class="foto-container"><img src="./images/<%= producto.image %> " alt="foto"></div>
+                           
+                            <div class="caracteristicas">          
+                                <p><strong> Marca: </strong><%= producto.brands.name %>  </p>
+                                <p><strong> Color: </strong><%= producto.description %>  </p>
+                                <p class="cant-mobile">Cantidad</p>
+                                <p class="cant-mobile precio">$<%= numberWithCommas(producto.price) %> </p>
+                            </div>
                         </div>
+        
+                        <p class="cant"><%= producto.discount %> </p>
+        
+                        <div class="final">
+                            <p class="total-prod">$<%= numberWithCommas(producto.price) %> </p>
+                            <form action="/product/deleteCart/<%= producto.id %> " method="post">
+                                <button type="submit" class="quitar">Quitar</button>
+                            </form>
+                        </div>
+                        
                     </div>
-    
-                    <p class="cant">1</p>
-    
-                    <div class="final">
-                        <p class="total-prod">$<%= numberWithCommas(producto.price) %> </p>
-                        <form action="/product/deleteCart/<%= producto.id %> " method="post">
-                            <button type="submit" class="quitar">Quitar</button>
-                        </form>
-                    </div>
-                    
-                </div>
-            <% }) %>
+                <% }) %>
+            <% } else { %>
+                <% productos.forEach(producto => { %>
+                    <% if (producto.prod.name.includes('No hay productos')) { %>
+                        <div class="productos">
+                            <div class="prod-resumen">
+                                <p class="prod-name"><%= producto.prod.name %> <i class="far fa-sad-cry"></i></p>
+                                <a href="http:/products">  Ver productos</a>
+                            </div>
+                        </div>
+                    <% } else {%>
+                        <div class="productos">
+                            <div class="prod-resumen">
+                                <p class="prod-name"><%= producto.prod.name %> </p>
+                                <div class="foto-container"><img src="./images/<%= producto.prod.image %> " alt="foto"></div>
+                            
+                                <div class="caracteristicas">          
+                                    <p><strong> Marca: </strong><%= producto.prod.brands.name %>  </p>
+                                    <p><strong> Color: </strong><%= producto.colors %>  </p>
+                                    <p class="cant-mobile">Cantidad</p>
+                                    <p class="cant-mobile precio">$<%= numberWithCommas(producto.prod.price) %> </p>
+                                </div>
+                            </div>
+            
+                            <p class="cant"><%= producto.cantidad %> </p>
+            
+                            <div class="final">
+                                <p class="total-prod">$<%= numberWithCommas(producto.prod.price) %> </p>
+                                <form action="/product/deleteCart/<%= producto.prod.id %> " method="post">
+                                    <button type="submit" class="quitar">Quitar</button>
+                                </form>
+                            </div>
+                            
+                        </div>
+                    <% } %> 
+                <% }) %>
+            <% } %>
             
             <div class="total">
                 <p>Total:</p>

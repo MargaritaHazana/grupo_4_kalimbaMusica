@@ -35,7 +35,7 @@ userController = {
         // para el menu colapsable del Header
         let categorias = await DB.Category.findAll()
         let marcas = await DB.Brand.findAll()
-
+ 
         let errors = validationResult(req);
         let mensaje = []
         // Valida los datos del form
@@ -92,7 +92,7 @@ userController = {
             // ID y categoría del usuario en sesion
             let sessionUserID = req.session.userID;
             let categoryUser = req.session.category;
-
+ 
             let mensaje = []
             // para el menu colapsable del Header
             let categorias = await DB.Category.findAll()
@@ -114,13 +114,13 @@ userController = {
         let marcas = await DB.Brand.findAll()
         let errors = validationResult(req);
         let mensaje = []
-
+ 
         // Valida los datos del form
         if (!errors.isEmpty()) {
             // Si hay errores - Redirige al login y envía errores
             return res.render('login', {errors: errors.errors, view: 'forms', sessionUserID, mensaje, categorias, categoryUser, marcas});
         } 
-
+ 
         // Si no hay errores - Busca si el el email está registrado en la DB
         try {
             // Encuentra el user que se quiere loguear
@@ -143,7 +143,7 @@ userController = {
                     
                 res.render('login', { view: 'forms', sessionUserID, mensaje, categoryUser, categorias, marcas});
             }
-
+ 
         // Si no encuentra el usuario - Redirige al login y manda mensaje de error        
         } catch (error) {
             mensaje.push('Email o contraseña invalida'); 

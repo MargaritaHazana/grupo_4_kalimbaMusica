@@ -3,6 +3,8 @@ module.exports = (sequelize, DataTypes) => {
         'Product_user',
         {   productsId: DataTypes.INTEGER,
             usersId: DataTypes.INTEGER,
+            colors: DataTypes.STRING,
+            cantidad: DataTypes.INTEGER,
             deletedAt: DataTypes.DATE
         },
         {tableName: 'products_users',

@@ -62,28 +62,32 @@
 
                         </div>
 
-                        <div>
+                        <div class="detail"> 
                             <p><strong>Marca: </strong> <%= producto.brands.name %></p>
                             <p><strong>Categoría: </strong> <%= producto.categories.name %></p>
                             <p><strong>Subcategoría: </strong> <%= producto.subcategories.name %></p>
                             <p><strong>Tipo: </strong> <%= producto.types.name %></p>
                         </div>
-                        <div class="cant">
-                            <label for="">Cantidad:</label>
-                            <input class="inputDetail" type="number" value="1" name="cantidad">
-                        </div>
-                        <div class="colors">
-                            <label>Colores:</label>
-                            <select class="selectDetail" name="color" id="" multiple>
-                                <% coloresDisp.forEach(color => { %>
-                                    <option value="<%= color %>" class="<%= color %> " ></option>
-                                <% }) %>
-                            </select>
-                        </div>
                         
                         <section>
 
                         <form action="/product/addToCart/<%= producto.id %> " method="post">
+                            <div class="cant">
+                                <label for="">Cantidad:</label>
+                                <input class="inputDetail" type="number" value="1" name="cantidad">
+                            </div>
+                            <div class="colors">
+                                <label>Colores:</label>
+                                <select class="selectDetail" name="color" id="" >
+                                    <% for( let i = 0; i < coloresDisp.length; i++ ) { %>
+                                        <% if (coloresDisp[i].id == i) { %>
+                                            <option value="<%= coloresDisp[i].name %>" name='color'selected ><%= coloresDisp[i].name %> </option>
+                                            <% } else { %>
+                                            <option value="<%= coloresDisp[i].name %>" name= 'color'><%= coloresDisp[i].name %></option>
+                                        <% } %>
+                                    <% } %>
+                                </select>
+                            </div>
                             <button type="submit" class="boton-comprar">
                                 Añadir a mi carrito
                             </button>
@@ -93,12 +97,14 @@
                     <!-- Si el user es admin - Muestra botones de editar y eliminar -->
                     <% if (categoryUser == 1) { %>
                         <% var urlEdit = "/product/" + producto.id + "/edit" %>  
-                        <form action="/product/delete/<%= producto.id %>?_method=delete" method="POST" >
-                            <button type="submit" class="boton">Eliminar producto</button>
-                        </form>
-                        <form action="<%= urlEdit %> " method="get">
-                            <button type="submit" class="boton">Editar producto</button>
-                        </form>
+                        <div class="admin">
+                            <form action="/product/delete/<%= producto.id %>?_method=delete" method="POST" >
+                                <button type="submit" class="boton">Eliminar</button>
+                            </form>
+                            <form action="<%= urlEdit %> " method="get">
+                                <button type="submit" class="boton">Editar</button>
+                            </form>
+                        </div>
                     <% } %>
                     
                 </section>
@@ -111,7 +117,6 @@
                     <p><strong>Subcategoría: <%= producto.subcategories.name %> </strong></p>
                     <p><strong>Tipo: <%= producto.types.name %> </strong></p>
                 </div>
-               
                 <section class="titulo2">
 
                     <h1>Medios de pago</h1>
@@ -122,32 +127,19 @@
                         <i class="fab fa-cc-paypal pp"></i>
                         <i class="fab fa-cc-amex amex"></i>
                     </div>
-                    <div class="divmp">
+                    <!-- <div class="divmp">
                         <h1 class="titulomp">Pagá a través de MercadoPago</h1><i class="far fa-handshake mp"></i>
-                    </div>
+                    </div> -->
                 </section>
-
-                <section class="titulo2">
-
-                    <h1>Envíos</h1>
-                    
-                    <div class="list">
-                        <ul >
-                            <li><i class="fas fa-shipping-fast camion"></i> Envíos a todo el país </li>
-                            <li><i class="fas fa-undo-alt flecha"></i> Devolución gratis por 30 días </li>
-                            <li><i class="fas fa-credit-card tarjeta"></i> Consultá medios de pago </li>
-                        </ul> 
-                    </div>
-                </section>
-
                 <section class="titulo2">
                     <h1>Formas de entrega</h1>
                     <p class="retiro">Retirá tu compra por cualquiera de nuestros locales</p>
-                    <a href="/locales" class="consulta">Ver locales</a>
+                    <a href="/nav/ayuda" class="consulta">Ver locales</a>
                     <p class="retiro">Envíos a todo el país por Correo Argentino</p>
-                    <a href="/" class="consulta">Consultar costo de envío</a>
+                    <a href="/nav/ayuda" class="consulta">Consultar costo de envío</a>
                     
                 </section>
+                
             </div>
         </div>
         

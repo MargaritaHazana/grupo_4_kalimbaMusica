@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const {check, validationResult, body} = require('express-validator');
 var multer = require('multer');
 var path = require('path');
 

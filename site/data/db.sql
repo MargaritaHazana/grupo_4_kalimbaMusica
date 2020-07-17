@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `kalimba_musica` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+USE `kalimba_musica`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: kalimba_musica
@@ -103,7 +105,7 @@ CREATE TABLE `colors_products` (
   `deletedAt` datetime(6) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=179 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=183 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,7 +114,7 @@ CREATE TABLE `colors_products` (
 
 LOCK TABLES `colors_products` WRITE;
 /*!40000 ALTER TABLE `colors_products` DISABLE KEYS */;
-INSERT INTO `colors_products` VALUES (86,3,NULL,19),(0,3,'0000-00-00 00:00:00.000000',23),(3,1,NULL,75),(3,2,NULL,76),(3,3,NULL,77),(5,3,NULL,80),(5,4,NULL,81),(12,3,NULL,89),(53,7,NULL,91),(55,8,NULL,94),(56,4,NULL,95),(63,8,NULL,103),(66,1,NULL,108),(66,3,NULL,109),(66,9,NULL,110),(67,8,NULL,111),(68,3,NULL,112),(68,9,NULL,113),(69,3,NULL,114),(70,3,NULL,117),(70,4,NULL,118),(71,10,NULL,119),(73,10,NULL,122),(76,4,NULL,126),(83,3,NULL,132),(4,1,NULL,139),(4,2,NULL,140),(7,3,NULL,141),(7,4,NULL,142),(8,4,NULL,143),(9,7,NULL,144),(6,4,NULL,145),(6,5,NULL,146),(10,9,NULL,147),(10,1,NULL,148),(11,3,NULL,149),(52,4,NULL,150),(54,2,NULL,151),(54,4,NULL,152),(57,4,NULL,153),(58,2,NULL,154),(59,7,NULL,155),(59,8,NULL,156),(60,6,NULL,157),(60,8,NULL,158),(61,8,NULL,159),(62,3,NULL,160),(64,1,NULL,161),(64,3,NULL,162),(65,7,NULL,163),(65,8,NULL,164),(72,2,NULL,165),(72,3,NULL,166),(74,7,NULL,167),(74,8,NULL,168),(75,3,NULL,169),(77,3,NULL,170),(78,1,NULL,171),(79,10,NULL,172),(80,3,NULL,173),(80,5,NULL,174),(81,3,NULL,175),(82,3,NULL,176),(84,3,NULL,177),(85,3,NULL,178);
+INSERT INTO `colors_products` VALUES (86,3,NULL,19),(0,3,'0000-00-00 00:00:00.000000',23),(3,1,NULL,75),(3,2,NULL,76),(3,3,NULL,77),(5,3,NULL,80),(5,4,NULL,81),(12,3,NULL,89),(53,7,NULL,91),(55,8,NULL,94),(56,4,NULL,95),(63,8,NULL,103),(66,1,NULL,108),(66,3,NULL,109),(66,9,NULL,110),(67,8,NULL,111),(68,3,NULL,112),(68,9,NULL,113),(69,3,NULL,114),(70,3,NULL,117),(70,4,NULL,118),(71,10,NULL,119),(73,10,NULL,122),(76,4,NULL,126),(83,3,NULL,132),(4,1,NULL,139),(4,2,NULL,140),(7,3,NULL,141),(7,4,NULL,142),(8,4,NULL,143),(9,7,NULL,144),(6,4,NULL,145),(6,5,NULL,146),(10,9,NULL,147),(10,1,NULL,148),(11,3,NULL,149),(52,4,NULL,150),(54,2,NULL,151),(54,4,NULL,152),(57,4,NULL,153),(58,2,NULL,154),(59,7,NULL,155),(59,8,NULL,156),(60,6,NULL,157),(60,8,NULL,158),(61,8,NULL,159),(62,3,NULL,160),(64,1,NULL,161),(64,3,NULL,162),(65,7,NULL,163),(65,8,NULL,164),(72,2,NULL,165),(72,3,NULL,166),(74,7,NULL,167),(74,8,NULL,168),(75,3,NULL,169),(77,3,NULL,170),(78,1,NULL,171),(79,10,NULL,172),(80,3,NULL,173),(80,5,NULL,174),(81,3,NULL,175),(82,3,NULL,176),(84,3,NULL,177),(85,3,NULL,178),(88,2,NULL,181),(88,3,NULL,182);
 /*!40000 ALTER TABLE `colors_products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,7 +136,7 @@ CREATE TABLE `guides` (
   PRIMARY KEY (`id`),
   KEY `fk_guides_subcategories_idx` (`subcategoriesId`),
   CONSTRAINT `fk_guides_subcategories` FOREIGN KEY (`subcategoriesId`) REFERENCES `subcategories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -184,15 +186,15 @@ DROP TABLE IF EXISTS `orders`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `shippingAddress` varchar(100) NOT NULL,
   `shippingCity` varchar(100) NOT NULL,
   `shippingPostalcode` int(11) NOT NULL,
   `shippingDate` date DEFAULT NULL,
   `usersId` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
   `deletedAt` datetime(6) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `users_id_idx` (`usersId`),
-  CONSTRAINT `fk_orders_users_id` FOREIGN KEY (`usersId`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -201,6 +203,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (15,'Ruggieri 3052','CABA',1425,NULL,4,'Margarita',NULL);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,15 +218,11 @@ CREATE TABLE `orders_products` (
   `ordersId` int(11) NOT NULL,
   `productsId` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `colorsId` int(11) NOT NULL,
+  `colors` varchar(100) NOT NULL,
   `deletedAt` datetime(6) DEFAULT NULL,
-  KEY `products_id_idx` (`productsId`),
-  KEY `orders_id_idx` (`ordersId`),
-  KEY `fk_cart_colorsId_idx` (`colorsId`),
-  CONSTRAINT `fk_cart_colorsId` FOREIGN KEY (`colorsId`) REFERENCES `colors` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_ordersproducts_orders_id` FOREIGN KEY (`ordersId`) REFERENCES `orders` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_ordersproducts_products_id` FOREIGN KEY (`productsId`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -232,6 +231,7 @@ CREATE TABLE `orders_products` (
 
 LOCK TABLES `orders_products` WRITE;
 /*!40000 ALTER TABLE `orders_products` DISABLE KEYS */;
+INSERT INTO `orders_products` VALUES (15,6,1,'Marrón',NULL,22);
 /*!40000 ALTER TABLE `orders_products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -264,7 +264,7 @@ CREATE TABLE `products` (
   CONSTRAINT `fk_products_categories_id` FOREIGN KEY (`categoriesId`) REFERENCES `categories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_products_subcategories_id` FOREIGN KEY (`subcategoriesId`) REFERENCES `subcategories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_products_typesId` FOREIGN KEY (`typesId`) REFERENCES `types` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -296,7 +296,7 @@ CREATE TABLE `products_users` (
   KEY `fk_usersId_products_idx` (`usersId`),
   CONSTRAINT `fk_productsId_users` FOREIGN KEY (`productsId`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_usersId_products` FOREIGN KEY (`usersId`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -305,7 +305,6 @@ CREATE TABLE `products_users` (
 
 LOCK TABLES `products_users` WRITE;
 /*!40000 ALTER TABLE `products_users` DISABLE KEYS */;
-INSERT INTO `products_users` VALUES (80,4,NULL,7,'0',1),(83,4,NULL,19,'0',1),(58,4,NULL,22,'0',1),(54,4,NULL,25,'Blanco',1),(7,4,NULL,26,'Blanco',1);
 /*!40000 ALTER TABLE `products_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -385,7 +384,7 @@ CREATE TABLE `users` (
   `image` varchar(100) DEFAULT NULL,
   `deletedAt` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -394,7 +393,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (2,2,'Joaquin','Girod',1158365508,'2001-03-14','joacogirodQgmail.com','12345678','Avatar.jpg',NULL),(3,2,'Mar','H',2147483647,'2000-04-05','sol_delia@hotmail.com','$2a$10$Tr3TfVwrA4ptUqJDaXMwv.cvRWYSe7yPg0/ylgRRC8NCNvlGT3D.C','image-1594322819136.jpg',NULL),(4,1,'Margarita','Hazaña',1134680021,'2000-12-30','margaritahazana@gmail.com','$2a$10$9sOLgMmdUuLGs.08p3/nd.kQwqNSdCVIvcvWuTg7c3l6lQAeTqo7G','image-1594421264925.jpg',NULL),(6,2,'Margarita','Hazaña',2147483647,'3444-02-23','sol_delia@hotmail.com','$2a$10$iITPWBEe6K/hFV1yEO0g2.7Xy6OcjudHIcSjEmWGvlgaVPZ0FtnbO','image-1594422031122.jpg',NULL),(8,2,'Pepe','Pepe',1234567890,'2000-12-23','tcheng0@vimeo.com','$2a$10$pFejv5B6UHsjcylKduzpXubPBiGwpjXDW0nL/YCYwF53EFyDsE.fS','image-1594682347181.jpg',NULL),(9,2,'Sofia','Pepe',2147483647,'1111-11-11','sofiabaya@gmail.com','$2a$10$V.FGoER3nv4UFYUj6xaChuW9U7B20KQ3HhHME5weJAEM508HL8Yfa','image-1594835429434.jpg',NULL),(10,1,'Margarita','Pepe',2147483647,'3333-11-22','joaquin@gmail.com','$2a$10$KWJKdc.kSkbveo9fCoYsS.G3QIQrjf/zvvY2eo0/NpnUWQgFQmND6','image-1594835511469.jpg',NULL);
+INSERT INTO `users` VALUES (2,2,'Joaquin','Girod',1158365508,'2001-03-14','joacogirodQgmail.com','12345678','Avatar.jpg',NULL),(4,1,'Margarita','Hazaña',1134680021,'2000-12-30','margaritahazana@gmail.com','$2a$10$FZb2PRi6dgFLbzD9GkqNBebCzubIutxUfh0kGl077XV1BVhephqIO','image-1594421264925.jpg',NULL),(6,2,'Margarita','Hazaña',2147483647,'3444-02-23','sol_delia@hotmail.com','$2a$10$iITPWBEe6K/hFV1yEO0g2.7Xy6OcjudHIcSjEmWGvlgaVPZ0FtnbO','image-1594422031122.jpg',NULL),(8,2,'Pepe','Pepe',1234567890,'2000-12-23','tcheng0@vimeo.com','$2a$10$pFejv5B6UHsjcylKduzpXubPBiGwpjXDW0nL/YCYwF53EFyDsE.fS','image-1594682347181.jpg',NULL),(9,2,'Sofia','Pepe',2147483647,'1111-11-11','sofiabaya@gmail.com','$2a$10$V.FGoER3nv4UFYUj6xaChuW9U7B20KQ3HhHME5weJAEM508HL8Yfa','image-1594835429434.jpg',NULL),(10,1,'Margarita','Pepe',2147483647,'3333-11-22','joaquin@gmail.com','$2a$10$KWJKdc.kSkbveo9fCoYsS.G3QIQrjf/zvvY2eo0/NpnUWQgFQmND6','image-1594835511469.jpg',NULL),(11,2,'Sofia','Baya',1123456654,'2000-12-12','sofia@gmail.com','$2a$10$Dg.k6BS5GKdDALttH76uJu8/Hm6lxy8eR7.ks/eRUmoQYNtxs/GW.','image-1594936639078.jpg',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -407,4 +406,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-16 14:28:05
+-- Dump completed on 2020-07-16 21:35:27

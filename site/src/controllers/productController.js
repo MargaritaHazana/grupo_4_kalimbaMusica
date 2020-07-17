@@ -139,6 +139,13 @@ productController = {
                 productId.forEach(product =>{
                     productos.push(product.dataValues);
                 })
+
+                if (productos.length == 0) {
+                    // Si se eliminaron los productos
+                    productos = [{colors:'', cantidad:'', prod:{name:'No hay productos en tu carrito',price:'', brands:{name:''}, image:''}}];
+                    total = 0
+                    res.render('productCart', { view: 'carrito', destacados, sessionUserID, productos, numberWithCommas, total, categoryUser, categorias, marcas });
+                }
                 
                 // Busca la info de cada producto y lo mete en el array de productos
                 for (let i = 0; i < productos.length; i++) {
@@ -271,8 +278,7 @@ productController = {
     },
 
     // Agrega el nuevo producto a la base de datos
-    addingProduct : async (req, res, next)=>{
-       
+    addingProduct : async (req, res, next)=>{ 
         try {
             const newProduct = await DB.Product.create({
                 name: req.body.name,
@@ -443,16 +449,17 @@ productController = {
         // para el menu colapsable del Header
         let categorias = await DB.Category.findAll()
         let marcas = await DB.Brand.findAll()
-        res.render('buy', {sessionUserID, view: 'forms',mensaje, categorias, marcas, categoryUser, sessionUserID});
+        res.render('buy', {sessionUserID, view: 'forms', mensaje, categorias, marcas, categoryUser, sessionUserID});
     },
 
-    buy:async (req,res)=>{
+    buy: async (req,res)=>{
         // ID y categoría del usuario en sesion
         let sessionUserID = req.session.userID;
         let categoryUser = req.session.category;
         // para el menu colapsable del Header
         let categorias = await DB.Category.findAll()
         let marcas = await DB.Brand.findAll()
+
         let errors = validationResult(req);
         let mensaje = []
         // Valida los datos del form
@@ -462,7 +469,28 @@ productController = {
             return res.render('buy', { view: 'forms', mensaje, errors: errors.errors, sessionUserID, categoryUser, categorias,marcas});
         // Si no hay errores
         } else {
-            res.redirect('https://www.mercadopago.com.ar/');
+            try {
+                let carrito = await DB.Product_user.findAll({where: {usersId: sessionUserID}});
+                const newOrder = await DB.Order.create({
+                    usersId: sessionUserID,
+                    shippingAddress: req.body.direccion,
+                    shippingCity: req.body.ciudad,
+                    shippingPostalcode: req.body.cp,
+                    name: req.body.nombre,
+                }); 
+                for (let i = 0; i < carrito.length; i++) {
+                    await DB.Order_product.create({
+                        ordersId: newOrder.id,
+                        productsId: carrito[i].productsId,
+                        cantidad: carrito[i].cantidad,
+                        colors: carrito[i].colors,
+                        name: req.body.nombre,
+                    }); 
+                }
+                res.redirect('https://www.mercadopago.com.ar/');
+            } catch (error) {
+                res.send(error);
+            }
         }
     }
 }

@@ -158,7 +158,7 @@ userController = {
                             res.send(error)
                         }   
                     }
-                    res.redirect('/');
+                    res.redirect('/productCart');
                 }
             } else {
                 // Si está mal la contraseña - Redirige al login y manda mensaje de error

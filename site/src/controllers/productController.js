@@ -185,16 +185,16 @@ productController = {
         let marcas = await DB.Brand.findAll()
             // Si no hay un usuario logueado - guarda el producto en session
             if (sessionUserID == undefined) {
-                // Si el producto ya está en el carrito - No lo vuelve a agregar
+                // Si el producto ya está en el carrito con ese mismo color - No lo vuelve a agregar
                 let control = false
                 for (let i = 0; i < cartProds.length; i++) {
-                    if (cartProds[i].id == req.params.id) {
+                    if (cartProds[i].id == req.params.id && cartProds[i].colorName == req.body.color) {
                         control = true
                     } 
                 }
                 if (control) {
                     res.redirect('/productDetail/' + req.params.id);
-                // Si el producto no esta en el carrito - Lo agrega
+                // Si el producto no esta en el carrito con ese color- Lo agrega
                 } else {
                     cartProds.push({
                         id: req.params.id,

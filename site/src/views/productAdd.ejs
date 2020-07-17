@@ -44,6 +44,7 @@
         <div class="container">
             <label class="pregunta" for="">Categoría</label>
             <select name="categoriesId" class="respuesta category">
+                <option value=" ">Seleccionar</option>
                 <% categories.forEach(category => { %>
                 <option value="<%= category.id %>"> <%= category.name %> </option>
                 <% }) %>
@@ -53,6 +54,7 @@
         <div class="container">
             <label class="pregunta" for="">Subcategoría</label>
             <select name="subcategoriesId" class="respuesta subcategory">
+                <option value=" ">Seleccionar</option>
                 
             </select>
         </div>
@@ -60,6 +62,7 @@
         <div class="container">
             <label class="pregunta" for="">Tipo</label>
             <select name="typesId" class="respuesta type">
+                <option value=" ">Seleccionar</option>
                 
             </select>
         </div> 

@@ -7,7 +7,7 @@
                     <img class="IMG002" src="/images/<%= producto.image %> " alt="foto">
                     <p class="P003"><%= producto.name %>  </p> 
                     <div class="preciosDestacados">
-                        <p class="P004"> $<%= producto.price %> </p>
+                        <p class="P004"> $<%= numberWithCommas(producto.price) %> </p>
                         <p class="P005"><%= producto.discount %>%OFF </p>
                     </div>
                 </div>

@@ -31,7 +31,7 @@ productController = {
             // para el menu colapsable del Header
             let categorias = await DB.Category.findAll()
             let marcas = await DB.Brand.findAll()
-            res.render('index', { view: 'index', destacados, sessionUserID, categorias, marcas, categoryUser });
+            res.render('index', { view: 'index', destacados,numberWithCommas, sessionUserID, categorias, marcas, categoryUser });
         } catch (error) {
             res.send(error)
         }
@@ -81,7 +81,7 @@ productController = {
                 // para el menu colapsable del Header
                 let categorias = await DB.Category.findAll()
                 let marcas = await DB.Brand.findAll()
-                res.render('productDetail', { view: 'detail' , producto, precioViejo, precioFinal, destacados, sessionUserID, categoryUser, marcas, categorias, coloresDisp });
+                res.render('productDetail', { view: 'detail' , producto, precioViejo, precioFinal,numberWithCommas, destacados, sessionUserID, categoryUser, marcas, categorias, coloresDisp });
             } catch (error) {
                 res.send(error)
             }

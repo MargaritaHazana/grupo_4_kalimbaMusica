@@ -16,7 +16,7 @@ var navRouter = require('./routes/nav')
 
 
 // Middlewares
-var loginCookie = require('./middlewares/loginCookieMiddleware.js');
+var loginCookie = require('./middlewares/loginCookieMiddleware');
 
 var app = express();
 

@@ -1,4 +1,4 @@
-module.exports = function authCookie(req,res,next){
+module.exports = function loginCookie(req,res,next){
     if (req.session.userID || req.cookies.userIdCookie) {
         if (req.session.userID) {
             req.session.userID = req.session.userID
